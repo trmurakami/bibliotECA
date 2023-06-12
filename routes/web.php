@@ -16,7 +16,7 @@ use App\Http\Controllers\WorkController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::resource('works', WorkController::class);
