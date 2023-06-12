@@ -1,5 +1,7 @@
 @extends('layout.layout')
 
+@section('title', 'BibliotECA - Resultado da busca')
+
 @section('content')
 
 
