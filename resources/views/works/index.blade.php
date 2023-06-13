@@ -13,8 +13,33 @@
     </div>
     @endif
 
-    <div class="col col-lg-8">
+    <div class="col col-lg-12">
+        <h3 class="mt-2">Resultado da busca por "{{ $request->search }}" no campo título</h3>
+        <form action="/works" method="get">
+            <div class="input-group">
+                <input type="text" class="form-control"
+                    placeholder="Pesquisar no título (Deixe em branco e clique em buscar para exibir todo o acervo)"
+                    name="search">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Buscar</button>
+                </div>
+            </div>
+        </form>
+        <p>Foram encontrados {{ $works->total() }} resultados para a busca "{{ $request->search }}"</p>
+        <p>Exibindo página {{ $works->currentPage() }} de {{ $works->lastPage() }}</p>
+        <p>Exibindo {{ $works->perPage() }} resultados por página</p>
+        <nav aria-label="Navigation">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="{{ $works->previousPageUrl() }}">Anterior</a></li>
+                @for ($i = 1; $i <= $works->lastPage(); $i++)
+                    <li class="page-item"><a class="page-link" href="{{ $works->url($i) }}">{{ $i }}</a></li>
+                    @endfor
+                    <li class="page-item"><a class="page-link" href="{{ $works->nextPageUrl() }}">Próxima</a></li>
+            </ul>
+        </nav>
+    </div>
 
+    <div class="col col-lg-8">
 
 
         @foreach ($works as $work)
@@ -53,6 +78,16 @@
 
 
         @endforeach
+
+        <nav aria-label="Navigation">
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" href="{{ $works->previousPageUrl() }}">Anterior</a></li>
+                @for ($i = 1; $i <= $works->lastPage(); $i++)
+                    <li class="page-item"><a class="page-link" href="{{ $works->url($i) }}">{{ $i }}</a></li>
+                    @endfor
+                    <li class="page-item"><a class="page-link" href="{{ $works->nextPageUrl() }}">Próxima</a></li>
+            </ul>
+        </nav>
 
     </div>
     <div class="col col-lg-4">

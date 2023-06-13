@@ -10,11 +10,23 @@ class WorkController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $works = Work::all();
 
-        return view('works.index', compact('works'));
+        if (!$request->per_page) {
+            $request->per_page = 20;
+        }
+
+        $query = Work::query();
+
+        if ($request->search) {
+            $query->where('name', 'LIKE', '%' . $request->search . '%');
+        }
+
+
+        $works = $query->orderByDesc('id')->paginate($request->per_page);
+
+        return view('works.index', compact('works'), compact('request'));
     }
 
     /**
