@@ -74,10 +74,14 @@
         @endforeach
     </div>
     <div class="col col-lg-4">
-        Filters
+        <h3>Refinar resultados</h3>
 
-        <x-facet field="type" fieldName="Tipo" :request="$request" />
-        <x-facet field="name" fieldName="Título" :request="$request" />
+        <div class="accordion" id="facets">
+
+
+            <x-facet field="type" fieldName="Tipo" :request="$request" />
+            <x-facet field="name" fieldName="Título" :request="$request" />
+        </div>
 
     </div>
     <x-pagination :works="$works" :search="$request->search" />
