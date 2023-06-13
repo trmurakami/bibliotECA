@@ -4,7 +4,6 @@
 
 @section('content')
 
-
 <div class="row">
 
     @if ($message = Session::get('success'))
@@ -96,6 +95,19 @@
     </div>
     <div class="col col-lg-4">
         Filters
+        <ul>
+            @foreach ($facets as $facet)
+            <h2>{{ $facet['field'] }}</h2>
+            @foreach ($facet['values'] as $value)
+
+            <li>{{ $value['field'] }} ({{ $value['count'] }})</li>
+
+            @endforeach
+
+
+            @endforeach
+        </ul>
+
     </div>
     <nav aria-label="Navigation">
         <ul class="pagination justify-content-center">
