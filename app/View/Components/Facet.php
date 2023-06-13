@@ -30,8 +30,8 @@ class Facet extends Component
     public function render(): View|Closure|string
     {
         $query = Work::select('' . $this->field . ' as field', DB::raw('count(*) as count'));
-        if ($this->request->search) {
-            $query->where('name', 'like', '%' . $this->request->search . '%');
+        if ($this->request->name) {
+            $query->where('name', 'like', '%' . $this->request->name . '%');
         }
 
         if ($this->request->type) {
@@ -42,6 +42,12 @@ class Facet extends Component
         $facets[0]['field'] = $this->field;
         $facets[0]['fieldName'] = $this->fieldName;
         $facets[0]['values'] = $result->toArray();
+        $facets[0]['request'][0]['field'] = "name";
+        $facets[0]['request'][0]['value'] = $this->request->name;
+        if ($this->request->type) {
+            $facets[0]['request'][1]['field'] = "type";
+            $facets[0]['request'][1]['value'] = $this->request->type;
+        }
         return view('components.facet', compact('facets'));
     }
 }

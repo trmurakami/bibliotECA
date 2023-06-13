@@ -20,8 +20,8 @@ class WorkController extends Controller
 
         $query = Work::query();
 
-        if ($request->search) {
-            $query->where('name', 'LIKE', '%' . $request->search . '%');
+        if ($request->name) {
+            $query->where('name', 'LIKE', '%' . $request->name . '%');
         }
 
         if ($request->type) {

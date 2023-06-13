@@ -10,8 +10,29 @@
         <div class="accordion-body">
             <ul>
                 @foreach ($facet['values'] as $value)
-                <li><a href="/works?{{ $facet['field'] }}={{ $value['field'] }}">{{ $value['field'] }}
-                        ({{ $value['count'] }})</a></li>
+
+
+
+                @foreach ($facet['request'] as $request)
+
+                @php
+
+                $request_array = [];
+                if (!empty($request['value'])) {
+                $request_array[] = $request['field'] . '=' . $request['value'];
+                $request_array = array_unique($request_array);
+                }
+
+                @endphp
+                @endforeach
+
+                <li>
+                    <a href="/works?{{ $facet['field'] }}={{ $value['field'] }}&{{ implode('&', $request_array) }}">
+                        {{ $value['field'] }} ({{ $value['count'] }})
+                    </a>
+                </li>
+
+
 
                 @endforeach
             </ul>

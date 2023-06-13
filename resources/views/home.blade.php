@@ -10,7 +10,7 @@
             <div class="input-group">
                 <input type="text" class="form-control"
                     placeholder="Pesquisar no título (Deixe em branco e clique em buscar para exibir todo o acervo)"
-                    name="search">
+                    name="name">
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="submit">Buscar</button>
                 </div>
