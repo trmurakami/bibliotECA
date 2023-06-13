@@ -26,29 +26,9 @@
         </form>
         <p>Foram encontrados {{ $works->total() }} resultados para a busca "{{ $request->search }}". Exibindo página
             {{ $works->currentPage() }} de {{ $works->lastPage() }} ({{ $works->perPage() }} resultados por página)</p>
-        <nav aria-label="Navigation">
-            <ul class="pagination justify-content-center">
-                @if ($works->onFirstPage())
-                <li class="page-item"><a class="page-link disabled">Anterior</a>
-                </li>
-                @else
-                <li class="page-item"><a class="page-link" href="{{ $works->previousPageUrl() }}">Anterior</a></li>
-                @endif
-                @for ($i = 1; $i <= $works->lastPage(); $i++)
-                    @if ($i == $works->currentPage())
-                    <li class="page-item"><a class="page-link active" href="{{ $works->url($i) }}">{{ $i }}</a></li>
-                    @else
-                    <li class="page-item"><a class="page-link" href="{{ $works->url($i) }}">{{ $i }}</a></li>
-                    @endif
-                    @endfor
 
-                    @if ($works->hasMorePages())
-                    <li class="page-item"><a class="page-link" href="{{ $works->nextPageUrl() }}">Próxima</a></li>
-                    @else
-                    <li class="page-item"><a class="page-link disabled">Próxima</a></li>
-                    @endif
-            </ul>
-        </nav>
+
+        <x-pagination :works="$works" :search="$request->search" />
     </div>
 
     <div class="col col-lg-8">
@@ -95,12 +75,14 @@
     </div>
     <div class="col col-lg-4">
         Filters
+
         <ul>
             @foreach ($facets as $facet)
-            <h2>{{ $facet['field'] }}</h2>
+            <h2>{{ $facet['fieldName'] }}</h2>
             @foreach ($facet['values'] as $value)
 
-            <li>{{ $value['field'] }} ({{ $value['count'] }})</li>
+            <li><a href="/works?{{ $facet['field'] }}={{ $value['field'] }}">{{ $value['field'] }}
+                    ({{ $value['count'] }})</a></li>
 
             @endforeach
 
@@ -109,29 +91,7 @@
         </ul>
 
     </div>
-    <nav aria-label="Navigation">
-        <ul class="pagination justify-content-center">
-            @if ($works->onFirstPage())
-            <li class="page-item"><a class="page-link disabled">Anterior</a>
-            </li>
-            @else
-            <li class="page-item"><a class="page-link" href="{{ $works->previousPageUrl() }}">Anterior</a></li>
-            @endif
-            @for ($i = 1; $i <= $works->lastPage(); $i++)
-                @if ($i == $works->currentPage())
-                <li class="page-item"><a class="page-link active" href="{{ $works->url($i) }}">{{ $i }}</a></li>
-                @else
-                <li class="page-item"><a class="page-link" href="{{ $works->url($i) }}">{{ $i }}</a></li>
-                @endif
-                @endfor
-
-                @if ($works->hasMorePages())
-                <li class="page-item"><a class="page-link" href="{{ $works->nextPageUrl() }}">Próxima</a></li>
-                @else
-                <li class="page-item"><a class="page-link disabled">Próxima</a></li>
-                @endif
-        </ul>
-    </nav>
+    <x-pagination :works="$works" :search="$request->search" />
 </div>
 
 

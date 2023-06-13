@@ -24,12 +24,18 @@ class WorkController extends Controller
             $query->where('name', 'LIKE', '%' . $request->search . '%');
         }
 
+        if ($request->type) {
+            $query->where('type', $request->type);
+        }
+
 
         $works = $query->orderByDesc('id')->paginate($request->per_page);
 
-        $facets[0]['field'] = 'Tipo';
+        $facets[0]['field'] = 'type';
+        $facets[0]['fieldName'] = 'Tipo';
         $facets[0]['values'] = self::facet('type')->toArray();
-        $facets[1]['field'] = 'Título';
+        $facets[1]['field'] = 'name';
+        $facets[1]['fieldName'] = 'Título';
         $facets[1]['values'] = self::facet('name')->toArray();
 
         return view('works.index', compact('works', 'request', 'facets'));
