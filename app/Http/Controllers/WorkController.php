@@ -63,6 +63,7 @@ class WorkController extends Controller
     public function update(Request $request, Work $work)
     {
         $request->validate([
+            'type' => 'required',
             'name' => 'required',
             'description'  => 'required',
         ]);

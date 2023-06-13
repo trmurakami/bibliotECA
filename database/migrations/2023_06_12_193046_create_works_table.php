@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('works', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('type');
             $table->string('name')->nullable();
             $table->longText('description')->nullable();
             $table->timestamps();

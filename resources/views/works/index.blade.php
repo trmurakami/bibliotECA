@@ -29,6 +29,7 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <h5 class="card-title">{{ $work->name }}</h5>
+                        <p class="card-text">{{ $work->type }}</p>
                         <p class="card-text">{{ $work->description }}</p>
 
                         <form action="{{ route('works.destroy',$work->id) }}" method="POST">
