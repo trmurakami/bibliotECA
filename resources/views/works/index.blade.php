@@ -25,35 +25,52 @@
                 </div>
             </div>
         </form>
-        <p>Foram encontrados {{ $works->total() }} resultados para a busca "{{ $request->search }}"</p>
-        <p>Exibindo página {{ $works->currentPage() }} de {{ $works->lastPage() }}</p>
-        <p>Exibindo {{ $works->perPage() }} resultados por página</p>
+        <p>Foram encontrados {{ $works->total() }} resultados para a busca "{{ $request->search }}". Exibindo página
+            {{ $works->currentPage() }} de {{ $works->lastPage() }} ({{ $works->perPage() }} resultados por página)</p>
         <nav aria-label="Navigation">
-            <ul class="pagination">
+            <ul class="pagination justify-content-center">
+                @if ($works->onFirstPage())
+                <li class="page-item"><a class="page-link disabled">Anterior</a>
+                </li>
+                @else
                 <li class="page-item"><a class="page-link" href="{{ $works->previousPageUrl() }}">Anterior</a></li>
+                @endif
                 @for ($i = 1; $i <= $works->lastPage(); $i++)
+                    @if ($i == $works->currentPage())
+                    <li class="page-item"><a class="page-link active" href="{{ $works->url($i) }}">{{ $i }}</a></li>
+                    @else
                     <li class="page-item"><a class="page-link" href="{{ $works->url($i) }}">{{ $i }}</a></li>
+                    @endif
                     @endfor
+
+                    @if ($works->hasMorePages())
                     <li class="page-item"><a class="page-link" href="{{ $works->nextPageUrl() }}">Próxima</a></li>
+                    @else
+                    <li class="page-item"><a class="page-link disabled">Próxima</a></li>
+                    @endif
             </ul>
         </nav>
     </div>
 
     <div class="col col-lg-8">
-
-
         @foreach ($works as $work)
-
-
         <div class="card mb-3">
-            <div class="row g-0" style="max-width: 540px;">
-                <div class="col-md-4">
-                    <img src="https://m.media-amazon.com/images/I/61JDKFKVntL._AC_UF1000,1000_QL80_.jpg"
-                        class="img-fluid rounded-start" alt="Cover">
+            <div class="row g-0">
+                <div class="col-md-4" style="max-width: 200px;">
+                    @if ($work->cover)
+                    <a href="{{ route('works.show',$work->id) }}">
+                        <img src="{{ asset('storage/cover/'.$work->cover) }}" class="img-fluid rounded-start"
+                            alt="Cover">
+                    </a>
+                    @else
+                    <a href="{{ route('works.show',$work->id) }}">
+                        <img src="{{ asset('storage/cover/default.png') }}" class="img-fluid rounded-start" alt="Cover">
+                    </a>
+                    @endif
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">{{ $work->name }}</h5>
+                        <h5 class="card-title"><a href="{{ route('works.show',$work->id) }}">{{ $work->name }}</a></h5>
                         <p class="card-text">{{ $work->type }}</p>
                         <p class="card-text">{{ $work->description }}</p>
 
@@ -75,24 +92,34 @@
                 </div>
             </div>
         </div>
-
-
         @endforeach
-
-        <nav aria-label="Navigation">
-            <ul class="pagination">
-                <li class="page-item"><a class="page-link" href="{{ $works->previousPageUrl() }}">Anterior</a></li>
-                @for ($i = 1; $i <= $works->lastPage(); $i++)
-                    <li class="page-item"><a class="page-link" href="{{ $works->url($i) }}">{{ $i }}</a></li>
-                    @endfor
-                    <li class="page-item"><a class="page-link" href="{{ $works->nextPageUrl() }}">Próxima</a></li>
-            </ul>
-        </nav>
-
     </div>
     <div class="col col-lg-4">
         Filters
     </div>
+    <nav aria-label="Navigation">
+        <ul class="pagination justify-content-center">
+            @if ($works->onFirstPage())
+            <li class="page-item"><a class="page-link disabled">Anterior</a>
+            </li>
+            @else
+            <li class="page-item"><a class="page-link" href="{{ $works->previousPageUrl() }}">Anterior</a></li>
+            @endif
+            @for ($i = 1; $i <= $works->lastPage(); $i++)
+                @if ($i == $works->currentPage())
+                <li class="page-item"><a class="page-link active" href="{{ $works->url($i) }}">{{ $i }}</a></li>
+                @else
+                <li class="page-item"><a class="page-link" href="{{ $works->url($i) }}">{{ $i }}</a></li>
+                @endif
+                @endfor
+
+                @if ($works->hasMorePages())
+                <li class="page-item"><a class="page-link" href="{{ $works->nextPageUrl() }}">Próxima</a></li>
+                @else
+                <li class="page-item"><a class="page-link disabled">Próxima</a></li>
+                @endif
+        </ul>
+    </nav>
 </div>
 
 
