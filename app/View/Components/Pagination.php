@@ -9,14 +9,12 @@ use Illuminate\View\Component;
 class Pagination extends Component
 {
     public $works;
-    public $search;
     /**
      * Create a new component instance.
      */
-    public function __construct($works, $search)
+    public function __construct($works)
     {
         $this->works = $works;
-        $this->search = $search;
     }
 
     /**

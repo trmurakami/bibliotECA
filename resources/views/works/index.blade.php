@@ -28,7 +28,7 @@
             {{ $works->currentPage() }} de {{ $works->lastPage() }} ({{ $works->perPage() }} resultados por página)</p>
 
 
-        <x-pagination :works="$works" :search="$request->search" />
+        <x-pagination :works="$works" />
     </div>
 
     <div class="col col-lg-8">
@@ -84,7 +84,7 @@
         </div>
 
     </div>
-    <x-pagination :works="$works" :search="$request->search" />
+    <x-pagination :works="$works" />
 </div>
 
 

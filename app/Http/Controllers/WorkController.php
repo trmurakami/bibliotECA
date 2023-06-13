@@ -29,7 +29,7 @@ class WorkController extends Controller
         }
 
 
-        $works = $query->orderByDesc('id')->paginate($request->per_page);
+        $works = $query->orderByDesc('id')->paginate($request->per_page)->withQueryString();
 
         return view('works.index', compact('works', 'request'));
     }
