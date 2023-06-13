@@ -76,19 +76,8 @@
     <div class="col col-lg-4">
         Filters
 
-        <ul>
-            @foreach ($facets as $facet)
-            <h2>{{ $facet['fieldName'] }}</h2>
-            @foreach ($facet['values'] as $value)
-
-            <li><a href="/works?{{ $facet['field'] }}={{ $value['field'] }}">{{ $value['field'] }}
-                    ({{ $value['count'] }})</a></li>
-
-            @endforeach
-
-
-            @endforeach
-        </ul>
+        <x-facet field="type" fieldName="Tipo" :request="$request" />
+        <x-facet field="name" fieldName="Título" :request="$request" />
 
     </div>
     <x-pagination :works="$works" :search="$request->search" />
