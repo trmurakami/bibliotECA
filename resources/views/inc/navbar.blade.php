@@ -20,7 +20,34 @@
             @if (Route::has('login'))
             <div class="text-end">
                 @auth
-                <a type="button" class="btn btn-outline-light me-2" href="{{ url('/dashboard') }}">Dashboard</a>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        {{ Auth::user()->name }}
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <x-dropdown-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                                {{ __('Dashboard') }}
+                            </x-dropdown-link>
+                        </li>
+                        <li>
+                            <x-dropdown-link :href="route('profile.edit')">
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
+                        </li>
+                        <li>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+
+                                <x-dropdown-link :href="route('logout')" onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                                    {{ __('Log Out') }}
+                                </x-dropdown-link>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
                 @else
                 <a type="button" class="btn btn-outline-light me-2" href="{{ route('login') }}">Login</a>
                 @if (Route::has('register'))
