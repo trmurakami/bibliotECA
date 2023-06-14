@@ -37,6 +37,9 @@ class Facet extends Component
         if ($this->request->type) {
             $query->where('type', $this->request->type);
         }
+        if ($this->request->datePublished) {
+            $query->where('datePublished', $this->request->datePublished);
+        }
         $query->groupBy($this->field)->orderByDesc('count')->orderByDesc($this->field)->limit(10);
         $result = $query->get();
         $facets[0]['field'] = $this->field;
@@ -47,6 +50,10 @@ class Facet extends Component
         if ($this->request->type) {
             $facets[0]['request'][1]['field'] = "type";
             $facets[0]['request'][1]['value'] = $this->request->type;
+        }
+        if ($this->request->datePublished) {
+            $facets[0]['request'][2]['field'] = "datePublished";
+            $facets[0]['request'][2]['value'] = $this->request->datePublished;
         }
         return view('components.facet', compact('facets'));
     }

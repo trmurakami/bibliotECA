@@ -28,6 +28,9 @@ class WorkController extends Controller
             $query->where('type', $request->type);
         }
 
+        if ($request->datePublished) {
+            $query->where('datePublished', $request->datePublished);
+        }
 
         $works = $query->orderByDesc('id')->paginate($request->per_page)->withQueryString();
 

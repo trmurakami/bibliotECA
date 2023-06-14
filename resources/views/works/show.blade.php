@@ -30,5 +30,22 @@
             {{ $work->description }}
         </div>
     </div>
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+            <strong>Ano de publicação:</strong>
+            {{ $work->datePublished }}
+        </div>
+    </div>
+    <form action="{{ route('works.destroy',$work->id) }}" method="POST">
+
+        <a class="btn btn-info" href="{{ route('works.show',$work->id) }}">Show</a>
+
+        <a class="btn btn-primary" href="{{ route('works.edit',$work->id) }}">Edit</a>
+
+        @csrf
+        @method('DELETE')
+
+        <button type="submit" class="btn btn-danger">Delete</button>
+    </form>
 </div>
 @endsection

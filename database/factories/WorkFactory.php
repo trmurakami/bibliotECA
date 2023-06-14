@@ -21,6 +21,7 @@ class WorkFactory extends Factory
             'type' => $this->faker->randomElement(['Book', 'Article']),
             'name' => $this->faker->name,
             'description' => $this->faker->text,
+            'datePublished' => $this->faker->date('Y'),
         ];
     }
 }

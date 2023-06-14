@@ -41,6 +41,12 @@
                     placeholder="Description">{{ $work->description }}</textarea>
             </div>
         </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Ano de publicação:</strong>
+                <input type="text" name="datePublished" class="form-control" placeholder="Ano de publicação">
+            </div>
+        </div>
         <div class="col-xs-12 col-sm-12 col-md-12 text-center">
             <button type="submit" class="btn btn-primary">Submit</button>
         </div>

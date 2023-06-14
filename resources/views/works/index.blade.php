@@ -43,7 +43,7 @@
 
 
             <x-facet field="type" fieldName="Tipo" :request="$request" />
-            <x-facet field="name" fieldName="Título" :request="$request" />
+            <x-facet field="datePublished" fieldName="Ano de publicação" :request="$request" />
         </div>
 
     </div>
