@@ -51,8 +51,8 @@ class WorkController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'description'  => 'required',
+            'type' => 'required',
+            'name' => 'required'
         ]);
 
         Work::create($request->all());
@@ -85,7 +85,6 @@ class WorkController extends Controller
         $request->validate([
             'type' => 'required',
             'name' => 'required',
-            'description'  => 'required',
         ]);
 
         $work->update($request->all());

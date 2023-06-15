@@ -5,6 +5,7 @@
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
                 <li><a href="/works" class="nav-link px-2 text-white">Works</a></li>
+                <li><a href="/editor" class="nav-link px-2 text-white">Editor</a></li>
                 @if (Route::has('login'))
                 @auth
                 <li><a href="/works/create" class="nav-link px-2 text-white">Create</a></li>

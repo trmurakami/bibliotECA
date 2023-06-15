@@ -4,11 +4,8 @@
 
 @section('content')
 <div id="editor">
-    <editor :work="{{ $work }}"></editor>
-    <script>
-    window.Laravel = <?php echo json_encode(['csrfToken' => csrf_token()]); ?>
-    </script>
-
+    <editor></editor>
 </div>
+
 <script src="{{ mix('js/editor.js') }}"></script>
 @endsection
