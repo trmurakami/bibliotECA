@@ -87,7 +87,7 @@
                             getIDAuthority(author), getAuthorities(author.name)
                             " />
                     <datalist id="datalistAuthority">
-                        <option v-for="  authority   in   authorities  " :value="authority.name" :key="authority.id"
+                        <option v-for="authority in authorities" :value="authority.name" :key="authority.id"
                             :id="authority.id"></option>
                     </datalist>
                     <select v-model="author.function" autocomplete="off" class="form-select" aria-label="Author funcion"

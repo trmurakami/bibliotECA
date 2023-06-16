@@ -22,6 +22,16 @@ class WorkFactory extends Factory
             'name' => $this->faker->name,
             'description' => $this->faker->text,
             'datePublished' => $this->faker->date('Y'),
+            'author' => [
+                [
+                    'name' => $this->faker->name,
+                    'function' => $this->faker->randomElement(['Author', 'Organizer', 'Writer of preface']),
+                ],
+                [
+                    'name' => $this->faker->name,
+                    'function' => $this->faker->randomElement(['Author', 'Organizer', 'Writer of preface']),
+                ]
+            ]
         ];
     }
 }
