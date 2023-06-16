@@ -25,6 +25,17 @@
                 <h5 class="card-title"><a href="{{ route('works.show',$work->id) }}">{{ $work->name }}
                         ({{ $work->datePublished }})</a></h5>
                 <p class="card-text"><small class="text-body-secondary">{{ $work->type }}</small></p>
+                @php
+                $namesArray = array_map(function ($author) {
+                return $author['name'];
+                }, $work->author);
+                $string = implode(', ', $namesArray);
+                @endphp
+                @if (isset($namesArray))
+                <p class="card-text"><small class="text-body-secondary">Autores:
+                        {{ implode(', ', $namesArray) }}</small>
+                </p>
+                @endif
                 <p class="card-text">{{ $work->description }}</p>
             </div>
         </div>

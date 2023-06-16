@@ -4,7 +4,7 @@
 
         {{ work }}
 
-        <form action="/works" method="POST">
+        <form @submit.prevent>
             <input type="hidden" name="_token" :value="csrf" />
 
             <!-- Type -->
@@ -50,13 +50,22 @@
                 </div>
             </template>
 
+            <!-- alternateName -->
+            <template v-if="record.type === 'book'">
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" v-model.trim="record.alternateName" id="alternateName"
+                        name="alternateName" placeholder="Nome alternativo" />
+                    <label for="alternateName">Nome alternativo</label>
+                </div>
+            </template>
+
 
             <!-- Author -->
             <template v-if="record.type === 'book' ||
                 record.type === 'musicrecording' ||
                 record.type === 'musicalbum'
                 ">
-                <div class="input-group mb-2" v-for="(  author, indexAuthor  ) in   record.author  ">
+                <div class="input-group mb-2" v-for="(author, indexAuthor) in record.author">
                     <div class="input-group-prepend">
                         <span class="input-group-text">Autor / Função</span>
                     </div>
@@ -67,12 +76,12 @@
                     <input v-model.trim="author.viaf" autocomplete="off" type="text" aria-label="VIAF" class="form-control"
                         placeholder="VIAF" id="viaf" readonly />
                     <!-- <input
-            v-model="author.name"
-            autocomplete="off"
-            type="text"
-            class="form-control"
-            placeholder="Digite o nome"
-          /> -->
+                        v-model="author.name"
+                        autocomplete="off"
+                        type="text"
+                        class="form-control"
+                        placeholder="Digite o nome"
+                    /> -->
                     <input class="form-control" list="datalistAuthority" placeholder="Digite o nome" v-model="author.name"
                         @input="
                             getIDAuthority(author), getAuthorities(author.name)
@@ -116,8 +125,14 @@
 
             <div class="mt-5">
                 <div class="d-flex justify-content-start">
-                    <button class="btn btn-primary mt-1" type="submit">
-                        Criar registro - Novo
+                    <!-- Button Form -->
+                    <button v-if="editRecordID == 0" @click="addRecord" class="btn btn-primary mt-1">
+                        Criar registro
+                    </button>
+
+                    <!-- Button Form -->
+                    <button v-if="editRecordID != 0" @click="updateRecord" class="btn btn-warning mt-1">
+                        Editar registro
                     </button>
                 </div>
                 <button class="btn btn-warning" id="button-addon1" @click="record = cleanrecord">
@@ -282,20 +297,20 @@ export default {
                 };
                 axios
                     .post(
-                        "api/creative_work/" + this.record.type,
+                        "api/works",
                         JSON.stringify(this.record),
                         { headers }
                     )
                     .then((response) => {
                         this.success = true;
-                        this.changeCatalogingPage("catalogTable");
                     })
                     .catch((error) => {
                         this.loaded = true;
-                        if (error.response.status === 422) {
-                            this.errors = error.response.data.errors || {};
-                        }
-                        console.log("Error");
+                        console.log(error);
+                        // if (error.response.status === 422) {
+                        //     this.errors = error.response.data.errors || {};
+                        // }
+                        // console.log("Error");
                     });
             }
         },
@@ -673,9 +688,6 @@ export default {
                         console.log("Error");
                     });
             }
-        },
-        changeCatalogingPage: function (pageCat) {
-            this.$store.commit("changeCatalogingPage", pageCat);
         },
         checkPropEmpty() {
             if (!this.work) {
