@@ -21,7 +21,7 @@ class Facet extends Component
     {
         $this->request = $request;
         $this->field = $field;
-        $this->fieldName = $fieldName;        
+        $this->fieldName = $fieldName;
     }
 
     /**
