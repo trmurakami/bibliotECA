@@ -25,8 +25,7 @@ return new class extends Migration
             $table->string('bookFormat')->nullable();
             $table->jsonb('byartist')->nullable();
             $table->jsonb('citation')->nullable(); // not included
-            $table->jsonb('character')->nullable();
-            $table->string('conferenceName')->nullable();
+            $table->jsonb('character')->nullable();            
             $table->jsonb('contributor')->nullable(); // not included
             $table->jsonb('copyrightHolder')->nullable(); // not included
             $table->string('copyrightYear')->nullable();
@@ -79,6 +78,7 @@ return new class extends Migration
             $table->jsonb('productionCompany')->nullable();
             $table->jsonb('publisher')->nullable();
             $table->string('recordingOf')->nullable();
+            $table->string('releasedEvent')->nullable();
             $table->string('startDate')->nullable();
             $table->jsonb('size')->nullable(); // not included
             $table->jsonb('subjectOf')->nullable(); // not included

@@ -43,8 +43,8 @@ class Facet extends Component
         if ($this->request->author) {
             $query->where('author', 'like', '%' . $this->request->author . '%');
         }
-        if ($this->request->conferenceName) {
-            $query->where('conferenceName', 'like', '%' . $this->request->conferenceName . '%');
+        if ($this->request->releasedEvent) {
+            $query->where('releasedEvent', 'like', '%' . $this->request->releasedEvent . '%');
         }
         if ($this->request->isPartOf_name) {
             $query->where('isPartOf_name', 'like', '%' . $this->request->isPartOf_name . '%');
@@ -72,9 +72,9 @@ class Facet extends Component
             $facets[0]['request'][3]['field'] = "author";
             $facets[0]['request'][3]['value'] = $this->request->author;
         }
-        if ($this->request->conferenceName) {
-            $facets[0]['request'][4]['field'] = "conferenceName";
-            $facets[0]['request'][4]['value'] = $this->request->conferenceName;
+        if ($this->request->releasedEvent) {
+            $facets[0]['request'][4]['field'] = "releasedEvent";
+            $facets[0]['request'][4]['value'] = $this->request->releasedEvent;
         }
         if ($this->request->isPartOf_name) {
             $facets[0]['request'][5]['field'] = "isPartOf_name";

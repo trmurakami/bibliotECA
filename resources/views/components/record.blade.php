@@ -44,9 +44,9 @@
                     </small>
                 </p>
                 @endif
-                @if (isset($work->conferenceName))
+                @if (isset($work->releasedEvent))
                 <p class="card-text">
-                    <small class="text-body-secondary">Apresentado no evento: {{ $work->conferenceName }}
+                    <small class="text-body-secondary">Apresentado no evento: {{ $work->releasedEvent }}
                     </small>
                     @endif
                 <p class="card-text">{{ $work->description }}</p>

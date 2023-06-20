@@ -19,7 +19,7 @@ class LattesController extends Controller
                     $record['name'] = (string)$trabalho->{'DADOS-BASICOS-DO-TRABALHO'}['TITULO-DO-TRABALHO'];
                     $record['datePublished'] = (string)$trabalho->{'DADOS-BASICOS-DO-TRABALHO'}['ANO-DO-TRABALHO'];
                     $record['type'] = (string)$trabalho->{'DADOS-BASICOS-DO-TRABALHO'}['NATUREZA'];
-                    $record['conferenceName'] = (string)$trabalho->{'DETALHAMENTO-DO-TRABALHO'}['NOME-DO-EVENTO'];
+                    $record['releasedEvent'] = (string)$trabalho->{'DETALHAMENTO-DO-TRABALHO'}['NOME-DO-EVENTO'];
                     $i_autores = 0;
                     foreach ($trabalho->{'AUTORES'} as $autor) {
                         $record['author'][$i_autores]['name'] = (string)$autor->attributes()->{'NOME-COMPLETO-DO-AUTOR'};

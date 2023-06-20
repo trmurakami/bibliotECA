@@ -36,8 +36,8 @@ class WorkController extends Controller
             $query->where('author', $request->author);
         }
 
-        if ($request->conferenceName) {
-            $query->where('conferenceName', $request->conferenceName);
+        if ($request->releasedEvent) {
+            $query->where('releasedEvent', $request->releasedEvent);
         }
 
         if ($request->isPartOf_name) {
