@@ -7,6 +7,9 @@
                 <li><a href="/works" class="nav-link px-2 text-white">Works</a></li>
                 <li><a href="/editor" class="nav-link px-2 text-white">Editor</a></li>
                 <li><a href="/upload" class="nav-link px-2 text-white">Upload</a></li>
+                <li><a href="/classificador/treinamento" class="nav-link px-2 text-white">Classificador -
+                        Treinamento</a></li>
+                <li><a href="/classificador/consulta" class="nav-link px-2 text-white">Classificador - Consulta</a></li>
                 @if (Route::has('login'))
                 @auth
                 <li><a href="/works/create" class="nav-link px-2 text-white">Create</a></li>
