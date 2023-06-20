@@ -61,6 +61,15 @@ class WorkController extends Controller
             ->with('success', 'Work created successfully.');
     }
 
+    public static function storeFromCSV($data)
+    {
+        $work = new Work();
+        $work->type = $data['type'];
+        $work->name = $data['name'];
+        $work->datePublished = $data['datePublished'];
+        $work->save();
+    }
+
     /**
      * Display the specified resource.
      */

@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WorkController;
 use App\Http\Controllers\WorksAPIController;
+use App\Http\Controllers\UploadController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,3 +39,6 @@ Route::resource('works', WorkController::class)->only(['create'])->middleware('a
 Route::get('/editor', function () {
     return view('works.createnew');
 });
+
+Route::get('upload', [UploadController::class, 'index']);
+Route::post('upload', [UploadController::class, 'upload'])->name('upload.upload');
