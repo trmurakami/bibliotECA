@@ -1,16 +1,22 @@
-<!-- resources/views/classificador/treinamento.blade.php -->
+@extends('layouts.layout')
+
+@section('title', 'BibliotECA - Treinamento do classificador')
+
+@section('content')
+
 
 <form method="POST" action="{{ route('classificador.treinamento') }}">
     @csrf
-    <div>
-        <label for="strings">Digite as strings para treinamento (uma por linha):</label>
-        <textarea name="strings" id="strings" rows="5" required></textarea>
+
+    <div class="mb-3">
+        <label for="strings" class="form-label">Digite as strings para treinamento (uma por linha):</label>
+        <textarea class="form-control" id="strings" rows="3" name="strings" required></textarea>
     </div>
-    <div>
+    <div class="mb-3">
         <label for="labels">Digite os rótulos correspondentes (uma por linha):</label>
-        <textarea name="labels" id="labels" rows="5" required></textarea>
+        <textarea class="form-control" name="labels" id="labels" rows="3" required></textarea>
     </div>
-    <div>
-        <button type="submit">Treinar Modelo</button>
-    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+
+@endsection
