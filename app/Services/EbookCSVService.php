@@ -30,10 +30,14 @@ class EbookCSVService
                     $rowData[$key] = $value;
                 }
                 $i++;
-                WorkController::storeFromCSV($rowData);
+                $resultUpload = WorkController::storeFromCSV($rowData);
+            }
+            if ($resultUpload == true) {
+                echo "Arquivo processado com sucesso!";
+            } else {
+                echo "Erro ao processar o arquivo!";
             }
             fclose($handle);
-            echo "Arquivo processado com sucesso!";
         }
     }
 }

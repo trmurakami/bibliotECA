@@ -71,6 +71,7 @@ class WorkController extends Controller
         if (!$saved) {
             Log::error('Erro ao salvar o trabalho: ' . $data['name']);
         }
+        return $saved;
     }
 
     /**
