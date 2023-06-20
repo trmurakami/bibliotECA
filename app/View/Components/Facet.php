@@ -40,7 +40,11 @@ class Facet extends Component
         if ($this->request->datePublished) {
             $query->where('datePublished', $this->request->datePublished);
         }
-        $query->groupBy($this->field)->orderByDesc('count')->orderByDesc($this->field)->limit(10);
+        if ($this->field == 'datePublished') {            
+            $query->groupBy($this->field)->orderByDesc('field')->limit(10);
+        } else {
+            $query->groupBy($this->field)->orderByDesc('count')->orderByDesc($this->field)->limit(10);
+        }
         $result = $query->get();
         $facets[0]['field'] = $this->field;
         $facets[0]['fieldName'] = $this->fieldName;
