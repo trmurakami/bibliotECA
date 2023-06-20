@@ -67,7 +67,10 @@ class WorkController extends Controller
         $work->type = $data['type'];
         $work->name = $data['name'];
         $work->datePublished = $data['datePublished'];
-        $work->save();
+        $saved = $work->save();
+        if (!$saved) {
+            Log::error('Erro ao salvar o trabalho: ' . $data['name']);
+        }
     }
 
     /**

@@ -33,6 +33,7 @@ class EbookCSVService
                 WorkController::storeFromCSV($rowData);
             }
             fclose($handle);
+            echo "Arquivo processado com sucesso!";
         }
     }
 }
