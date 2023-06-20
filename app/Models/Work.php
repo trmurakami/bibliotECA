@@ -38,6 +38,7 @@ class Work extends Model
         'albumReleaseType',
         'author',
         'byartist',
+        'conferenceName',
         'countryOfOrigin',
         'datePublished',
         'description',

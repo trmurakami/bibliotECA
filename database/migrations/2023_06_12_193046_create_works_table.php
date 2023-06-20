@@ -26,6 +26,7 @@ return new class extends Migration
             $table->jsonb('byartist')->nullable();
             $table->jsonb('citation')->nullable(); // not included
             $table->jsonb('character')->nullable();
+            $table->string('conferenceName')->nullable();
             $table->jsonb('contributor')->nullable(); // not included
             $table->jsonb('copyrightHolder')->nullable(); // not included
             $table->string('copyrightYear')->nullable();

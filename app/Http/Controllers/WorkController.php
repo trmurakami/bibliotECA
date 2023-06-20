@@ -32,6 +32,18 @@ class WorkController extends Controller
             $query->where('datePublished', $request->datePublished);
         }
 
+        if ($request->author) {
+            $query->where('author', $request->author);
+        }
+
+        if ($request->conferenceName) {
+            $query->where('conferenceName', $request->conferenceName);
+        }
+
+        if ($request->isPartOf_name) {
+            $query->where('isPartOf_name', $request->isPartOf_name);
+        }
+
         $works = $query->orderByDesc('datePublished')->paginate($request->per_page)->withQueryString();
 
         return view('works.index', compact('works', 'request'));

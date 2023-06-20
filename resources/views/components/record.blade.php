@@ -38,6 +38,17 @@
                         {{ implode(', ', $namesArray) }}</small>
                 </p>
                 @endif
+                @if (isset($work->isPartOf_name))
+                <p class="card-text">
+                    <small class="text-body-secondary">Publicado em: {{ $work->isPartOf_name }}
+                    </small>
+                </p>
+                @endif
+                @if (isset($work->conferenceName))
+                <p class="card-text">
+                    <small class="text-body-secondary">Apresentado no evento: {{ $work->conferenceName }}
+                    </small>
+                    @endif
                 <p class="card-text">{{ $work->description }}</p>
             </div>
         </div>

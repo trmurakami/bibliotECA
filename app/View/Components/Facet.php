@@ -40,7 +40,16 @@ class Facet extends Component
         if ($this->request->datePublished) {
             $query->where('datePublished', $this->request->datePublished);
         }
-        if ($this->field == 'datePublished') {            
+        if ($this->request->author) {
+            $query->where('author', 'like', '%' . $this->request->author . '%');
+        }
+        if ($this->request->conferenceName) {
+            $query->where('conferenceName', 'like', '%' . $this->request->conferenceName . '%');
+        }
+        if ($this->request->isPartOf_name) {
+            $query->where('isPartOf_name', 'like', '%' . $this->request->isPartOf_name . '%');
+        }
+        if ($this->field == 'datePublished') {
             $query->groupBy($this->field)->orderByDesc('field')->limit(10);
         } else {
             $query->groupBy($this->field)->orderByDesc('count')->orderByDesc($this->field)->limit(10);
@@ -58,6 +67,18 @@ class Facet extends Component
         if ($this->request->datePublished) {
             $facets[0]['request'][2]['field'] = "datePublished";
             $facets[0]['request'][2]['value'] = $this->request->datePublished;
+        }
+        if ($this->request->author) {
+            $facets[0]['request'][3]['field'] = "author";
+            $facets[0]['request'][3]['value'] = $this->request->author;
+        }
+        if ($this->request->conferenceName) {
+            $facets[0]['request'][4]['field'] = "conferenceName";
+            $facets[0]['request'][4]['value'] = $this->request->conferenceName;
+        }
+        if ($this->request->isPartOf_name) {
+            $facets[0]['request'][5]['field'] = "isPartOf_name";
+            $facets[0]['request'][5]['value'] = $this->request->isPartOf_name;
         }
         return view('components.facet', compact('facets'));
     }
