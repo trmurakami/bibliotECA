@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('albumReleaseType')->nullable();
             $table->string('alternateName')->nullable();
             $table->jsonb('author')->nullable();
+            $table->jsonb('authors_array')->nullable();
             $table->jsonb('award')->nullable(); // not included
             $table->string('bookEdition')->nullable();
             $table->string('bookFormat')->nullable();

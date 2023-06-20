@@ -18,7 +18,7 @@ class LattesController extends Controller
                     
                     $record['name'] = (string)$trabalho->{'DADOS-BASICOS-DO-TRABALHO'}['TITULO-DO-TRABALHO'];
                     $record['datePublished'] = (string)$trabalho->{'DADOS-BASICOS-DO-TRABALHO'}['ANO-DO-TRABALHO'];
-                    $record['type'] = (string)$trabalho->{'DADOS-BASICOS-DO-TRABALHO'}['NATUREZA'];
+                    $record['type'] = "Trabalho em Evento";
                     $record['releasedEvent'] = (string)$trabalho->{'DETALHAMENTO-DO-TRABALHO'}['NOME-DO-EVENTO'];
                     $i_autores = 0;
                     foreach ($trabalho->{'AUTORES'} as $autor) {
@@ -35,7 +35,7 @@ class LattesController extends Controller
                     //dd($artigo);
                     $record['name'] = (string)$artigo->{'DADOS-BASICOS-DO-ARTIGO'}['TITULO-DO-ARTIGO'];
                     $record['datePublished'] = (string)$artigo->{'DADOS-BASICOS-DO-ARTIGO'}['ANO-DO-ARTIGO'];
-                    $record['type'] = "Article";
+                    $record['type'] = "Artigo";
                     $record['isPartOf_name'] = (string)$artigo->{'DETALHAMENTO-DO-ARTIGO'}['TITULO-DO-PERIODICO-OU-REVISTA'];
                     $i_autores = 0;
                     foreach ($artigo->{'AUTORES'} as $autor) {
