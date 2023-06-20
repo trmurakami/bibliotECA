@@ -33,7 +33,7 @@ class LattesController extends Controller
                 foreach ($curriculo->{'PRODUCAO-BIBLIOGRAFICA'}->{'ARTIGOS-PUBLICADOS'}->{'ARTIGO-PUBLICADO'} as $artigo) {
                     $record['name'] = (string)$artigo->{'DADOS-BASICOS-DO-ARTIGO'}['TITULO-DO-ARTIGO'];
                     $record['datePublished'] = (string)$artigo->{'DADOS-BASICOS-DO-ARTIGO'}['ANO-DO-ARTIGO'];
-                    $record['type'] = (string)$artigo->{'DADOS-BASICOS-DO-ARTIGO'}['NATUREZA'];
+                    $record['type'] = "Article";
                     $i_autores = 0;
                     foreach ($artigo->{'AUTORES'} as $autor) {
                         $record['author'][$i_autores]['name'] = (string)$autor->attributes()->{'NOME-COMPLETO-DO-AUTOR'};
