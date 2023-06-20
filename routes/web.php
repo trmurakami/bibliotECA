@@ -6,6 +6,7 @@ use App\Http\Controllers\WorkController;
 use App\Http\Controllers\WorksAPIController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\ClassificadorController;
+use App\Http\Controllers\LattesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,3 +50,5 @@ Route::get('/classificador/consulta', [ClassificadorController::class, 'consulta
 Route::post('/classificador/consulta', [ClassificadorController::class, 'processarConsulta'])->name('classificador.processarConsulta');
 Route::get('/classificador/treinamento', [ClassificadorController::class, 'treinamento'])->name('classificador.treinamento');
 Route::post('/classificador/treinamento', [ClassificadorController::class, 'processarTreinamento'])->name('classificador.processarTreinamento');
+
+Route::post('/lattes', [LattesController::class, 'processXML'])->name('lattes.processXML');

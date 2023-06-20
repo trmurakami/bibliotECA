@@ -23,4 +23,18 @@
     </div>
     <button type="submit">Enviar</button>
 </form>
+
+
+<h2>Upload de Arquivo XML do Lattes</h2>
+
+<form method="POST" action="{{ route('lattes.processXML') }}" enctype="multipart/form-data">
+    @csrf
+    <div class="mb-3">
+        <label for="file" class="form-label">Arquivo</label>
+        <input class="form-control" type="file" for="file" accept=".xml" name="file">
+        <input type="text" name="new_filename" value="curriculo.xml" hidden>
+    </div>
+    <button type="submit">Enviar</button>
+</form>
+
 @endsection

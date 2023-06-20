@@ -32,7 +32,7 @@ class WorkController extends Controller
             $query->where('datePublished', $request->datePublished);
         }
 
-        $works = $query->orderByDesc('id')->paginate($request->per_page)->withQueryString();
+        $works = $query->orderByDesc('datePublished')->paginate($request->per_page)->withQueryString();
 
         return view('works.index', compact('works', 'request'));
     }
