@@ -20114,7 +20114,7 @@ var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
   "for": "type",
   "class": "form-label mb-3"
 }, "Tipo de material", -1 /* HOISTED */);
-var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<option value=\"book\" selected>Livro</option><option value=\"movie\">Filme</option><option value=\"musicrecording\">Gravação musical</option><option value=\"musicalbum\">Álbum musical</option><option value=\"videoobject\">Vídeo</option><option value=\"periodical\">Periódico</option>", 6);
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<option value=\"Book\" selected>Livro</option><option value=\"Movie\">Filme</option><option value=\"MusicRecording\">Gravação musical</option><option value=\"MusicAlbum\">Álbum musical</option><option value=\"VideoObject\">Vídeo</option><option value=\"Periodical\">Periódico</option>", 6);
 var _hoisted_10 = [_hoisted_4];
 var _hoisted_11 = {
   key: 0,

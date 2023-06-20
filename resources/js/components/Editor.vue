@@ -11,12 +11,12 @@
 
             <label for="type" class="form-label mb-3">Tipo de material</label>
             <select class="form-select mb-3" id="type" v-model="record.type" name="type" required>
-                <option value="book" selected>Livro</option>
-                <option value="movie">Filme</option>
-                <option value="musicrecording">Gravação musical</option>
-                <option value="musicalbum">Álbum musical</option>
-                <option value="videoobject">Vídeo</option>
-                <option value="periodical">Periódico</option>
+                <option value="Book" selected>Livro</option>
+                <option value="Movie">Filme</option>
+                <option value="MusicRecording">Gravação musical</option>
+                <option value="MusicAlbum">Álbum musical</option>
+                <option value="VideoObject">Vídeo</option>
+                <option value="Periodical">Periódico</option>
             </select>
 
             <!-- DOI -->
