@@ -4,6 +4,7 @@
 
 @section('content')
 
+<h2>Treinamento do classificador</h2>
 
 <form method="POST" action="{{ route('classificador.treinamento') }}">
     @csrf
