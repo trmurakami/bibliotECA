@@ -9,3 +9,13 @@ class Person extends Model
 {
     use HasFactory;
 }
+
+class Person extends Model
+{
+    protected $fillable = ['name'];
+
+    public function works()
+    {
+        return $this->belongsToMany(Work::class, 'person_work');
+    }
+}

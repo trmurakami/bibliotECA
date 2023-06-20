@@ -84,4 +84,10 @@ class Work extends Model
         'videoQuality',
         'volumeNumber'
     ];
+
+    public function authors()
+    {
+        return $this->belongsToMany(Person::class, 'person_work');
+    }
+
 }

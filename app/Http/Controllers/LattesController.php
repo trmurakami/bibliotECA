@@ -23,6 +23,7 @@ class LattesController extends Controller
                     $i_autores = 0;
                     foreach ($trabalho->{'AUTORES'} as $autor) {
                         $record['author'][$i_autores]['name'] = (string)$autor->attributes()->{'NOME-COMPLETO-DO-AUTOR'};
+                        $record['author'][$i_autores]['id'] = (string)$autor->attributes()->{'NRO-ID-CNPQ'};
                         $i_autores++;
                     }
                     $work = new Work($record);
