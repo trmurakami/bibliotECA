@@ -19761,8 +19761,7 @@ __webpack_require__.r(__webpack_exports__);
         axios__WEBPACK_IMPORTED_MODULE_0___default().post("api/works", JSON.stringify(this.record), {
           headers: headers
         }).then(function (response) {
-          _this.success = true;
-          _this.record = _this.cleanrecord;
+          _this.success = true, _this.record = _this.cleanrecord;
         })["catch"](function (error) {
           _this.loaded = true;
           console.log(error);

@@ -851,8 +851,8 @@ export default {
                         { headers }
                     )
                     .then((response) => {
-                        this.success = true;
-                        this.record = this.cleanrecord;
+                        this.success = true,
+                            (this.record = this.cleanrecord);
                     })
                     .catch((error) => {
                         this.loaded = true;
