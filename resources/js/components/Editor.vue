@@ -4,6 +4,10 @@
 
         {{ work }}
 
+        <div class="alert alert-success" role="alert" v-if="success">
+            Registro criado com sucesso!
+        </div>
+
         <form @submit.prevent>
             <input type="hidden" name="_token" :value="csrf" />
 
@@ -348,6 +352,18 @@
                 </div>
             </template>
 
+            <!-- Duration -->
+            <template v-if="record.type === 'Filme' ||
+                record.type === 'Vídeo' ||
+                record.type === 'Gravação musical'
+                ">
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" v-model="record.duration" id="duration" name="duration"
+                        placeholder="Digite a duração" />
+                    <label for="duration">Duração</label>
+                </div>
+            </template>
+
 
             <div class="d-flex bd-highlight mt-2">
                 <div class="p-2 flex-grow-1 bd-highlight">
@@ -531,6 +547,7 @@ export default {
                     )
                     .then((response) => {
                         this.success = true;
+                        this.record = this.cleanrecord;
                     })
                     .catch((error) => {
                         this.loaded = true;
