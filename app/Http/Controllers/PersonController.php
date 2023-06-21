@@ -14,7 +14,7 @@ class PersonController extends Controller
             $query->where('name', 'LIKE', '%' . $request->name . '%');
         }
         $people = $query->withCount('works')->with('works')
-        ->orderByDesc('works_count')->paginate(15);
+        ->orderByDesc('works_count')->orderByRaw('name COLLATE NOCASE')->paginate(15);
 
         return view('people.index', compact('people'));
     }
