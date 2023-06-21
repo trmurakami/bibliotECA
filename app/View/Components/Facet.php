@@ -41,7 +41,10 @@ class Facet extends Component
             $query->where('datePublished', $this->request->datePublished);
         }
         if ($this->request->author) {
-            $query->where('author', 'like', '%' . $this->request->author . '%');
+            $search = $this->request->author;
+            $query->whereHas('authors', function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%');
+            });            
         }
         if ($this->request->releasedEvent) {
             $query->where('releasedEvent', 'like', '%' . $this->request->releasedEvent . '%');
