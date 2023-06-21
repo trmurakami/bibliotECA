@@ -3,7 +3,7 @@
         <small class="text-body-secondary">{{ $work->type }}</small>
     </div>
     <div class="row g-0">
-        <div class="col-md-4 d-flex align-items-center justify-content-center" style="max-width: 100px;">
+        <div class="col-lg-2 d-flex align-items-center justify-content-center">
             @if ($work->cover)
             <a href="{{ route('works.show',$work->id) }}">
                 <img src="{{ asset('storage/cover/'.$work->cover) }}" class="img-fluid rounded-start" alt="Cover">
@@ -23,7 +23,7 @@
 
             @endif
         </div>
-        <div class="col-md-8">
+        <div class="col-lg-10">
             <div class="card-body">
                 <h5 class="card-title"><a href="{{ route('works.show',$work->id) }}">{{ $work->name }}
                         ({{ $work->datePublished }})</a></h5>
