@@ -17,7 +17,7 @@ class WorkController extends Controller
     {
 
         if (!$request->per_page) {
-            $request->per_page = 20;
+            $request->per_page = 10;
         }
 
         $query = Work::query()->with('authors');
