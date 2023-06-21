@@ -10,6 +10,7 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
+        "medlib/cover": "^1.0",
         "opcodesio/log-viewer": "^2.4",
         "teamtnt/tntsearch": "^3.1"
     },
