@@ -35,7 +35,10 @@ class WorkController extends Controller
         }
 
         if ($request->author) {
-            $query->where('author', $request->author);
+            $search = $request->author;
+            $query->whereHas('authors', function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%');
+            });
         }
 
         if ($request->releasedEvent) {
@@ -46,7 +49,7 @@ class WorkController extends Controller
             $query->where('isPartOf_name', $request->isPartOf_name);
         }
 
-        $works = $query->orderByDesc('datePublished')->paginate($request->per_page)->withQueryString()->withPath('authors');
+        $works = $query->orderByDesc('datePublished')->paginate($request->per_page)->withQueryString();
 
         return view('works.index', compact('works', 'request'));
     }

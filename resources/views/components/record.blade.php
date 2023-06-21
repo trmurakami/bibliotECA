@@ -41,7 +41,7 @@
                 @endif
 
                 @foreach ($work->authors as $author)
-                {{ $author->name }}
+                <a href="/works?author={{ $author->name }}">{{ $author->name }}</a>
                 <br />
                 @endforeach
 
