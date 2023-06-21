@@ -12,7 +12,15 @@
                     placeholder="Pesquisar no título (Deixe em branco e clique em buscar para exibir todo o acervo)"
                     name="name">
                 <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">Buscar</button>
+                    <button class="btn btn-primary" type="submit">Buscar no título</button>
+                </div>
+            </div>
+        </form>
+        <form action="/works" method="get">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Pesquisar por nome do autor" name="author">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">Buscar autor</button>
                 </div>
             </div>
         </form>
