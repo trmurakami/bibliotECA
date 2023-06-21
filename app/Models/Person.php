@@ -7,12 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Person extends Model
 {
-    use HasFactory;
-}
 
-class Person extends Model
-{
-    protected $fillable = ['name'];
+    //use HasFactory;
+    
+    protected $fillable = ['id_lattes13','name'];
 
     public function works()
     {

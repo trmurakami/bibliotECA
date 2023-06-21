@@ -7,6 +7,7 @@ use App\Http\Controllers\WorksAPIController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\ClassificadorController;
 use App\Http\Controllers\LattesController;
+use App\Http\Controllers\PersonController;
 use App\Http\Controllers\WorkPersonController;
 
 /*
@@ -57,3 +58,5 @@ Route::post('/lattes', [LattesController::class, 'processXML'])->name('lattes.pr
 
 Route::post('/works/{work}/attach', [WorkPersonController::class, 'attachPerson'])->name('works.attachPerson');
 Route::delete('/works/{work}/detach/{person}', [WorkPersonController::class, 'detachPerson'])->name('works.detachPerson');
+
+Route::resource('people', PersonController::class);

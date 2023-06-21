@@ -13,7 +13,6 @@ class Work extends Model
         'about' => 'array',
         'actor' => 'array',
         'author' => 'array',
-        'authors_array' => 'array',
         'byartist' => 'array',
         'character' => 'array',
         'countryOfOrigin' => 'array',
@@ -38,7 +37,6 @@ class Work extends Model
         'albumProductionType',
         'albumReleaseType',
         'author',
-        'authors_array',
         'byartist',
         'releasedEvent',
         'countryOfOrigin',
@@ -85,9 +83,11 @@ class Work extends Model
         'volumeNumber'
     ];
 
+    protected $with = ['authors'];
+
     public function authors()
     {
-        return $this->belongsToMany(Person::class, 'person_work');
+        return $this->belongsToMany(Person::class, 'person_work')->withPivot('relation', 'function')->withTimestamps();
     }
 
 }

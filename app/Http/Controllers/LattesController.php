@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Work;
+use App\Models\Person;
+use App\Http\Controllers\WorkController;
 
 class LattesController extends Controller
 {
@@ -23,11 +25,20 @@ class LattesController extends Controller
                     $i_autores = 0;
                     foreach ($trabalho->{'AUTORES'} as $autor) {
                         $record['author'][$i_autores]['name'] = (string)$autor->attributes()->{'NOME-COMPLETO-DO-AUTOR'};
-                        $record['author'][$i_autores]['id'] = (string)$autor->attributes()->{'NRO-ID-CNPQ'};
+                        $record['author'][$i_autores]['id_lattes13'] = (string)$autor->attributes()->{'NRO-ID-CNPQ'};
+                        $record['author'][$i_autores]['function'] = 'Autor';
+                        $existingPerson = Person::where('name', $record['author'][$i_autores]['name'])->first();
+                        if ($existingPerson) {
+                            $record['author'][$i_autores]['id'] = $existingPerson->id;
+                        } else {
+                            $newPersonID = Person::firstOrCreate(['name' => $record['author'][$i_autores]['name'], 'id_lattes13' => $record['author'][$i_autores]['id_lattes13']])->id;
+                            $record['author'][$i_autores]['id'] = $newPersonID;
+                        }
                         $i_autores++;
                     }
                     $work = new Work($record);
                     $work->save();
+                    WorkController::indexRelations($work->id);
                     unset($record);
                 }
             }
@@ -41,10 +52,20 @@ class LattesController extends Controller
                     $i_autores = 0;
                     foreach ($artigo->{'AUTORES'} as $autor) {
                         $record['author'][$i_autores]['name'] = (string)$autor->attributes()->{'NOME-COMPLETO-DO-AUTOR'};
+                        $record['author'][$i_autores]['id_lattes13'] = (string)$autor->attributes()->{'NRO-ID-CNPQ'};
+                        $record['author'][$i_autores]['function'] = 'Autor';
+                        $existingPerson = Person::where('name', $record['author'][$i_autores]['name'])->first();
+                        if ($existingPerson) {
+                            $record['author'][$i_autores]['id'] = $existingPerson->id;
+                        } else {
+                            $newPersonID = Person::firstOrCreate(['name' => $record['author'][$i_autores]['name'], 'id_lattes13' => $record['author'][$i_autores]['id_lattes13']])->id;
+                            $record['author'][$i_autores]['id'] = $newPersonID;
+                        }
                         $i_autores++;
                     }
                     $work = new Work($record);
                     $work->save();
+                    WorkController::indexRelations($work->id);
                     unset($record);
                 }
             }

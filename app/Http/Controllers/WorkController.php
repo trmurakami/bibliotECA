@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Work;
+use App\Models\Person;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use Illuminate\Database\Eloquent\Collection;
 
 class WorkController extends Controller
 {
@@ -18,7 +20,7 @@ class WorkController extends Controller
             $request->per_page = 20;
         }
 
-        $query = Work::query();
+        $query = Work::query()->with('authors');
 
         if ($request->name) {
             $query->where('name', 'LIKE', '%' . $request->name . '%');
@@ -44,7 +46,7 @@ class WorkController extends Controller
             $query->where('isPartOf_name', $request->isPartOf_name);
         }
 
-        $works = $query->orderByDesc('datePublished')->paginate($request->per_page)->withQueryString()->withPath('person');
+        $works = $query->orderByDesc('datePublished')->paginate($request->per_page)->withQueryString()->withPath('authors');
 
         return view('works.index', compact('works', 'request'));
     }
@@ -131,15 +133,15 @@ class WorkController extends Controller
             ->with('success', 'Work deleted successfully');
     }
 
-    public function indexRelations($id)
+    public static function indexRelations($id)
     {
         $record = Work::find($id);
-        $record->people()->detach();
+        $record->authors()->detach();
         if ($record->author) {
             foreach ($record->author as $author) {
                 if ($author["id"] != "") {
                     $person = Person::find($author["id"]);
-                    $record->people()->attach($person, ['relation' => $author['function'], 'function' => $author['function']]);
+                    $record->authors()->attach($person, ['relation' => $author['function'], 'function' => $author['function']]);
                 }
             }
         }
@@ -147,7 +149,7 @@ class WorkController extends Controller
             foreach ($record->about as $about) {
                 if ($about["id"] != "") {
                     $person = Thing::find($about["id"]);
-                    $record->people()->attach($person, ['relation' => "about", 'function' => "about"]);
+                    $record->authors()->attach($person, ['relation' => "about", 'function' => "about"]);
                 }
             }
         }
@@ -155,7 +157,7 @@ class WorkController extends Controller
             foreach ($record->director as $director) {
                 if ($director["id"] != "") {
                     $person = Person::find($director["id"]);
-                    $record->people()->attach($person, ['relation' => "director", 'function' => "director"]);
+                    $record->authors()->attach($person, ['relation' => "director", 'function' => "director"]);
                 }
             }
         }
@@ -163,7 +165,7 @@ class WorkController extends Controller
             foreach ($record->actor as $actor) {
                 if ($actor["id"] != "") {
                     $person = Thing::find($actor["id"]);
-                    $record->people()->attach($person, ['relation' => "actor", 'function' => "actor"]);
+                    $record->authors()->attach($person, ['relation' => "actor", 'function' => "actor"]);
                 }
             }
         }
@@ -171,7 +173,7 @@ class WorkController extends Controller
             foreach ($record->musicby as $musicby) {
                 if ($musicby["id"] != "") {
                     $person = Thing::find($musicby["id"]);
-                    $record->people()->attach($person, ['relation' => "musicby", 'function' => "musicby"]);
+                    $record->authors()->attach($person, ['relation' => "musicby", 'function' => "musicby"]);
                 }
             }
         }
@@ -179,7 +181,7 @@ class WorkController extends Controller
             foreach ($record->productionCompany as $productionCompany) {
                 if ($productionCompany["id"] != "") {
                     $person = Thing::find($productionCompany["id"]);
-                    $record->people()->attach($person, ['relation' => "productionCompany", 'function' => "productionCompany"]);
+                    $record->authors()->attach($person, ['relation' => "productionCompany", 'function' => "productionCompany"]);
                 }
             }
         }
@@ -187,7 +189,7 @@ class WorkController extends Controller
             foreach ($record->translator as $translator) {
                 if ($translator["id"] != "") {
                     $person = Thing::find($translator["id"]);
-                    $record->people()->attach($person, ['relation' => "translator", 'function' => "translator"]);
+                    $record->authors()->attach($person, ['relation' => "translator", 'function' => "translator"]);
                 }
             }
         }
@@ -195,7 +197,7 @@ class WorkController extends Controller
             foreach ($record->publisher as $publisher) {
                 if ($publisher["id"] != "") {
                     $person = Thing::find($publisher["id"]);
-                    $record->people()->attach($person, ['relation' => "publisher", 'function' => "publisher"]);
+                    $record->authors()->attach($person, ['relation' => "publisher", 'function' => "publisher"]);
                 }
             }
         }
