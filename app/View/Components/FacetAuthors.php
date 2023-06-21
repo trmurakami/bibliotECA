@@ -31,9 +31,12 @@ class FacetAuthors extends Component
         $type = $this->request->type;
         $name = $this->request->name;
         $datePublished = $this->request->datePublished;
+        $inLanguage = $this->request->inLanguage;
+        $issn = $this->request->issn;
+        $author = $this->request->author;
         $q = Person::query();
         
-        $q->whereHas('works', function ($q) use ($type, $name, $datePublished) {
+        $q->whereHas('works', function ($q) use ($type, $name, $datePublished, $inLanguage, $issn, $author) {
             if (!empty($type)) {
                 $q->where('type', $type);
             }
@@ -42,12 +45,21 @@ class FacetAuthors extends Component
             }
             if (!empty($datePublished)) {
                 $q->where('datePublished', $datePublished);
+            }
+            if (!empty($inLanguage)) {
+                $q->where('inLanguage', 'LIKE', '%' . $inLanguage . '%');
+            }
+            if (!empty($issn)) {
+                $q->where('issn', $issn);
+            }
+            if (!empty($author)) {
+                $q->whereHas('authors', function ($q) use ($author) {
+                    $q->where('name', 'LIKE', '%' . $author . '%');
+                });
             }
         });
 
-
-
-        $q->withCount(['works' => function ($q) use ($type, $name, $datePublished) {
+        $q->withCount(['works' => function ($q) use ($type, $name, $datePublished, $inLanguage, $issn, $author) {
             if (!empty($type)) {
                 $q->where('type', $type);
             }
@@ -56,6 +68,17 @@ class FacetAuthors extends Component
             }
             if (!empty($datePublished)) {
                 $q->where('datePublished', $datePublished);
+            }
+            if (!empty($inLanguage)) {
+                $q->where('inLanguage', 'LIKE', '%' . $inLanguage . '%');
+            }
+            if (!empty($issn)) {
+                $q->where('issn', $issn);
+            }
+            if (!empty($author)) {
+                $q->whereHas('authors', function ($q) use ($author) {
+                    $q->where('name', 'LIKE', '%' . $author . '%');
+                });
             }
         }])->get();
 
