@@ -5,7 +5,7 @@
         {{ work }}
 
         <div class="alert alert-success" role="alert" v-if="success">
-            Registro criado com sucesso!
+            Registro criado com sucesso! - <a href="/editor" class="alert-link">Criar novo registro</a>.
         </div>
 
         <form @submit.prevent>
@@ -312,6 +312,113 @@
                 </button>
             </template>
 
+            <!-- Director -->
+            <template v-if="record.type === 'Filme' || record.type === 'Vídeo'">
+                <div class="input-group mb-2" v-for="(director, indexDirector) in record.director">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Diretor</span>
+                    </div>
+                    <input v-model="director.id" autocomplete="off" type="text" aria-label="Diretor ID" class="form-control"
+                        name="directorId" id="directorId" placeholder="ID do diretor" readonly />
+                    <input v-model.trim="director.name" autocomplete="off" type="text" class="form-control"
+                        name="directorName" id="directorName" placeholder="Nome" list="datalistAuthority" @input="
+                            getIDAuthority(director),
+                            getAuthorities(director.name)
+                            " />
+                    <datalist id="datalistAuthority">
+                        <option v-for="authority in authorities" :value="authority.name" :key="authority.id"
+                            :id="authority.id"></option>
+                    </datalist>
+                    <button @click="deleteField('director', indexDirector)" class="btn btn-danger btn-sm">
+                        Limpar
+                    </button>
+                </div>
+
+                <button @click="addField('director')" class="btn btn-info btn-sm mb-2">
+                    Adicionar diretor
+                </button>
+            </template>
+
+            <!-- Actor -->
+            <template v-if="record.type === 'Filme' || record.type === 'Vídeo'">
+                <div class="input-group mb-2" v-for="(actor, indexActor) in record.actor">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Ator/Atriz</span>
+                    </div>
+                    <input v-model="actor.id" autocomplete="off" type="text" class="form-control" name="idActor"
+                        id="idActor" placeholder="ID do ator / atriz" readonly />
+                    <input v-model.trim="actor.name" autocomplete="off" type="text" class="form-control" name="nameActor"
+                        id="nameActor" placeholder="Nome do ator / atriz" @input="
+                            getIDAuthority(actor), getAuthorities(actor.name)
+                            " list="datalistAuthority" />
+                    <datalist id="datalistAuthority">
+                        <option v-for="authority in authorities" :value="authority.name" :key="authority.id"
+                            :id="authority.id"></option>
+                    </datalist>
+                    <button @click="deleteField('actor', indexActor)" class="btn btn-danger btn-sm">
+                        Limpar
+                    </button>
+                </div>
+
+                <button @click="addField('actor')" class="btn btn-info btn-sm mb-2">
+                    Adicionar ator
+                </button>
+            </template>
+
+            <!-- Translator -->
+            <template v-if="record.type === 'Livro'">
+                <div class="input-group mb-2" v-for="(translator, indexTranslator) in record.translator">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Tradutor</span>
+                    </div>
+                    <input v-model="translator.id" autocomplete="off" type="text" class="form-control" name="id" id="id"
+                        placeholder="ID do tradutor" readonly />
+                    <input v-model.trim="translator.name" list="datalistAuthority" autocomplete="off" type="text"
+                        class="form-control" name="name" id="name" placeholder="Nome do tradutor(a)" @input="
+                            getIDAuthority(translator),
+                            getAuthorities(translator.name)
+                            " />
+                    <datalist id="datalistAuthority">
+                        <option v-for="authority in authorities" :value="authority.name" :key="authority.id"
+                            :id="authority.id"></option>
+                    </datalist>
+                    <button @click="deleteField('translator', indexTranslator)" class="btn btn-danger btn-sm">
+                        Limpar
+                    </button>
+                </div>
+
+                <button @click="addField('translator')" class="btn btn-info btn-sm mb-2">
+                    Adicionar tradutor
+                </button>
+            </template>
+
+            <!-- Music By -->
+            <template v-if="record.type === 'Filme'">
+                <div class="input-group mb-2" v-for="(musicby, indexMusicBy) in record.musicby">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Música por</span>
+                    </div>
+                    <input v-model="musicby.id" type="text" class="form-control" name="idMusicBy" id="idMusicBy"
+                        placeholder="ID do Artista" readonly />
+                    <input v-model.trim="musicby.name" type="text" class="form-control" name="nameMusicBy" id="nameMusicBy"
+                        placeholder="Nome do Artista" list="datalistAuthority" @input="
+                            getIDAuthority(musicby),
+                            getAuthorities(musicby.name)
+                            " />
+                    <datalist id="datalistAuthority">
+                        <option v-for="authority in authorities" :value="authority.name" :key="authority.id"
+                            :id="authority.id"></option>
+                    </datalist>
+                    <button @click="deleteField('musicby', indexMusicBy)" class="btn btn-danger btn-sm">
+                        Limpar
+                    </button>
+                </div>
+
+                <button @click="addField('musicby')" class="btn btn-info btn-sm mb-2">
+                    Adicionar Música por
+                </button>
+            </template>
+
             <!-- Abstract -->
             <div class="form-floating mb-2">
                 <textarea class="form-control" placeholder="Digite o resumo" v-model.trim="record.abstract" id="abstract"
@@ -333,6 +440,204 @@
                     name="datePublished" placeholder="Digite a data de publicação" />
                 <label for="datePublished">Data de publicação</label>
             </div>
+
+            <!-- countryOfOrigin -->
+            <template v-if="record.type === 'Filme' ||
+                record.type === 'Livro' ||
+                record.type === 'Álbum musical'
+                ">
+                <div class="input-group mb-2" v-for="(
+                        countryOfOrigin, indexcountryOfOrigin
+                    ) in record.countryOfOrigin">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">País de origem</span>
+                    </div>
+                    <select class="form-select" v-model="countryOfOrigin.code">
+                        <option value="BR">Brasil</option>
+                        <option value="US">Estados Unidos</option>
+                        <option value="ES">Espanha</option>
+                        <option value="FR">França</option>
+                        <option value="PT">Portugal</option>
+                    </select>
+                    <button @click="
+                        deleteField('countryOfOrigin', indexcountryOfOrigin)
+                        " class="btn btn-danger btn-sm">
+                        Limpar
+                    </button>
+                </div>
+
+                <button @click="addField('countryOfOrigin')" class="btn btn-info btn-sm mb-2">
+                    Adicionar país
+                </button>
+            </template>
+
+            <!-- Production Company -->
+            <template v-if="record.type === 'Filme' || record.type === 'Vídeo'">
+                <div class="input-group mb-2" v-for="(
+                        productionCompany, indexProductionCompany
+                    ) in record.productionCompany">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Produtora</span>
+                    </div>
+                    <input v-model="productionCompany.id" type="text" class="form-control" name="id" id="id"
+                        placeholder="ID da Produtora" readonly />
+                    <input v-model="productionCompany.name" type="text" class="form-control" name="name" id="name"
+                        placeholder="Nome da Produtora" list="datalistAuthorityOrg" @input="
+                            getIDAuthority(productionCompany),
+                            getAuthoritiesOrganization(
+                                productionCompany.name
+                            )
+                            " />
+                    <datalist id="datalistAuthorityOrg">
+                        <option v-for="authority in authoritiesOrganization" :value="authority.name" :key="authority.id"
+                            :id="authority.id"></option>
+                    </datalist>
+                    <button @click="
+                        deleteField(
+                            'productionCompany',
+                            indexProductionCompany
+                        )
+                        " class="btn btn-danger btn-sm">
+                        Limpar
+                    </button>
+                </div>
+                <button @click="addField('productionCompany')" class="btn btn-info btn-sm mb-2">
+                    Adicionar produtora
+                </button>
+            </template>
+
+            <!-- isrcCode -->
+            <template v-if="record.type === 'Gravação musical'">
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" v-model="record.isrcCode" id="isrcCode" name="isrcCode"
+                        placeholder="Digite o código ISRC" />
+                    <label for="isrcCode">Código ISRC</label>
+                    <div id="isrcCode" class="form-text">
+                        <a href="https://isrcsearch.ifpi.org/#!/search" target="_blank">ISRC pode ser consultado neste
+                            link</a>
+                    </div>
+                </div>
+            </template>
+
+            <!-- recordingOf -->
+            <template v-if="record.type === 'Gravação musical'">
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" v-model="record.recordingOf" id="recordingOf" name="recordingOf"
+                        placeholder="Digite a gravação original em que esta se baseou" />
+                    <label for="recordingOf">Gravação de</label>
+                </div>
+            </template>
+
+            <!-- byartist -->
+            <template v-if="record.type === 'Gravação musical' ||
+                record.type === 'Álbum musical'
+                ">
+                <div class="input-group mb-2" v-for="(byartist, indexArtist) in record.byartist">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Artista</span>
+                    </div>
+                    <input v-model="byartist.id" autocomplete="off" type="text" aria-label="ByArtist ID"
+                        class="form-control" id="id" placeholder="ID do Artista" readonly />
+                    <input v-model="byartist.name" autocomplete="off" type="text" aria-label="ByArtist Name"
+                        class="form-control" id="name" placeholder="Nome do Artista" list="datalistArtist" @input="
+                            getIDAuthority(byartist),
+                            getAuthorities(byartist.name)
+                            " />
+                    <datalist id="datalistArtist">
+                        <option v-for="authorityArtist in authorities" :value="authorityArtist.name"
+                            :key="authorityArtist.id" :id="authorityArtist.id" :function="authorityArtist.function">
+                        </option>
+                    </datalist>
+                    <input v-model="byartist.function" autocomplete="off" type="text" aria-label="ByArtist Function"
+                        class="form-control" id="function" placeholder="Função" />
+                    <button @click="deleteField('byartist', indexArtist)" class="btn btn-danger btn-sm">
+                        Limpar
+                    </button>
+                </div>
+                <br />
+                <button @click="addField('byartist')" class="btn btn-info btn-sm mb-2">
+                    Adicionar artista
+                </button>
+            </template>
+
+            <!-- inAlbum -->
+            <template v-if="record.type === 'Gravação musical'">
+                <div class="input-group mb-2" v-for="(inAlbum, indexinAlbum) in record.inAlbum">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Álbum</span>
+                    </div>
+                    <input v-model="inAlbum.id" type="text" class="form-control" name="id" id="id" placeholder="ID do Álbum"
+                        readonly />
+                    <input v-model="inAlbum.name" type="text" class="form-control" name="name" id="name"
+                        placeholder="Nome do Álbum" list="datalistAuthorityOrg" @input="
+                            getIDAuthority(inAlbum),
+                            getAuthoritiesOrganization(inAlbum.name)
+                            " />
+                    <datalist id="datalistAuthorityOrg">
+                        <option v-for="authority in authoritiesOrganization" :value="authority.name" :key="authority.id"
+                            :id="authority.id"></option>
+                    </datalist>
+                    <button @click="deleteField('inAlbum', indexinAlbum)" class="btn btn-danger btn-sm">
+                        Limpar
+                    </button>
+                </div>
+                <button @click="addField('inAlbum')" class="btn btn-info btn-sm mb-2">
+                    Adicionar álbum
+                </button>
+            </template>
+
+            <!-- Publisher -->
+            <div class="input-group mb-2" v-for="(publisher, indexpublisher) in record.publisher">
+                <div class="input-group-prepend">
+                    <span class="input-group-text">Editora / Publicadora</span>
+                </div>
+                <input v-model="publisher.id" type="text" class="form-control" name="id" id="id" placeholder="ID"
+                    readonly />
+                <input v-model.trim="publisher.name" type="text" class="form-control" name="name" id="name"
+                    placeholder="Nome da Editora / Publicadora" list="datalistAuthorityOrg" @input="
+                        getIDAuthority(publisher),
+                        getAuthoritiesOrganization(publisher.name)"
+                    :class="{ 'is-invalid': Object.keys(publisher.name).length === 0, }" />
+                <datalist id="datalistAuthorityOrg">
+                    <option v-for="authority in authoritiesOrganization" :value="authority.name" :key="authority.id"
+                        :id="authority.id"></option>
+                </datalist>
+                <button @click="deleteField('publisher', indexpublisher)" class="btn btn-danger btn-sm">
+                    Limpar
+                </button>
+            </div>
+            <button @click="addField('publisher')" class="btn btn-info btn-sm mb-2">
+                Adicionar editora / publicadora
+            </button>
+
+            <!-- subtitleLanguage -->
+            <template v-if="record.type === 'Filme' || record.type === 'Vídeo'">
+                <div class="input-group mb-2" v-for="(
+                        subtitleLanguage, indexSubtitleLanguage
+                    ) in record.subtitleLanguage">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">Idioma da legenda</span>
+                    </div>
+                    <select class="form-select" v-model="subtitleLanguage.code">
+                        <option value="pt-BR">Português</option>
+                        <option value="en-US">Inglês (Estados Unidos)</option>
+                        <option value="fr-FR">Francês</option>
+                        <option value="es-ES">Espanhol</option>
+                    </select>
+                    <button @click="
+                        deleteField(
+                            'subtitleLanguage',
+                            indexSubtitleLanguage
+                        )
+                        " class="btn btn-danger btn-sm">
+                        Limpar
+                    </button>
+                </div>
+
+                <button @click="addField('subtitleLanguage')" class="btn btn-info btn-sm mb-2">
+                    Adicionar idioma da legenda
+                </button>
+            </template>
 
             <!-- Book Edition -->
             <template v-if="record.type === 'Livro'">
