@@ -6,7 +6,9 @@
 
 @foreach ($people as $person)
 
-{{ print_r($person->name, true)}} - {{ print_r($person->id_lattes13, true)}}
+{{ print_r($person->name, true)}} - {{ print_r($person->id_lattes13, true)}} - {{ $person->works_count }}
+
+
 
 <br />
 

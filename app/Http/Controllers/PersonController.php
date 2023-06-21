@@ -9,7 +9,8 @@ class PersonController extends Controller
 {
     public function index()
     {
-        $people = Person::all();
+        $people = Person::withCount('works')->with('works')
+        ->orderByDesc('works_count')->get();
 
         return view('people.index', compact('people'));
     }
