@@ -20,8 +20,8 @@
                 @foreach ($people as $person)
 
                 <li class="list-group-item">
-                    <div class="row">
-                        <div class="col-8">
+                    <div class="d-flex bd-highlight">
+                        <div class="w-100 bd-highlight">
                             <a href="/works?author={{ $person->name }}">{{ print_r($person->name, true)}}</a>
                             @if ($person->id_lattes13)
                             <a href="https://lattes.cnpq.br/{{ $person->id_lattes13 }}" target="_blank">
@@ -30,7 +30,9 @@
                             </a>
                             @endif
                         </div>
-                        <div class="col-4"><span class="badge text-bg-primary">{{ $person->works_count }}</span></div>
+                        <div class="flex-shrink-1 bd-highlight"><span
+                                class="badge text-bg-primary">{{ $person->works_count }}</span>
+                        </div>
                     </div>
                 </li>
 
