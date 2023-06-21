@@ -49,6 +49,10 @@ class WorkController extends Controller
             $query->where('isPartOf_name', $request->isPartOf_name);
         }
 
+        if ($request->inLanguage) {
+            $query->where('inLanguage', 'like', '%' .  $request->inLanguage . '%');
+        }
+
         $works = $query->orderByDesc('datePublished')->paginate($request->per_page)->withQueryString();
 
         return view('works.index', compact('works', 'request'));

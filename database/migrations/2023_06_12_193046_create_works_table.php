@@ -47,7 +47,7 @@ return new class extends Migration
             $table->jsonb('identifier')->nullable(); // not included
             $table->string('image')->nullable();
             $table->jsonb('inAlbum')->nullable();
-            $table->jsonb('inlanguage')->nullable();
+            $table->string('inLanguage')->nullable();
             $table->jsonb('inPlaylist')->nullable(); // not included
             $table->boolean('isaccessibleforfree')->nullable();
             $table->jsonb('isBasedOn')->nullable(); // not included
