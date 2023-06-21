@@ -7,9 +7,13 @@ use App\Models\Person;
 
 class PersonController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $people = Person::withCount('works')->with('works')
+        $query = Person::query();
+        if ($request->name) {
+            $query->where('name', 'LIKE', '%' . $request->name . '%');
+        }
+        $people = $query->withCount('works')->with('works')
         ->orderByDesc('works_count')->paginate(15);
 
         return view('people.index', compact('people'));
