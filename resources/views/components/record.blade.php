@@ -49,7 +49,6 @@
                         </ul>
                     </small>
                 </p>
-
                 @if (isset($work->isPartOf_name))
                 <p class="card-text">
                     <small class="text-body-secondary">
@@ -57,12 +56,31 @@
                         @if (isset($work->issn))
                         (ISSN: {{ $work->issn }})
                         @endif
+                        @if (!empty($work->volumeNumber))
+                        Vol.: {{ $work->volumeNumber }}
+                        @endif
+                        @if (!empty($work->issueNumber))
+                        , Num.: {{ $work->issueNumber }}
+                        @endif
+                        @if (!empty($work->pageStart))
+                        , p. {{ $work->pageStart }} - {{ $work->pageEnd }}
+                        @endif
                     </small>
                 </p>
                 @endif
                 @if (isset($work->releasedEvent))
                 <p class="card-text">
-                    <small class="text-body-secondary">Apresentado no evento: {{ $work->releasedEvent }}
+                    <small class="text-body-secondary">
+                        Apresentado no evento: {{ $work->releasedEvent }}
+                        @if (!empty($work->volumeNumber))
+                        Vol.: {{ $work->volumeNumber }}
+                        @endif
+                        @if (!empty($work->issueNumber))
+                        , Num.: {{ $work->issueNumber }}
+                        @endif
+                        @if (!empty($work->pageStart))
+                        , p. {{ $work->pageStart }} - {{ $work->pageEnd }}
+                        @endif
                     </small>
                     @endif
                 <p class="card-text">{{ $work->description }}</p>
