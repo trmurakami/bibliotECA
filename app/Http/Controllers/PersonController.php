@@ -10,7 +10,7 @@ class PersonController extends Controller
     public function index()
     {
         $people = Person::withCount('works')->with('works')
-        ->orderByDesc('works_count')->get();
+        ->orderByDesc('works_count')->paginate(15);
 
         return view('people.index', compact('people'));
     }
