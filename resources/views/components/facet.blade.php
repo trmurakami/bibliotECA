@@ -2,11 +2,13 @@
     @foreach ($facets as $facet)
     <h2 class="accordion-header">
         <button class="accordion-button" type="button" data-bs-toggle="collapse"
-            data-bs-target="#{{ $facet['fieldName'] }}" aria-expanded="true" aria-controls="{{ $facet['fieldName'] }}">
+            data-bs-target="#{{ hash('crc32', $facet['fieldName']) }}" aria-expanded="true"
+            aria-controls="{{ hash('crc32', $facet['fieldName']) }}">
             {{ $facet['fieldName'] }}
         </button>
     </h2>
-    <div id="{{ $facet['fieldName'] }}" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+    <div id="{{ hash('crc32', $facet['fieldName']) }}" class="accordion-collapse collapse show"
+        data-bs-parent="#{{ hash('crc32', $facet['fieldName']) }}">
         <div class="accordion-body">
             <ul>
                 @foreach ($facet['values'] as $value)
