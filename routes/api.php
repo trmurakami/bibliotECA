@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WorksAPIController;
 use App\Http\Controllers\ProxyOAIPMHController;
+use App\Http\Controllers\ProxyEIDRController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,5 @@ Route::prefix('oai')->group(
         Route::get('list', [ProxyOAIPMHController::class, 'listOAIPMH']);
     }
 );
+
+Route::get('eidr/{eidr}', [ProxyEIDRController::class, 'getEIDR']);

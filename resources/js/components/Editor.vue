@@ -47,6 +47,26 @@
                     </div>
                 </template>
 
+                <!-- EIDR -->
+                <div class="d-flex align-items-center mb-3 mt-3" v-if="loadingEIDR">
+                    <strong>Carregando dados da base EIDR ...</strong>
+                    <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+                </div>
+                <template v-if="record.type === 'Filme'">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">EIDR</span>
+                        <input type="text" class="form-control" v-model="record.titleEIDR" id="titleEIDR" name="titleEIDR"
+                            placeholder="Digite o EIDR" />
+                        <a class="btn btn-info btn-sm" href="https://ui.eidr.org/search" target="_blank">EIDR pode ser
+                            consultado neste link</a>
+                        <button class="btn btn-info btn-sm" @click="
+                            getEIDR(record.titleEIDR.replace('10.5240/', ''))
+                            ">
+                            Recuperar dados do EIDR
+                        </button>
+                    </div>
+                </template>
+
 
                 <!-- OAI-PMH -->
                 <template v-if="record.type === 'Periódico'">
@@ -73,6 +93,19 @@
                                 .ListMetadataFormats.metadataFormat" :key="metadataFormat.metadataPrefix"
                                 :value="metadataFormat.metadataPrefix">
                                 {{ metadataFormat.metadataPrefix }}
+                            </option>
+                        </select>
+                    </div>
+                </template>
+
+                <!-- OAI-PMH Sets-->
+                <template v-if="OAISets">
+                    <div class="m-3">
+                        <label for="isbn" class="form-label">Sets OAI-PMH</label>
+                        <select class="form-select" v-model="record.oaiset">
+                            <option value="">Nenhum</option>
+                            <option v-for="set in OAISets.ListSets.set" :key="set.setSpec" :value="set.setSpec">
+                                {{ set.setName }}
                             </option>
                         </select>
                     </div>
@@ -305,7 +338,7 @@ export default {
                 thumbnailUrl: "",
                 translator: [],
                 translationOfWork: "",
-                type: "book",
+                type: "Livro",
                 uploadDate: "",
                 url: "",
             },
@@ -354,7 +387,7 @@ export default {
                 thumbnailUrl: "",
                 translator: [],
                 translationOfWork: "",
-                type: "book",
+                type: "Livro",
                 uploadDate: "",
                 url: "",
             },
