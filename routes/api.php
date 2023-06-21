@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WorksAPIController;
+use App\Http\Controllers\ProxyOAIPMHController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +21,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource("works", WorksAPIController::class);
+
+Route::prefix('oai')->group(
+    function () {
+        Route::get('identify', [ProxyOAIPMHController::class, 'getOAIPMHIdentify']);
+        Route::get('listmetadataformats', [ProxyOAIPMHController::class, 'listMetadataFormats']);
+        Route::get('listsets', [ProxyOAIPMHController::class, 'listSets']);
+        Route::post('harvest', [HarvestOAIPMHController::class, 'harvest']);
+        Route::get('list', [ProxyOAIPMHController::class, 'listOAIPMH']);
+    }
+);

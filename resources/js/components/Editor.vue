@@ -11,28 +11,76 @@
 
             <label for="type" class="form-label mb-3">Tipo de material</label>
             <select class="form-select mb-3" id="type" v-model="record.type" name="type" required>
-                <option value="Book" selected>Livro</option>
-                <option value="Movie">Filme</option>
-                <option value="MusicRecording">Gravação musical</option>
-                <option value="MusicAlbum">Álbum musical</option>
-                <option value="VideoObject">Vídeo</option>
-                <option value="Periodical">Periódico</option>
+                <option value="Livro" selected>Livro</option>
+                <option value="Artigo">Artigo</option>
+                <option value="Trabalho em Evento">Trabalho em Evento</option>
+                <option value="Filme">Filme</option>
+                <option value="Gravação musical">Gravação musical</option>
+                <option value="Álbum musical">Álbum musical</option>
+                <option value="Vídeo">Vídeo</option>
+                <option value="Periódico">Periódico</option>
             </select>
 
-            <!-- DOI -->
-            <template v-if="record.type === 'book'">
+            <div class="m-5">
+                <h5>Identificadores:</h5>
+
+                <!-- DOI -->
                 <div class="alert alert-warning" role="alert" v-if="loadingDOI">
                     Buscando dados do DOI na Crossref ...
                 </div>
-                <div class="m-3">
-                    <label for="doi" class="form-label">DOI</label>
-                    <input type="text" class="form-control" v-model="record.doi" id="doi" name="doi"
-                        placeholder="Digite o DOI" />
-                    <button class="btn btn-info btn-sm m-2" @click="getDOI(record.doi), (loadingDOI = true)">
-                        Recuperar dados de DOI na Crossref
-                    </button>
+
+                <div class="input-group mb-3">
+                    <span class="input-group-text">DOI</span>
+                    <input type="text" class="form-control" placeholder="Digite o DOI" aria-label="Digite o DOI"
+                        v-model="record.doi" id="doi" name="doi" aria-describedby="doi">
+                    <button class="btn btn-info" type="button" id="doi"
+                        @click="getDOI(record.doi), (loadingDOI = true)">Recuperar dados de DOI na Crossref</button>
                 </div>
-            </template>
+
+
+                <!-- ISSN -->
+                <template v-if="record.type === 'Periódico'">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">ISSN</span>
+                        <input type="text" class="form-control" v-model="record.issn" id="ISSN" name="ISSN"
+                            placeholder="Digite o ISSN" />
+                    </div>
+                </template>
+
+
+                <!-- OAI-PMH -->
+                <template v-if="record.type === 'Periódico'">
+                    <div class="input-group mb-3">
+                        <span class="input-group-text">OAI-PMH</span>
+                        <input type="text" class="form-control" v-model="record.oaipmh" id="oaipmh" name="oaipmh"
+                            placeholder="Digite a URL do OAI-PMH" />
+                        <button class="btn btn-info btn-sm" @click="
+                            getOAIPMH(record.oaipmh),
+                            getOAIMetadataFormats(record.oaipmh),
+                            getOAISets(record.oaipmh)
+                            ">
+                            Recuperar dados do OAI-PMH
+                        </button>
+                    </div>
+                </template>
+
+                <!-- OAI-PMH MetadataFormats-->
+                <template v-if="OAIMetadataFormats">
+                    <div class="m-3">
+                        <label for="isbn" class="form-label">Formato de metadados OAI-PMH (Escolha um)</label>
+                        <select class="form-select" v-model="record.oaimetadataformat">
+                            <option v-for="metadataFormat in OAIMetadataFormats
+                                .ListMetadataFormats.metadataFormat" :key="metadataFormat.metadataPrefix"
+                                :value="metadataFormat.metadataPrefix">
+                                {{ metadataFormat.metadataPrefix }}
+                            </option>
+                        </select>
+                    </div>
+                </template>
+
+
+            </div>
+
 
             <!-- Name -->
             <div class="form-floating mb-2">
@@ -42,7 +90,7 @@
             </div>
 
             <!-- Translation of Work -->
-            <template v-if="record.type === 'book'">
+            <template v-if="record.type === 'Livro'">
                 <div class="form-floating mb-2">
                     <input type="text" class="form-control" v-model.trim="record.translationOfWork" id="translationOfWork"
                         name="translationOfWork" placeholder="A obra da qual esta obra foi traduzida" />
@@ -51,7 +99,7 @@
             </template>
 
             <!-- alternateName -->
-            <template v-if="record.type === 'book'">
+            <template v-if="record.type === 'Livro'">
                 <div class="form-floating mb-2">
                     <input type="text" class="form-control" v-model.trim="record.alternateName" id="alternateName"
                         name="alternateName" placeholder="Nome alternativo" />
@@ -61,9 +109,11 @@
 
 
             <!-- Author -->
-            <template v-if="record.type === 'book' ||
-                record.type === 'musicrecording' ||
-                record.type === 'musicalbum'
+            <template v-if="record.type === 'Livro' ||
+                record.type === 'Gravação musical' ||
+                record.type === 'Álbum musical' ||
+                record.type === 'Artigo' ||
+                record.type === 'Trabalho em Evento'
                 ">
                 <div class="input-group mb-2" v-for="(author, indexAuthor) in record.author">
                     <div class="input-group-prepend">
@@ -108,6 +158,13 @@
                 </button>
             </template>
 
+            <!-- Abstract -->
+            <div class="form-floating mb-2">
+                <textarea class="form-control" placeholder="Digite o resumo" v-model.trim="record.abstract" id="abstract"
+                    name="abstract" style="height: 100px"></textarea>
+                <label for="abstract">Resumo</label>
+            </div>
+
             <!-- Description -->
             <div class="form-floating mb-2">
                 <textarea class="form-control" placeholder="Digite uma descrição" v-model.trim="record.description"
@@ -123,8 +180,27 @@
                 <label for="datePublished">Data de publicação</label>
             </div>
 
-            <div class="mt-5">
-                <div class="d-flex justify-content-start">
+            <!-- Book Edition -->
+            <template v-if="record.type === 'Livro'">
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" v-model="record.bookEdition" id="bookEdition" name="bookEdition"
+                        placeholder="Digite a edição" />
+                    <label for="bookEdition">Edição</label>
+                </div>
+            </template>
+
+            <!-- Number of pages -->
+            <template v-if="record.type === 'Livro'">
+                <div class="form-floating mb-2">
+                    <input type="text" class="form-control" v-model="record.numberOfPages" id="numberOfPages"
+                        name="numberOfPages" placeholder="Digite o número de páginas" />
+                    <label for="numberOfPages">Número de paginas</label>
+                </div>
+            </template>
+
+
+            <div class="d-flex bd-highlight mt-2">
+                <div class="p-2 flex-grow-1 bd-highlight">
                     <!-- Button Form -->
                     <button v-if="editRecordID == 0" @click="addRecord" class="btn btn-primary mt-1">
                         Criar registro
@@ -135,9 +211,11 @@
                         Editar registro
                     </button>
                 </div>
-                <button class="btn btn-warning" id="button-addon1" @click="record = cleanrecord">
-                    Limpar formulário
-                </button>
+                <div class="p-2 bd-highlight">
+                    <button class="btn btn-warning" id="button-addon1" @click="record = cleanrecord">
+                        Limpar formulário
+                    </button>
+                </div>
             </div>
         </form>
     </div>
@@ -263,7 +341,7 @@ export default {
                 musicby: [],
                 name: "",
                 numberOfPages: "",
-                oaimetadataformat: "oai_dc",
+                oaimetadataformat: "",
                 oaipmh: "",
                 oaiset: "",
                 productionCompany: [],
