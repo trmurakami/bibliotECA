@@ -53,6 +53,10 @@ class WorkController extends Controller
             $query->where('inLanguage', 'like', '%' .  $request->inLanguage . '%');
         }
 
+        if ($request->issn) {
+            $query->where('issn', $request->issn);
+        }
+
         $works = $query->orderByDesc('datePublished')->paginate($request->per_page)->withQueryString();
 
         return view('works.index', compact('works', 'request'));

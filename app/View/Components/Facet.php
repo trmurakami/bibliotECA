@@ -43,6 +43,9 @@ class Facet extends Component
         if ($this->request->inLanguage) {
             $query->where('inLanguage', 'like', '%' .  $this->request->inLanguage . '%');
         }
+        if ($this->request->issn) {
+            $query->where('issn', $this->request->issn);
+        }
         if ($this->request->author) {
             $search = $this->request->author;
             $query->whereHas('authors', function ($query) use ($search) {
@@ -51,15 +54,18 @@ class Facet extends Component
         }
         if ($this->request->releasedEvent) {
             $query->where('releasedEvent', 'like', '%' . $this->request->releasedEvent . '%');
+            
         }
         if ($this->request->isPartOf_name) {
-            $query->where('isPartOf_name', 'like', '%' . $this->request->isPartOf_name . '%');
+            $querywhere('isPartOf_name', 'like', '%' . $this->request->isPartOf_name . '%');
+            
         }
         if ($this->field == 'datePublished') {
             $query->groupBy($this->field)->orderByDesc('field')->limit(10);
         } else {
             $query->groupBy($this->field)->orderByDesc('count')->orderByDesc($this->field)->limit(10);
         }
+        
         $result = $query->get();
         $facets[0]['field'] = $this->field;
         $facets[0]['fieldName'] = $this->fieldName;

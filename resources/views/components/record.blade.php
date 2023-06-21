@@ -50,7 +50,11 @@
 
                 @if (isset($work->isPartOf_name))
                 <p class="card-text">
-                    <small class="text-body-secondary">Publicado em: {{ $work->isPartOf_name }}
+                    <small class="text-body-secondary">
+                        Publicado em: {{ $work->isPartOf_name }}
+                        @if (isset($work->issn))
+                        (ISSN: {{ $work->issn }})
+                        @endif
                     </small>
                 </p>
                 @endif
