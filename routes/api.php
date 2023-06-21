@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WorksAPIController;
 use App\Http\Controllers\ProxyOAIPMHController;
 use App\Http\Controllers\ProxyEIDRController;
+use App\Http\Controllers\HarvestOAIPMHController;
+use App\Http\Controllers\Z3950Controller;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,3 +36,6 @@ Route::prefix('oai')->group(
 );
 
 Route::get('eidr/{eidr}', [ProxyEIDRController::class, 'getEIDR']);
+
+
+Route::get('z3950', [Z3950Controller::class, 'searchZ3950']);

@@ -57,7 +57,7 @@
                         <span class="input-group-text">EIDR</span>
                         <input type="text" class="form-control" v-model="record.titleEIDR" id="titleEIDR" name="titleEIDR"
                             placeholder="Digite o EIDR" />
-                        <a class="btn btn-info btn-sm" href="https://ui.eidr.org/search" target="_blank">EIDR pode ser
+                        <a class="btn btn-warning btn-sm" href="https://ui.eidr.org/search" target="_blank">EIDR pode ser
                             consultado neste link</a>
                         <button class="btn btn-info btn-sm" @click="
                             getEIDR(record.titleEIDR.replace('10.5240/', ''))
@@ -110,6 +110,123 @@
                         </select>
                     </div>
                 </template>
+
+                <!-- ISBN -->
+                <template v-if="record.type === 'Livro'">
+                    <div class="alert alert-warning" role="alert" v-if="loadingISBN">
+                        Buscando dados no Google Books ...
+                    </div>
+                    <div class="alert alert-warning" role="alert" v-if="loadingZ3950">
+                        Buscando dados no Z39.50 ...
+                    </div>
+                    <div class="input-group mb-3" v-for="(isbn, indexisbn) in record.isbn">
+                        <span class="input-group-text">ISBN</span>
+                        <input type="text" class="form-control" v-model.trim="isbn.id" id="isbn" name="isbn"
+                            placeholder="Digite o ISBN" />
+                        <select class="form-select" v-model="isbn.type">
+                            <option value="ISBN-13">ISBN-13</option>
+                            <option value="ISBN-10">ISBN-10</option>
+                            <option value="canceled/invalid">
+                                Cancelado ou inválido
+                            </option>
+                        </select>
+                        <button @click="deleteField('isbn', indexisbn)" class="btn btn-danger btn-sm">
+                            Apagar
+                        </button>
+                        <button class="btn btn-info btn-sm" @click="
+                            getISBN(record.isbn[indexisbn].id),
+                            (loadingISBN = true)
+                            " v-if="record.isbn[indexisbn].id != ''">
+                            Google Books
+                        </button>
+                        <button class="btn btn-info btn-sm" @click="
+                            getZ3950(
+                                record.isbn[indexisbn].id,
+                                'dedalus.usp.br:9991/usp01',
+                                'USP/DEDALUS'
+                            ),
+                            getZ3950(
+                                record.isbn[indexisbn].id,
+                                'unesp.alma.exlibrisgroup.com:1921/55UNESP_INST',
+                                'UNESP'
+                            ),
+                            getZ3950(
+                                record.isbn[indexisbn].id,
+                                '162.214.168.248:9998/bib',
+                                'BN'
+                            ),
+                            (loadingZ3950 = true)
+                            " v-if="record.isbn[indexisbn].id != ''">
+                            Z39.50
+                        </button>
+                    </div>
+
+                    <button @click="addField('isbn')" class="btn btn-info btn-sm mb-2">
+                        + ISBN
+                    </button>
+                </template>
+
+                <template v-if="Z3950Records">
+                    <div class="alert alert-info alert-dismissible fade show bg-opacity-10" role="alert">
+                        <table class="table p-2 text-dark">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Fonte</th>
+                                    <th scope="col">Título</th>
+                                    <th scope="col">Autor</th>
+                                    <th scope="col">Outros autores</th>
+                                    <th scope="col">Editora</th>
+                                    <th scope="col">Local</th>
+                                    <th scope="col">Data de publicação</th>
+                                    <th scope="col">Descrição física</th>
+                                    <th scope="col">Idioma</th>
+                                    <th scope="col">Edição</th>
+                                    <!-- <th scope="col">Registro completo</th> -->
+                                    <th scope="col">Usar</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr v-for="(
+                                    Z3950Record, indexZ3950Record
+                                ) in Z3950Records" :key="indexZ3950Record">
+                                    <th scope="row">{{ Z3950Record.source }}</th>
+                                    <td>{{ Z3950Record.title }}</td>
+                                    <td>{{ Z3950Record.author }}</td>
+                                    <td>{{ Z3950Record.editor }}</td>
+                                    <td>{{ Z3950Record.publisher }}</td>
+                                    <td>{{ Z3950Record.pub_place }}</td>
+                                    <td>{{ Z3950Record.pub_date }}</td>
+                                    <td>{{ Z3950Record.extent }}</td>
+                                    <td>{{ Z3950Record.language }}</td>
+                                    <td>{{ Z3950Record.edition }}</td>
+                                    <!-- <td>{{ Z3950Record }}</td> -->
+                                    <td>
+                                        <button class="btn btn-info btn-sm m-2" @click="
+                                            (record.name = Z3950Record.title),
+                                            addAuthor(Z3950Record.author),
+                                            addAuthor(Z3950Record.editor),
+                                            (record.datePublished =
+                                                Z3950Record.pub_date),
+                                            (record.copyrightYear =
+                                                Z3950Record.pub_date),
+                                            (record.publisher[0].name =
+                                                Z3950Record.publisher),
+                                            (record.bookEdition =
+                                                Z3950Record.edition),
+                                            (record.numberOfPages =
+                                                Z3950Record.extent)
+                                            ">
+                                            Usar
+                                        </button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <button type="button" class="btn-close" aria-label="Close" @click="Z3950Records = null"></button>
+                    </div>
+                </template>
+
+
 
 
             </div>
