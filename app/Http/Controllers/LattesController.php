@@ -14,6 +14,11 @@ class LattesController extends Controller
         if ($request->file) {
             $curriculo = simplexml_load_file($request->file);
             //dd($curriculo);
+            // Create Person
+            $personLattesID = Person::firstOrCreate([
+                'id_lattes13' => (string)$curriculo['NUMERO-IDENTIFICADOR'],
+                'name' => (string)$curriculo->{'DADOS-GERAIS'}['NOME-COMPLETO']
+            ])->id;
 
             if (isset($curriculo->{'PRODUCAO-BIBLIOGRAFICA'}->{'TRABALHOS-EM-EVENTOS'})) { 
                 foreach ($curriculo->{'PRODUCAO-BIBLIOGRAFICA'}->{'TRABALHOS-EM-EVENTOS'}->{'TRABALHO-EM-EVENTOS'} as $trabalho) {
