@@ -10,11 +10,17 @@
     <div id="{{ hash('crc32', 'Autores') }}" class="accordion-collapse collapse"
         data-bs-parent="#{{ hash('crc32', 'Autores') }}">
         <div class="accordion-body">
+            <form action="/works" method="get" class="m-3">
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Pesquisar por nome do autor" name="author">
+                    <button class="btn btn-primary" type="submit">Buscar</button>
+                </div>
+            </form>
             <ul>
 
                 @foreach ($facets as $facet)
 
-                <li>
+                <li class="list-group-item">
                     <a href="/works?author={{ $facet['name'] }}">
                         {{ $facet['name'] }} ({{ $facet['works_count'] }})
                     </a>

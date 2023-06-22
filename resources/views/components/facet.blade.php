@@ -28,7 +28,7 @@
                 @endphp
                 @endforeach
 
-                <li>
+                <li class="list-group-item">
                     <a href="/works?{{ $facet['field'] }}={{ $value['field'] }}&{{ implode('&', $request_array) }}">
                         {{ $value['field'] }} ({{ $value['count'] }})
                     </a>

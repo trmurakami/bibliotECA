@@ -19,9 +19,7 @@
                 <input type="text" class="form-control"
                     placeholder="Pesquisar no título (Deixe em branco e clique em buscar para exibir todo o acervo)"
                     name="name">
-                <div class="input-group-append">
-                    <button class="btn btn-primary" type="submit">Buscar</button>
-                </div>
+                <button class="btn btn-primary" type="submit">Buscar</button>
             </div>
         </form>
         <div class="d-flex mt-3 mb-3">
@@ -37,7 +35,7 @@
         @endforeach
     </div>
     <div class="col col-lg-4">
-        <h3>Refinar resultados</h3>
+        <h3>Refinar resultados <a href="/works" class="btn btn-warning">Limpar busca</a> </h3>
 
         <div class="accordion" id="facets">
 
