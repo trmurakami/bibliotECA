@@ -270,9 +270,7 @@
                 record.type === 'Trabalho em Evento'
                 ">
                 <div class="input-group mb-2" v-for="(author, indexAuthor) in record.author">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Autor / Função</span>
-                    </div>
+                    <span class="input-group-text">Autor / Função</span>
                     <input v-model.trim="author.id" autocomplete="off" type="text" aria-label="Author ID"
                         class="form-control" placeholder="ID do autor" id="id" readonly />
                     <input v-model.trim="author.viaf" autocomplete="off" type="text" aria-label="VIAF" class="form-control"
@@ -309,9 +307,7 @@
             <!-- Director -->
             <template v-if="record.type === 'Filme' || record.type === 'Vídeo'">
                 <div class="input-group mb-2" v-for="(director, indexDirector) in record.director">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Diretor</span>
-                    </div>
+                    <span class="input-group-text">Diretor</span>
                     <input v-model="director.id" autocomplete="off" type="text" aria-label="Diretor ID" class="form-control"
                         name="directorId" id="directorId" placeholder="ID do diretor" readonly />
                     <input v-model.trim="director.name" autocomplete="off" type="text" class="form-control"
@@ -336,9 +332,7 @@
             <!-- Actor -->
             <template v-if="record.type === 'Filme' || record.type === 'Vídeo'">
                 <div class="input-group mb-2" v-for="(actor, indexActor) in record.actor">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Ator/Atriz</span>
-                    </div>
+                    <span class="input-group-text">Ator/Atriz</span>
                     <input v-model="actor.id" autocomplete="off" type="text" class="form-control" name="idActor"
                         id="idActor" placeholder="ID do ator / atriz" readonly />
                     <input v-model.trim="actor.name" autocomplete="off" type="text" class="form-control" name="nameActor"
@@ -362,9 +356,7 @@
             <!-- Translator -->
             <template v-if="record.type === 'Livro'">
                 <div class="input-group mb-2" v-for="(translator, indexTranslator) in record.translator">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Tradutor</span>
-                    </div>
+                    <span class="input-group-text">Tradutor</span>
                     <input v-model="translator.id" autocomplete="off" type="text" class="form-control" name="id" id="id"
                         placeholder="ID do tradutor" readonly />
                     <input v-model.trim="translator.name" list="datalistAuthority" autocomplete="off" type="text"
@@ -389,9 +381,7 @@
             <!-- Music By -->
             <template v-if="record.type === 'Filme'">
                 <div class="input-group mb-2" v-for="(musicby, indexMusicBy) in record.musicby">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Música por</span>
-                    </div>
+                    <span class="input-group-text">Música por</span>
                     <input v-model="musicby.id" type="text" class="form-control" name="idMusicBy" id="idMusicBy"
                         placeholder="ID do Artista" readonly />
                     <input v-model.trim="musicby.name" type="text" class="form-control" name="nameMusicBy" id="nameMusicBy"
@@ -440,12 +430,8 @@
                 record.type === 'Livro' ||
                 record.type === 'Álbum musical'
                 ">
-                <div class="input-group mb-2" v-for="(
-                        countryOfOrigin, indexcountryOfOrigin
-                    ) in record.countryOfOrigin">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">País de origem</span>
-                    </div>
+                <div class="input-group mb-2" v-for="(countryOfOrigin, indexcountryOfOrigin) in record.countryOfOrigin">
+                    <span class="input-group-text">País de origem</span>
                     <select class="form-select" v-model="countryOfOrigin.code">
                         <option value="BR">Brasil</option>
                         <option value="US">Estados Unidos</option>
@@ -467,12 +453,9 @@
 
             <!-- Production Company -->
             <template v-if="record.type === 'Filme' || record.type === 'Vídeo'">
-                <div class="input-group mb-2" v-for="(
-                        productionCompany, indexProductionCompany
-                    ) in record.productionCompany">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Produtora</span>
-                    </div>
+                <div class="input-group mb-2"
+                    v-for="(productionCompany, indexProductionCompany) in record.productionCompany">
+                    <span class="input-group-text">Produtora</span>
                     <input v-model="productionCompany.id" type="text" class="form-control" name="id" id="id"
                         placeholder="ID da Produtora" readonly />
                     <input v-model="productionCompany.name" type="text" class="form-control" name="name" id="name"
@@ -527,9 +510,7 @@
                 record.type === 'Álbum musical'
                 ">
                 <div class="input-group mb-2" v-for="(byartist, indexArtist) in record.byartist">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Artista</span>
-                    </div>
+                    <span class="input-group-text">Artista</span>
                     <input v-model="byartist.id" autocomplete="off" type="text" aria-label="ByArtist ID"
                         class="form-control" id="id" placeholder="ID do Artista" readonly />
                     <input v-model="byartist.name" autocomplete="off" type="text" aria-label="ByArtist Name"
@@ -557,9 +538,7 @@
             <!-- inAlbum -->
             <template v-if="record.type === 'Gravação musical'">
                 <div class="input-group mb-2" v-for="(inAlbum, indexinAlbum) in record.inAlbum">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Álbum</span>
-                    </div>
+                    <span class="input-group-text">Álbum</span>
                     <input v-model="inAlbum.id" type="text" class="form-control" name="id" id="id" placeholder="ID do Álbum"
                         readonly />
                     <input v-model="inAlbum.name" type="text" class="form-control" name="name" id="name"
@@ -582,20 +561,10 @@
 
             <!-- Publisher -->
             <div class="input-group mb-2" v-for="(publisher, indexpublisher) in record.publisher">
-                <div class="input-group-prepend">
-                    <span class="input-group-text">Editora / Publicadora</span>
-                </div>
-                <input v-model="publisher.id" type="text" class="form-control" name="id" id="id" placeholder="ID"
-                    readonly />
+                <span class="input-group-text">Editora / Publicadora</span>
                 <input v-model.trim="publisher.name" type="text" class="form-control" name="name" id="name"
-                    placeholder="Nome da Editora / Publicadora" list="datalistAuthorityOrg" @input="
-                        getIDAuthority(publisher),
-                        getAuthoritiesOrganization(publisher.name)"
+                    placeholder="Nome da Editora / Publicadora" list="datalistAuthorityOrg"
                     :class="{ 'is-invalid': Object.keys(publisher.name).length === 0, }" />
-                <datalist id="datalistAuthorityOrg">
-                    <option v-for="authority in authoritiesOrganization" :value="authority.name" :key="authority.id"
-                        :id="authority.id"></option>
-                </datalist>
                 <button @click="deleteField('publisher', indexpublisher)" class="btn btn-danger btn-sm">
                     Limpar
                 </button>
@@ -609,9 +578,7 @@
                 <div class="input-group mb-2" v-for="(
                         subtitleLanguage, indexSubtitleLanguage
                     ) in record.subtitleLanguage">
-                    <div class="input-group-prepend">
-                        <span class="input-group-text">Idioma da legenda</span>
-                    </div>
+                    <span class="input-group-text">Idioma da legenda</span>
                     <select class="form-select" v-model="subtitleLanguage.code">
                         <option value="pt-BR">Português</option>
                         <option value="en-US">Inglês (Estados Unidos)</option>
@@ -862,7 +829,7 @@ export default {
             if (this.record[field] === null) {
                 this.record[field] = [];
             }
-            this.record[field].push({ id: "", name: "" });
+            this.record[field].push({ name: "" });
         },
         deleteField: function (field, index) {
             this.record[field].splice(index, 1);

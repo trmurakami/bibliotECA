@@ -19778,7 +19778,6 @@ __webpack_require__.r(__webpack_exports__);
         this.record[field] = [];
       }
       this.record[field].push({
-        id: "",
         name: ""
       });
     },
@@ -20257,11 +20256,9 @@ var _hoisted_64 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElement
 var _hoisted_65 = {
   "class": "input-group mb-2"
 };
-var _hoisted_66 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "input-group-prepend"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_66 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "input-group-text"
-}, "Autor / Função")], -1 /* HOISTED */);
+}, "Autor / Função", -1 /* HOISTED */);
 var _hoisted_67 = ["onUpdate:modelValue"];
 var _hoisted_68 = ["onUpdate:modelValue"];
 var _hoisted_69 = ["onUpdate:modelValue"];
@@ -20284,11 +20281,9 @@ var _hoisted_76 = ["onClick"];
 var _hoisted_77 = {
   "class": "input-group mb-2"
 };
-var _hoisted_78 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "input-group-prepend"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_78 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "input-group-text"
-}, "Diretor")], -1 /* HOISTED */);
+}, "Diretor", -1 /* HOISTED */);
 var _hoisted_79 = ["onUpdate:modelValue"];
 var _hoisted_80 = ["onUpdate:modelValue", "onInput"];
 var _hoisted_81 = {
@@ -20299,11 +20294,9 @@ var _hoisted_83 = ["onClick"];
 var _hoisted_84 = {
   "class": "input-group mb-2"
 };
-var _hoisted_85 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "input-group-prepend"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_85 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "input-group-text"
-}, "Ator/Atriz")], -1 /* HOISTED */);
+}, "Ator/Atriz", -1 /* HOISTED */);
 var _hoisted_86 = ["onUpdate:modelValue"];
 var _hoisted_87 = ["onUpdate:modelValue", "onInput"];
 var _hoisted_88 = {
@@ -20314,11 +20307,9 @@ var _hoisted_90 = ["onClick"];
 var _hoisted_91 = {
   "class": "input-group mb-2"
 };
-var _hoisted_92 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "input-group-prepend"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_92 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "input-group-text"
-}, "Tradutor")], -1 /* HOISTED */);
+}, "Tradutor", -1 /* HOISTED */);
 var _hoisted_93 = ["onUpdate:modelValue"];
 var _hoisted_94 = ["onUpdate:modelValue", "onInput"];
 var _hoisted_95 = {
@@ -20329,11 +20320,9 @@ var _hoisted_97 = ["onClick"];
 var _hoisted_98 = {
   "class": "input-group mb-2"
 };
-var _hoisted_99 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "input-group-prepend"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_99 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "input-group-text"
-}, "Música por")], -1 /* HOISTED */);
+}, "Música por", -1 /* HOISTED */);
 var _hoisted_100 = ["onUpdate:modelValue"];
 var _hoisted_101 = ["onUpdate:modelValue", "onInput"];
 var _hoisted_102 = {
@@ -20362,11 +20351,9 @@ var _hoisted_110 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElemen
 var _hoisted_111 = {
   "class": "input-group mb-2"
 };
-var _hoisted_112 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "input-group-prepend"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_112 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "input-group-text"
-}, "País de origem")], -1 /* HOISTED */);
+}, "País de origem", -1 /* HOISTED */);
 var _hoisted_113 = ["onUpdate:modelValue"];
 var _hoisted_114 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<option value=\"BR\">Brasil</option><option value=\"US\">Estados Unidos</option><option value=\"ES\">Espanha</option><option value=\"FR\">França</option><option value=\"PT\">Portugal</option>", 5);
 var _hoisted_119 = [_hoisted_114];
@@ -20374,11 +20361,9 @@ var _hoisted_120 = ["onClick"];
 var _hoisted_121 = {
   "class": "input-group mb-2"
 };
-var _hoisted_122 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "input-group-prepend"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_122 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "input-group-text"
-}, "Produtora")], -1 /* HOISTED */);
+}, "Produtora", -1 /* HOISTED */);
 var _hoisted_123 = ["onUpdate:modelValue"];
 var _hoisted_124 = ["onUpdate:modelValue", "onInput"];
 var _hoisted_125 = {
@@ -20410,11 +20395,9 @@ var _hoisted_132 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElemen
 var _hoisted_133 = {
   "class": "input-group mb-2"
 };
-var _hoisted_134 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "input-group-prepend"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_134 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "input-group-text"
-}, "Artista")], -1 /* HOISTED */);
+}, "Artista", -1 /* HOISTED */);
 var _hoisted_135 = ["onUpdate:modelValue"];
 var _hoisted_136 = ["onUpdate:modelValue", "onInput"];
 var _hoisted_137 = {
@@ -20427,11 +20410,9 @@ var _hoisted_141 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElemen
 var _hoisted_142 = {
   "class": "input-group mb-2"
 };
-var _hoisted_143 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "input-group-prepend"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_143 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "input-group-text"
-}, "Álbum")], -1 /* HOISTED */);
+}, "Álbum", -1 /* HOISTED */);
 var _hoisted_144 = ["onUpdate:modelValue"];
 var _hoisted_145 = ["onUpdate:modelValue", "onInput"];
 var _hoisted_146 = {
@@ -20442,69 +20423,60 @@ var _hoisted_148 = ["onClick"];
 var _hoisted_149 = {
   "class": "input-group mb-2"
 };
-var _hoisted_150 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "input-group-prepend"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_150 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "input-group-text"
-}, "Editora / Publicadora")], -1 /* HOISTED */);
+}, "Editora / Publicadora", -1 /* HOISTED */);
 var _hoisted_151 = ["onUpdate:modelValue"];
-var _hoisted_152 = ["onUpdate:modelValue", "onInput"];
+var _hoisted_152 = ["onClick"];
 var _hoisted_153 = {
-  id: "datalistAuthorityOrg"
-};
-var _hoisted_154 = ["value", "id"];
-var _hoisted_155 = ["onClick"];
-var _hoisted_156 = {
   "class": "input-group mb-2"
 };
-var _hoisted_157 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
-  "class": "input-group-prepend"
-}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
+var _hoisted_154 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", {
   "class": "input-group-text"
-}, "Idioma da legenda")], -1 /* HOISTED */);
-var _hoisted_158 = ["onUpdate:modelValue"];
-var _hoisted_159 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+}, "Idioma da legenda", -1 /* HOISTED */);
+var _hoisted_155 = ["onUpdate:modelValue"];
+var _hoisted_156 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
   value: "pt-BR"
 }, "Português", -1 /* HOISTED */);
-var _hoisted_160 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+var _hoisted_157 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
   value: "en-US"
 }, "Inglês (Estados Unidos)", -1 /* HOISTED */);
-var _hoisted_161 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+var _hoisted_158 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
   value: "fr-FR"
 }, "Francês", -1 /* HOISTED */);
-var _hoisted_162 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
+var _hoisted_159 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("option", {
   value: "es-ES"
 }, "Espanhol", -1 /* HOISTED */);
-var _hoisted_163 = [_hoisted_159, _hoisted_160, _hoisted_161, _hoisted_162];
-var _hoisted_164 = ["onClick"];
-var _hoisted_165 = {
+var _hoisted_160 = [_hoisted_156, _hoisted_157, _hoisted_158, _hoisted_159];
+var _hoisted_161 = ["onClick"];
+var _hoisted_162 = {
   key: 14,
   "class": "form-floating mb-2"
 };
-var _hoisted_166 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_163 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "bookEdition"
 }, "Edição", -1 /* HOISTED */);
-var _hoisted_167 = {
+var _hoisted_164 = {
   key: 15,
   "class": "form-floating mb-2"
 };
-var _hoisted_168 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_165 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "numberOfPages"
 }, "Número de paginas", -1 /* HOISTED */);
-var _hoisted_169 = {
+var _hoisted_166 = {
   key: 16,
   "class": "form-floating mb-2"
 };
-var _hoisted_170 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_167 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "duration"
 }, "Duração", -1 /* HOISTED */);
-var _hoisted_171 = {
+var _hoisted_168 = {
   "class": "d-flex bd-highlight mt-2"
 };
-var _hoisted_172 = {
+var _hoisted_169 = {
   "class": "p-2 flex-grow-1 bd-highlight"
 };
-var _hoisted_173 = {
+var _hoisted_170 = {
   "class": "p-2 bd-highlight"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -21164,16 +21136,6 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, " Adicionar álbum ")], 64 /* STABLE_FRAGMENT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Publisher "), ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.record.publisher, function (publisher, indexpublisher) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_149, [_hoisted_150, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
       "onUpdate:modelValue": function onUpdateModelValue($event) {
-        return publisher.id = $event;
-      },
-      type: "text",
-      "class": "form-control",
-      name: "id",
-      id: "id",
-      placeholder: "ID",
-      readonly: ""
-    }, null, 8 /* PROPS */, _hoisted_151), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, publisher.id]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
-      "onUpdate:modelValue": function onUpdateModelValue($event) {
         return publisher.name = $event;
       },
       type: "text",
@@ -21183,24 +21145,15 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       name: "name",
       id: "name",
       placeholder: "Nome da Editora / Publicadora",
-      list: "datalistAuthorityOrg",
-      onInput: function onInput($event) {
-        return _ctx.getIDAuthority(publisher), _ctx.getAuthoritiesOrganization(publisher.name);
-      }
-    }, null, 42 /* CLASS, PROPS, HYDRATE_EVENTS */, _hoisted_152), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, publisher.name, void 0, {
+      list: "datalistAuthorityOrg"
+    }, null, 10 /* CLASS, PROPS */, _hoisted_151), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, publisher.name, void 0, {
       trim: true
-    }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("datalist", _hoisted_153, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.authoritiesOrganization, function (authority) {
-      return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("option", {
-        value: authority.name,
-        key: authority.id,
-        id: authority.id
-      }, null, 8 /* PROPS */, _hoisted_154);
-    }), 128 /* KEYED_FRAGMENT */))]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       onClick: function onClick($event) {
         return $options.deleteField('publisher', indexpublisher);
       },
       "class": "btn btn-danger btn-sm"
-    }, " Limpar ", 8 /* PROPS */, _hoisted_155)]);
+    }, " Limpar ", 8 /* PROPS */, _hoisted_152)]);
   }), 256 /* UNKEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[29] || (_cache[29] = function ($event) {
       return $options.addField('publisher');
@@ -21209,23 +21162,23 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
   }, " Adicionar editora / publicadora "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" subtitleLanguage "), $data.record.type === 'Filme' || $data.record.type === 'Vídeo' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     key: 13
   }, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.record.subtitleLanguage, function (subtitleLanguage, indexSubtitleLanguage) {
-    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_156, [_hoisted_157, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_153, [_hoisted_154, (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
       "class": "form-select",
       "onUpdate:modelValue": function onUpdateModelValue($event) {
         return subtitleLanguage.code = $event;
       }
-    }, _hoisted_163, 8 /* PROPS */, _hoisted_158), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, subtitleLanguage.code]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+    }, _hoisted_160, 8 /* PROPS */, _hoisted_155), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, subtitleLanguage.code]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       onClick: function onClick($event) {
         return $options.deleteField('subtitleLanguage', indexSubtitleLanguage);
       },
       "class": "btn btn-danger btn-sm"
-    }, " Limpar ", 8 /* PROPS */, _hoisted_164)]);
+    }, " Limpar ", 8 /* PROPS */, _hoisted_161)]);
   }), 256 /* UNKEYED_FRAGMENT */)), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     onClick: _cache[30] || (_cache[30] = function ($event) {
       return $options.addField('subtitleLanguage');
     }),
     "class": "btn btn-info btn-sm mb-2"
-  }, " Adicionar idioma da legenda ")], 64 /* STABLE_FRAGMENT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Book Edition "), $data.record.type === 'Livro' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_165, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, " Adicionar idioma da legenda ")], 64 /* STABLE_FRAGMENT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Book Edition "), $data.record.type === 'Livro' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_162, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     "class": "form-control",
     "onUpdate:modelValue": _cache[31] || (_cache[31] = function ($event) {
@@ -21234,7 +21187,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: "bookEdition",
     name: "bookEdition",
     placeholder: "Digite a edição"
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.record.bookEdition]]), _hoisted_166])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Number of pages "), $data.record.type === 'Livro' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_167, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.record.bookEdition]]), _hoisted_163])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Number of pages "), $data.record.type === 'Livro' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_164, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     "class": "form-control",
     "onUpdate:modelValue": _cache[32] || (_cache[32] = function ($event) {
@@ -21243,7 +21196,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: "numberOfPages",
     name: "numberOfPages",
     placeholder: "Digite o número de páginas"
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.record.numberOfPages]]), _hoisted_168])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Duration "), $data.record.type === 'Filme' || $data.record.type === 'Vídeo' || $data.record.type === 'Gravação musical' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_169, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.record.numberOfPages]]), _hoisted_165])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Duration "), $data.record.type === 'Filme' || $data.record.type === 'Vídeo' || $data.record.type === 'Gravação musical' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_166, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     "class": "form-control",
     "onUpdate:modelValue": _cache[33] || (_cache[33] = function ($event) {
@@ -21252,7 +21205,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: "duration",
     name: "duration",
     placeholder: "Digite a duração"
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.record.duration]]), _hoisted_170])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_171, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_172, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Button Form "), $data.editRecordID == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.record.duration]]), _hoisted_167])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_168, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_169, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Button Form "), $data.editRecordID == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 0,
     onClick: _cache[34] || (_cache[34] = function () {
       return $options.addRecord && $options.addRecord.apply($options, arguments);
@@ -21264,7 +21217,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $options.updateRecord && $options.updateRecord.apply($options, arguments);
     }),
     "class": "btn btn-warning mt-1"
-  }, " Editar registro ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_173, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, " Editar registro ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_170, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-warning",
     id: "button-addon1",
     onClick: _cache[36] || (_cache[36] = function ($event) {
