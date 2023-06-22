@@ -11,16 +11,14 @@
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Pesquisar por nome" name="name"
                     value="{{ request()->name }}">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit">Pesquisar</button>
-                </div>
+                <button class="btn btn-primary" type="submit">Pesquisar</button>
             </div>
             <div class="d-flex mt-3 mb-3">
                 <div class="mx-auto">
                     {!! $people->links() !!}
                 </div>
             </div>
-            <ul class="list-group">
+            <ul class="list-group list-group-flush">
                 @foreach ($people as $person)
 
                 <li class="list-group-item">
