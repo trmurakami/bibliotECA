@@ -13,7 +13,7 @@
     @endif
 
     <div class="col col-lg-12">
-        <h3 class="mt-2">Resultado da busca por "{{ $request->name }}" no campo título</h3>
+        <h3 class="mt-2">Resultado da busca</h3>
         <form action="/works" method="get">
             <div class="input-group">
                 <input type="text" class="form-control"
@@ -24,11 +24,11 @@
                 </div>
             </div>
         </form>
-        <p>Foram encontrados {{ $works->total() }} resultados para a busca "{{ $request->name }}". Exibindo página
-            {{ $works->currentPage() }} de {{ $works->lastPage() }} ({{ $works->perPage() }} resultados por página)</p>
-
-
-        <x-pagination :works="$works" />
+        <div class="d-flex mt-3 mb-3">
+            <div class="mx-auto">
+                {!! $works->links() !!}
+            </div>
+        </div>
     </div>
 
     <div class="col col-lg-8">
@@ -53,7 +53,11 @@
         </div>
 
     </div>
-    <x-pagination :works="$works" />
+    <div class="d-flex mt-3 mb-3">
+        <div class="mx-auto">
+            {!! $works->links() !!}
+        </div>
+    </div>
 </div>
 
 

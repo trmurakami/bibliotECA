@@ -15,7 +15,11 @@
                     <button class="btn btn-outline-secondary" type="submit">Pesquisar</button>
                 </div>
             </div>
-            <x-paginationPeople :people="$people" />
+            <div class="d-flex mt-3 mb-3">
+                <div class="mx-auto">
+                    {!! $people->links() !!}
+                </div>
+            </div>
             <ul class="list-group">
                 @foreach ($people as $person)
 
@@ -38,6 +42,11 @@
 
                 @endforeach
             </ul>
+            <div class="d-flex mt-3 mb-3">
+                <div class="mx-auto">
+                    {!! $people->links() !!}
+                </div>
+            </div>
     </div>
 </div>
 
