@@ -20,13 +20,12 @@ return new class extends Migration
             $table->string('albumReleaseType')->nullable();
             $table->string('alternateName')->nullable();
             $table->jsonb('author')->nullable();
-            $table->jsonb('authors_array')->nullable();
             $table->jsonb('award')->nullable(); // not included
             $table->string('bookEdition')->nullable();
             $table->string('bookFormat')->nullable();
             $table->jsonb('byartist')->nullable();
             $table->jsonb('citation')->nullable(); // not included
-            $table->jsonb('character')->nullable();            
+            $table->jsonb('character')->nullable();
             $table->jsonb('contributor')->nullable(); // not included
             $table->jsonb('copyrightHolder')->nullable(); // not included
             $table->string('copyrightYear')->nullable();

@@ -275,10 +275,10 @@
                     </div>
                     <input v-model.trim="author.id" autocomplete="off" type="text" aria-label="Author ID"
                         class="form-control" placeholder="ID do autor" id="id" readonly />
-                    <input v-model.trim="author.type" autocomplete="off" type="text" aria-label="Author Type"
-                        class="form-control" placeholder="Tipo" id="type" readonly />
                     <input v-model.trim="author.viaf" autocomplete="off" type="text" aria-label="VIAF" class="form-control"
-                        placeholder="VIAF" id="viaf" readonly />
+                        placeholder="VIAF" id="viaf" />
+                    <input hidden v-model.trim="author.id_lattes13" autocomplete="off" type="text" aria-label="ID Lattes"
+                        class="form-control" placeholder="ID Lattes" id="id_lattes13" readonly />
                     <!-- <input
                         v-model="author.name"
                         autocomplete="off"
@@ -286,19 +286,13 @@
                         class="form-control"
                         placeholder="Digite o nome"
                     /> -->
-                    <input class="form-control" list="datalistAuthority" placeholder="Digite o nome" v-model="author.name"
-                        @input="
-                            getIDAuthority(author), getAuthorities(author.name)
-                            " />
-                    <datalist id="datalistAuthority">
-                        <option v-for="authority in authorities" :value="authority.name" :key="authority.id"
-                            :id="authority.id"></option>
-                    </datalist>
+                    <input class="form-control" list="datalistAuthority" placeholder="Digite o nome"
+                        v-model="author.name" />
                     <select v-model="author.function" autocomplete="off" class="form-select" aria-label="Author funcion"
                         placeholder="Função">
-                        <option value="Author" selected>Autor</option>
-                        <option value="Organizer" selected>Organizador</option>
-                        <option value="Writer of preface" selected>
+                        <option value="Autor" selected>Autor</option>
+                        <option value="Organizador" selected>Organizador</option>
+                        <option value="Autor do prefácio" selected>
                             Autor do prefácio
                         </option>
                     </select>
@@ -852,7 +846,7 @@ export default {
                     )
                     .then((response) => {
                         this.success = true,
-                            (this.record = this.cleanrecord);
+                            this.record = this.cleanrecord
                     })
                     .catch((error) => {
                         this.loaded = true;
@@ -891,7 +885,7 @@ export default {
             }
         },
         addAuthor(name) {
-            this.record["author"].push({ id: "", name: name });
+            this.record["author"].push({ id: "", id_lattes13: "", viaf: "", function: "Autor", name: name });
         },
         getEIDR(eidr) {
             this.loadingEIDR = true;
@@ -964,8 +958,10 @@ export default {
                         ).forEach((val) => {
                             this.record.author.push({
                                 id: "",
+                                id_lattes13: "",
+                                viaf: "",
                                 name: val.given + " " + val.family,
-                                function: "Author",
+                                function: "Autor",
                             });
                         });
                     if (this.crossrefRecord.data.message.ISBN) {
@@ -995,48 +991,6 @@ export default {
                 .finally(() => (this.loading = false));
             this.getCover(id);
         },
-        getAuthorities(autQuery) {
-            axios
-                .get("api/things/?search=" + autQuery)
-                .then((response) => {
-                    this.authorities = response.data.data;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    this.errored = true;
-                })
-                .finally(() => (this.loading = false));
-        },
-        getAuthoritiesOrganization(autOrgQuery) {
-            axios
-                .get("api/things/?type=organization&search=" + autOrgQuery)
-                .then((response) => {
-                    this.authoritiesOrganization = response.data.data;
-                })
-                .catch(function (error) {
-                    console.log(error);
-                    this.errored = true;
-                })
-                .finally(() => (this.loading = false));
-        },
-
-        getIDAuthority(author) {
-            if (author.name == "") {
-                return (author.id = "");
-            }
-            axios.get("api/things/?search=" + author.name).then((response) => {
-                if (response.data.data.length > 0) {
-                    author.id = response.data.data[0].id.toString();
-                    author.type = response.data.data[0].type;
-                    author.viaf = response.data.data[0].viaf;
-                } else {
-                    author.id = "";
-                    author.type = "";
-                    author.viaf = "";
-                }
-            });
-        },
-
         getOAIPMH(URLOAIPMH) {
             axios
                 .get("api/oai/identify?url=" + URLOAIPMH)
@@ -1051,7 +1005,6 @@ export default {
                 })
                 .finally(() => (this.loading = false));
         },
-
         getOAIMetadataFormats(URLOAIPMH) {
             axios
                 .get("api/oai/listmetadataformats?url=" + URLOAIPMH)
@@ -1064,7 +1017,6 @@ export default {
                 })
                 .finally(() => (this.loading = false));
         },
-
         getOAISets(URLOAIPMH) {
             axios
                 .get("api/oai/listsets?url=" + URLOAIPMH)
@@ -1077,7 +1029,6 @@ export default {
                 })
                 .finally(() => (this.loading = false));
         },
-
         getZ3950(isbn, host, hostname) {
             axios
                 .get("api/z3950?isbn=" + isbn + "&host=" + host)
@@ -1101,7 +1052,6 @@ export default {
                 })
                 .finally(() => (this.loadingZ3950 = false));
         },
-
         getSchema(url, type) {
             axios
                 .get("api/schema/reader?url=" + url + "&type=" + type)
@@ -1134,7 +1084,6 @@ export default {
                 })
                 .finally(() => (this.loadingSchema = false));
         },
-
         search() {
             this.loadingSearch = true;
             axios
