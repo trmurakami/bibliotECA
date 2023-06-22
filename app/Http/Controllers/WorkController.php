@@ -152,7 +152,15 @@ class WorkController extends Controller
             foreach ($record->author as $author) {
                 if ($author["id"] != "") {
                     $person = Person::find($author["id"]);
-                    $record->authors()->attach($person, ['relation' => $author['function'], 'function' => $author['function']]);
+                    $record->authors()->attach($person, ['function' => $author['function']]);
+                } else {
+                    $person = Person::where('name', $author["name"])->first();
+                    if (!$person) {
+                        $person = new Person();
+                        $person->name = $author["name"];
+                        $person->save();
+                    }
+                    $record->authors()->attach($person, ['function' => $author['function']]);
                 }
             }
         }
@@ -160,7 +168,7 @@ class WorkController extends Controller
             foreach ($record->about as $about) {
                 if ($about["id"] != "") {
                     $person = Thing::find($about["id"]);
-                    $record->authors()->attach($person, ['relation' => "about", 'function' => "about"]);
+                    $record->authors()->attach($person, ['function' => "about"]);
                 }
             }
         }
@@ -168,7 +176,7 @@ class WorkController extends Controller
             foreach ($record->director as $director) {
                 if ($director["id"] != "") {
                     $person = Person::find($director["id"]);
-                    $record->authors()->attach($person, ['relation' => "director", 'function' => "director"]);
+                    $record->authors()->attach($person, ['function' => "director"]);
                 }
             }
         }
@@ -176,7 +184,7 @@ class WorkController extends Controller
             foreach ($record->actor as $actor) {
                 if ($actor["id"] != "") {
                     $person = Thing::find($actor["id"]);
-                    $record->authors()->attach($person, ['relation' => "actor", 'function' => "actor"]);
+                    $record->authors()->attach($person, ['function' => "actor"]);
                 }
             }
         }
@@ -184,7 +192,7 @@ class WorkController extends Controller
             foreach ($record->musicby as $musicby) {
                 if ($musicby["id"] != "") {
                     $person = Thing::find($musicby["id"]);
-                    $record->authors()->attach($person, ['relation' => "musicby", 'function' => "musicby"]);
+                    $record->authors()->attach($person, ['function' => "musicby"]);
                 }
             }
         }
@@ -192,7 +200,7 @@ class WorkController extends Controller
             foreach ($record->productionCompany as $productionCompany) {
                 if ($productionCompany["id"] != "") {
                     $person = Thing::find($productionCompany["id"]);
-                    $record->authors()->attach($person, ['relation' => "productionCompany", 'function' => "productionCompany"]);
+                    $record->authors()->attach($person, ['function' => "productionCompany"]);
                 }
             }
         }
@@ -200,7 +208,7 @@ class WorkController extends Controller
             foreach ($record->translator as $translator) {
                 if ($translator["id"] != "") {
                     $person = Thing::find($translator["id"]);
-                    $record->authors()->attach($person, ['relation' => "translator", 'function' => "translator"]);
+                    $record->authors()->attach($person, ['function' => "translator"]);
                 }
             }
         }
@@ -208,7 +216,7 @@ class WorkController extends Controller
             foreach ($record->publisher as $publisher) {
                 if ($publisher["id"] != "") {
                     $person = Thing::find($publisher["id"]);
-                    $record->authors()->attach($person, ['relation' => "publisher", 'function' => "publisher"]);
+                    $record->authors()->attach($person, ['function' => "publisher"]);
                 }
             }
         }

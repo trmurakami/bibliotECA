@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Work;
+use App\Http\Controllers\WorkController;
 
 class WorksAPIController extends Controller
 {
@@ -22,6 +23,7 @@ class WorksAPIController extends Controller
     public function store(Request $request)
     {
         $work = Work::create($request->all());
+        WorkController::indexRelations($work->id);
         return response()->json($work, 201);
     }
 

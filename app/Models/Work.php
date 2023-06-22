@@ -86,7 +86,7 @@ class Work extends Model
 
     public function authors()
     {
-        return $this->belongsToMany(Person::class, 'person_work')->withPivot('relation', 'function')->withTimestamps();
+        return $this->belongsToMany(Person::class, 'person_work')->withPivot('function')->withTimestamps();
     }
 
 }

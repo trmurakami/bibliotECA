@@ -16,7 +16,6 @@ class CreatePersonWorkTable extends Migration
             $table->primary(['person_id', 'work_id']);
             $table->foreign('person_id')->references('id')->on('people')->onDelete('cascade');
             $table->foreign('work_id')->references('id')->on('works')->onDelete('cascade');
-            $table->string('relation');
             $table->string('function');
         });
     }
