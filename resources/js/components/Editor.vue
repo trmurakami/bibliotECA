@@ -433,11 +433,12 @@
                 <div class="input-group mb-2">
                     <span class="input-group-text">País de origem</span>
                     <select class="form-select" v-model="countryOfOrigin">
-                        <option value="BR">Brasil</option>
-                        <option value="US">Estados Unidos</option>
-                        <option value="ES">Espanha</option>
-                        <option value="FR">França</option>
-                        <option value="PT">Portugal</option>
+                        <option value="Brasil">Brasil</option>
+                        <option value="Espanha">Espanha</option>
+                        <option value="Estados Unidos">Estados Unidos</option>
+                        <option value="França">França</option>
+                        <option value="Inglaterra">Inglaterra</option>
+                        <option value="Portugal">Portugal</option>
                     </select>
                 </div>
 
