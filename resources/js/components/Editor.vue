@@ -432,7 +432,7 @@
                 ">
                 <div class="input-group mb-2">
                     <span class="input-group-text">País de origem</span>
-                    <select class="form-select" v-model="countryOfOrigin">
+                    <select class="form-select" v-model="record.countryOfOrigin">
                         <option value="Brasil">Brasil</option>
                         <option value="Espanha">Espanha</option>
                         <option value="Estados Unidos">Estados Unidos</option>
@@ -450,7 +450,7 @@
             <!-- inlanguage -->
             <div class="input-group mb-2">
                 <span class="input-group-text">Idioma</span>
-                <select class="form-select" v-model="inLanguage">
+                <select class="form-select" v-model="record.inLanguage">
                     <option value="Português">Português</option>
                     <option value="Inglês">Inglês</option>
                     <option value="Francês">Francês</option>
