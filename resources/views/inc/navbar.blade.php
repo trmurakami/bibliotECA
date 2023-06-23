@@ -11,6 +11,7 @@
                 <li><a href="/classificador/treinamento" class="nav-link px-2 text-white">Classificador -
                         Treinamento</a></li>
                 <li><a href="/classificador/consulta" class="nav-link px-2 text-white">Classificador - Consulta</a></li>
+                <li><a href="/cutter" class="nav-link px-2 text-white">Cutter</a></li>
                 @if (Route::has('login'))
                 @auth
                 <li><a href="/works/create" class="nav-link px-2 text-white">Create</a></li>

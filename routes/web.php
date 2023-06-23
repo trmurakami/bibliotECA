@@ -60,3 +60,7 @@ Route::post('/works/{work}/attach', [WorkPersonController::class, 'attachPerson'
 Route::delete('/works/{work}/detach/{person}', [WorkPersonController::class, 'detachPerson'])->name('works.detachPerson');
 
 Route::resource('people', PersonController::class);
+
+Route::get('/cutter', function () {
+    return view('cutter.cutter');
+});
