@@ -3,18 +3,24 @@
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="/" class="nav-link px-2 text-secondary">Home</a></li>
-                <li><a href="/works" class="nav-link px-2 text-white">Works</a></li>
-                <li><a href="/people" class="nav-link px-2 text-white">People</a></li>
-                <li><a href="/editor" class="nav-link px-2 text-white">Editor</a></li>
-                <li><a href="/upload" class="nav-link px-2 text-white">Upload</a></li>
-                <li><a href="/classificador/treinamento" class="nav-link px-2 text-white">Classificador -
-                        Treinamento</a></li>
-                <li><a href="/classificador/consulta" class="nav-link px-2 text-white">Classificador - Consulta</a></li>
+                <li><a href="/" class="nav-link px-2 text-secondary">Início</a></li>
+                <li><a href="/works" class="nav-link px-2 text-white">Catálogo</a></li>
+                <li><a href="/people" class="nav-link px-2 text-white">Autoridades (Pessoas)</a></li>
                 <li><a href="/cutter" class="nav-link px-2 text-white">Cutter</a></li>
                 @if (Route::has('login'))
                 @auth
-                <li><a href="/works/create" class="nav-link px-2 text-white">Create</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        Ações
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="/editor">Editor</a></li>
+                        <li><a class="dropdown-item" href="/upload">Upload</a></li>
+                        <li><a class="dropdown-item" href="/classificador/treinamento">Classificador -
+                                Treinamento</a></li>
+                    </ul>
+                </li>
                 @endauth
                 @endif
             </ul>

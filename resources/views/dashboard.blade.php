@@ -11,6 +11,15 @@
                 <div class="p-6 text-gray-900">
                     {{ __("You're logged in!") }}
                 </div>
+
+                <li><a href="/editor" class="nav-link px-2">Editor</a></li>
+                <li><a href="/upload" class="nav-link px-2">Upload</a></li>
+                <li><a href="/classificador/treinamento" class="nav-link px-2">Classificador -
+                        Treinamento</a></li>
+                <li><a href="/classificador/consulta" class="nav-link px-2">Classificador - Consulta</a></li>
+                <li><a href="/cutter" class="nav-link px-2">Cutter</a></li>
+
+
             </div>
         </div>
     </div>
