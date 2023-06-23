@@ -640,6 +640,21 @@
                 </div>
             </template>
 
+            <!-- Book Format -->
+            <template v-if="record.type === 'Livro'">
+                <div class="form-floating mb-2">
+                    <select class="form-select" id="bookFormat" v-model="record.bookFormat" name="bookFormat" aria-label=""
+                        :class="{ 'is-invalid': record.bookFormat === '' }">
+                        <option value="AudiobookFormat">Audiobook</option>
+                        <option value="EBook">E-book</option>
+                        <option value="GraphicNovel">Graphic Novel</option>
+                        <option value="Hardcover">Capa dura</option>
+                        <option value="Paperback">Capa tradicional</option>
+                    </select>
+                    <label for="bookFormat">Formato do livro</label>
+                </div>
+            </template>
+
             <!-- Duration -->
             <template v-if="record.type === 'Filme' ||
                 record.type === 'Vídeo' ||

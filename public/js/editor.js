@@ -20529,16 +20529,25 @@ var _hoisted_184 = {
   key: 16,
   "class": "form-floating mb-2"
 };
-var _hoisted_185 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+var _hoisted_185 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<option value=\"AudiobookFormat\">Audiobook</option><option value=\"EBook\">E-book</option><option value=\"GraphicNovel\">Graphic Novel</option><option value=\"Hardcover\">Capa dura</option><option value=\"Paperback\">Capa tradicional</option>", 5);
+var _hoisted_190 = [_hoisted_185];
+var _hoisted_191 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
+  "for": "bookFormat"
+}, "Formato do livro", -1 /* HOISTED */);
+var _hoisted_192 = {
+  key: 17,
+  "class": "form-floating mb-2"
+};
+var _hoisted_193 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "duration"
 }, "Duração", -1 /* HOISTED */);
-var _hoisted_186 = {
+var _hoisted_194 = {
   "class": "d-flex bd-highlight mt-2"
 };
-var _hoisted_187 = {
+var _hoisted_195 = {
   "class": "p-2 flex-grow-1 bd-highlight"
 };
-var _hoisted_188 = {
+var _hoisted_196 = {
   "class": "p-2 bd-highlight"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
@@ -20560,7 +20569,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       return $data.record.base64Image = '';
     })
   }, "Excluir imagem")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])]), _hoisted_18, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("form", {
-    onSubmit: _cache[40] || (_cache[40] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {}, ["prevent"]))
+    onSubmit: _cache[41] || (_cache[41] = (0,vue__WEBPACK_IMPORTED_MODULE_0__.withModifiers)(function () {}, ["prevent"]))
   }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "hidden",
     name: "_token",
@@ -21266,31 +21275,41 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     id: "numberOfPages",
     name: "numberOfPages",
     placeholder: "Digite o número de páginas"
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.record.numberOfPages]]), _hoisted_183])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Duration "), $data.record.type === 'Filme' || $data.record.type === 'Vídeo' || $data.record.type === 'Gravação musical' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_184, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.record.numberOfPages]]), _hoisted_183])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Book Format "), $data.record.type === 'Livro' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_184, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("select", {
+    "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(["form-select", {
+      'is-invalid': $data.record.bookFormat === ''
+    }]),
+    id: "bookFormat",
+    "onUpdate:modelValue": _cache[36] || (_cache[36] = function ($event) {
+      return $data.record.bookFormat = $event;
+    }),
+    name: "bookFormat",
+    "aria-label": ""
+  }, _hoisted_190, 2 /* CLASS */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelSelect, $data.record.bookFormat]]), _hoisted_191])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Duration "), $data.record.type === 'Filme' || $data.record.type === 'Vídeo' || $data.record.type === 'Gravação musical' ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_192, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "text",
     "class": "form-control",
-    "onUpdate:modelValue": _cache[36] || (_cache[36] = function ($event) {
+    "onUpdate:modelValue": _cache[37] || (_cache[37] = function ($event) {
       return $data.record.duration = $event;
     }),
     id: "duration",
     name: "duration",
     placeholder: "Digite a duração"
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.record.duration]]), _hoisted_185])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_186, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_187, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Button Form "), $data.editRecordID == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, $data.record.duration]]), _hoisted_193])) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_194, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_195, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Button Form "), $data.editRecordID == 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 0,
-    onClick: _cache[37] || (_cache[37] = function () {
+    onClick: _cache[38] || (_cache[38] = function () {
       return $options.addRecord && $options.addRecord.apply($options, arguments);
     }),
     "class": "btn btn-primary mt-1"
   }, " Criar registro ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" Button Form "), $data.editRecordID != 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("button", {
     key: 1,
-    onClick: _cache[38] || (_cache[38] = function () {
+    onClick: _cache[39] || (_cache[39] = function () {
       return $options.updateRecord && $options.updateRecord.apply($options, arguments);
     }),
     "class": "btn btn-warning mt-1"
-  }, " Editar registro ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_188, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+  }, " Editar registro ")) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_196, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
     "class": "btn btn-warning",
     id: "button-addon1",
-    onClick: _cache[39] || (_cache[39] = function ($event) {
+    onClick: _cache[40] || (_cache[40] = function ($event) {
       return $data.record = $data.cleanrecord;
     })
   }, " Limpar formulário ")])])], 32 /* HYDRATE_EVENTS */)]);
