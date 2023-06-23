@@ -64,7 +64,7 @@
                 @else
                 <a type="button" class="btn btn-outline-light me-2" href="{{ route('login') }}">Login</a>
                 @if (Route::has('register'))
-                <a type="button" class="btn btn-warning" href="{{ route('register') }}">Register</a>
+                <a type="button" class="btn btn-warning" href="{{ route('register') }}">Registrar</a>
                 @endif
                 @endauth
             </div>

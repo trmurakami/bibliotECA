@@ -35,6 +35,7 @@ class MARCController extends Controller
                     WorkController::indexRelations($work->id);
                     unset($record);
                 }
+                return redirect('/works')->with('success', 'Trabalhos importados com sucesso!');
             }
         }
     }

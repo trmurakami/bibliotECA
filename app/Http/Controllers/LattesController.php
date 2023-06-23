@@ -86,6 +86,7 @@ class LattesController extends Controller
                     unset($record);
                 }
             }
+            return redirect('/works')->with('success', 'Trabalhos importados com sucesso!');
         }
     }
 }
