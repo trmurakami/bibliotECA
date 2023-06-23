@@ -5,6 +5,10 @@
             Registro criado com sucesso! - <a href="/editor" class="alert-link">Criar novo registro</a>.
         </div>
 
+        <div class="alert alert-success" role="alert" v-if="successUpdate">
+            Registro atualizado com sucesso! - <a href="/editor" class="alert-link">Criar novo registro</a>.
+        </div>
+
         <h2>Enviar imagem de capa capa</h2>
 
         <div class="input-group mb-3">
@@ -456,10 +460,6 @@
                         <option value="Portugal">Portugal</option>
                     </select>
                 </div>
-
-                <button @click="addField('countryOfOrigin')" class="btn btn-info btn-sm mb-2">
-                    Adicionar país
-                </button>
             </template>
 
             <!-- inlanguage -->
@@ -700,6 +700,7 @@ export default {
             loadingZ3950: false,
             loadingSearch: false,
             success: false,
+            successUpdate: false,
             successUploadCover: '',
             loaded: true,
             EIDRRecord: null,
@@ -852,6 +853,38 @@ export default {
                         //     this.errors = error.response.data.errors || {};
                         // }
                         // console.log("Error");
+                    });
+            }
+        },
+        updateRecord: function (e) {
+            e.preventDefault();
+            if (this.loaded) {
+                this.loaded = false;
+                this.success = false;
+                this.errors = {};
+                const headers = {
+                    "Content-Type": "application/json",
+                };
+                axios
+                    .put(
+                        "/api/works/" +
+                        this.editRecordID,
+                        JSON.stringify(this.record),
+                        { headers }
+                    )
+                    .then((response) => {
+                        this.successUpdate = true;
+                        window.scrollTo(0, 0);
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1000);
+                    })
+                    .catch((error) => {
+                        this.loaded = true;
+                        if (error.response.status === 422) {
+                            this.errors = error.response.data.errors || {};
+                        }
+                        console.log("Error");
                     });
             }
         },
@@ -1154,41 +1187,11 @@ export default {
                 });
             this.getCover(this.editRecordID);
         },
-        updateRecord: function (e) {
-            e.preventDefault();
-            if (this.loaded) {
-                this.loaded = false;
-                this.success = false;
-                this.errors = {};
-                const headers = {
-                    "Content-Type": "application/json",
-                };
-                axios
-                    .put(
-                        "api/creative_work/" +
-                        this.record.type +
-                        "/" +
-                        this.editRecordID,
-                        JSON.stringify(this.record),
-                        { headers }
-                    )
-                    .then((response) => {
-                        this.success = true;
-                        location.reload();
-                    })
-                    .catch((error) => {
-                        this.loaded = true;
-                        if (error.response.status === 422) {
-                            this.errors = error.response.data.errors || {};
-                        }
-                        console.log("Error");
-                    });
-            }
-        },
         checkPropEmpty() {
             if (!this.work) {
                 this.record = this.cleanrecord;
             } else {
+                this.editRecordID = this.work.id;
                 delete this.work.created_at;
                 delete this.work.updated_at;
                 delete this.work.id;

@@ -40,8 +40,9 @@ class WorksAPIController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $work->update($request->all());
-        return response()->json($work);
+        $work = Work::findOrFail($id);
+        $updateWork = $work->update($request->all());
+        return response()->json($updateWork);
     }
 
     /**
@@ -49,7 +50,7 @@ class WorksAPIController extends Controller
      */
     public function destroy(string $id)
     {
-        $work->delete();
+        Work::delete();
         return response()->json(null, 204);
     }
 }
