@@ -18,7 +18,7 @@
                         <a href="https://doi.org/{{ $work->doi }}" target="_blank">{{ $work->doi }}</a>
                     </small></p>
                 @endif
-
+                @if ($work->author)
                 <div class="card-text"><small class="text-body-secondary">Autores:</small>
                     <ul>
                         @foreach ($work->author as $author)
@@ -45,8 +45,8 @@
                         </li>
                         @endforeach
                     </ul>
-
                 </div>
+                @endif
                 @if (isset($work->isPartOf_name))
                 <p class="card-text">
                     <small class="text-body-secondary">

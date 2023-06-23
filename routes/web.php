@@ -9,6 +9,7 @@ use App\Http\Controllers\ClassificadorController;
 use App\Http\Controllers\LattesController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\WorkPersonController;
+use App\Http\Controllers\MARCController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,3 +65,5 @@ Route::resource('people', PersonController::class);
 Route::get('/cutter', function () {
     return view('cutter.cutter');
 });
+
+Route::post('marc', [MARCController::class, 'processMARC'])->name('marc.processMARC');	

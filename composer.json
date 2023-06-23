@@ -12,6 +12,7 @@
         "laravel/tinker": "^2.8",
         "medlib/cover": "^1.0",
         "opcodesio/log-viewer": "^2.4",
+        "scriptotek/marc": "^2.2",
         "teamtnt/tntsearch": "^3.1"
     },
     "require-dev": {
