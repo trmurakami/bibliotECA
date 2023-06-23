@@ -673,7 +673,6 @@
             </div>
         </form>
     </div>
-    {{ work }}
 </template>
 
 <script>
