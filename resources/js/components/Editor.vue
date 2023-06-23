@@ -5,14 +5,21 @@
             Registro criado com sucesso! - <a href="/editor" class="alert-link">Criar novo registro</a>.
         </div>
 
-        <h2>Enviar capa</h2>
+        <h2>Enviar imagem de capa capa</h2>
 
         <div class="input-group mb-3">
-            <input type="file" @change="handleFileChange" class="form-control">
-            <button @click="uploadImage" class="btn btn-outline-secondary">Enviar imagem</button>
+            <input type="file" @change="handleFileChange" class="form-control" accept=".jpg,.gif,.png">
         </div>
 
-        <img :src="record.base64Image" v-if="record.base64Image" height="300">
+        <div class="row">
+            <div class="col d-flex justify-content-center align-items-center">
+                <img :src="record.base64Image" v-if="record.base64Image" height="300">
+            </div>
+            <div class="col d-flex justify-content-center align-items-center">
+                <button class="btn btn-danger" @click="record.base64Image = ''" v-if="record.base64Image">Excluir
+                    imagem</button>
+            </div>
+        </div>
 
         <h2>Metadados</h2>
 
