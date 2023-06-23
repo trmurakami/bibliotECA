@@ -430,26 +430,32 @@
                 record.type === 'Livro' ||
                 record.type === 'Álbum musical'
                 ">
-                <div class="input-group mb-2" v-for="(countryOfOrigin, indexcountryOfOrigin) in record.countryOfOrigin">
+                <div class="input-group mb-2">
                     <span class="input-group-text">País de origem</span>
-                    <select class="form-select" v-model="countryOfOrigin.code">
+                    <select class="form-select" v-model="countryOfOrigin">
                         <option value="BR">Brasil</option>
                         <option value="US">Estados Unidos</option>
                         <option value="ES">Espanha</option>
                         <option value="FR">França</option>
                         <option value="PT">Portugal</option>
                     </select>
-                    <button @click="
-                        deleteField('countryOfOrigin', indexcountryOfOrigin)
-                        " class="btn btn-danger btn-sm">
-                        Limpar
-                    </button>
                 </div>
 
                 <button @click="addField('countryOfOrigin')" class="btn btn-info btn-sm mb-2">
                     Adicionar país
                 </button>
             </template>
+
+            <!-- inlanguage -->
+            <div class="input-group mb-2">
+                <span class="input-group-text">Idioma</span>
+                <select class="form-select" v-model="inLanguage">
+                    <option value="Português">Português</option>
+                    <option value="Inglês">Inglês</option>
+                    <option value="Francês">Francês</option>
+                    <option value="Espanhol">Espanhol</option>
+                </select>
+            </div>
 
             <!-- Production Company -->
             <template v-if="record.type === 'Filme' || record.type === 'Vídeo'">
@@ -704,7 +710,7 @@ export default {
                 byartist: [],
                 character: [],
                 copyrightYear: "",
-                countryOfOrigin: [{ code: "BR" }],
+                countryOfOrigin: "",
                 coverimage: '',
                 datePublished: '',
                 description: '',
@@ -715,7 +721,7 @@ export default {
                 endDate: "",
                 image: "",
                 inAlbum: [],
-                inlanguage: [{ code: "pt-BR" }],
+                inLanguage: "",
                 isaccessibleforfree: false,
                 isbn: [{ id: "", type: "" }],
                 isrcCode: "",
@@ -753,7 +759,7 @@ export default {
                 byartist: [],
                 character: [],
                 copyrightYear: "",
-                countryOfOrigin: [{ code: "BR" }],
+                countryOfOrigin: "",
                 coverimage: '',
                 datePublished: "",
                 description: "",
@@ -764,7 +770,7 @@ export default {
                 endDate: "",
                 image: "",
                 inAlbum: [],
-                inlanguage: [{ code: "pt-BR" }],
+                inLanguage: "",
                 isaccessibleforfree: false,
                 isbn: [{ id: "", type: "" }],
                 isrcCode: "",

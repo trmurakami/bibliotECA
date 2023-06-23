@@ -29,7 +29,7 @@ return new class extends Migration
             $table->jsonb('contributor')->nullable(); // not included
             $table->jsonb('copyrightHolder')->nullable(); // not included
             $table->string('copyrightYear')->nullable();
-            $table->jsonb('countryOfOrigin')->nullable();
+            $table->string('countryOfOrigin')->nullable();
             $table->longText('coverimage')->nullable();
             $table->string('dateCreated')->nullable(); // not included
             $table->string('datePublished')->nullable();

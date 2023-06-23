@@ -15,7 +15,6 @@ class Work extends Model
         'author' => 'array',
         'byartist' => 'array',
         'character' => 'array',
-        'countryOfOrigin' => 'array',
         'director' => 'array',
         'inAlbum' => 'array',
         'inPlaylist' => 'array',
