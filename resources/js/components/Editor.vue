@@ -1,9 +1,6 @@
 <template>
     <div>
         <h1>Editor</h1>
-
-        {{ work }}
-
         <div class="alert alert-success" role="alert" v-if="success">
             Registro criado com sucesso! - <a href="/editor" class="alert-link">Criar novo registro</a>.
         </div>
@@ -669,6 +666,7 @@
             </div>
         </form>
     </div>
+    {{ work }}
 </template>
 
 <script>
@@ -1180,9 +1178,11 @@ export default {
             if (!this.work) {
                 this.record = this.cleanrecord;
             } else {
-                this.record.name = this.work.name;
-                this.record.description = this.work.description;
-                this.record.datePublished = this.work.datePublished;
+                delete this.work.created_at;
+                delete this.work.updated_at;
+                delete this.work.id;
+                delete this.work.authors;
+                this.record = this.work;
             }
         },
         handleFileChange(event) {

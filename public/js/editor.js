@@ -20036,9 +20036,11 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       if (!this.work) {
         this.record = this.cleanrecord;
       } else {
-        this.record.name = this.work.name;
-        this.record.description = this.work.description;
-        this.record.datePublished = this.work.datePublished;
+        delete this.work.created_at;
+        delete this.work.updated_at;
+        delete this.work.id;
+        delete this.work.authors;
+        this.record = this.work;
       }
     },
     handleFileChange: function handleFileChange(event) {
@@ -20508,7 +20510,7 @@ var _hoisted_180 = {
   "class": "p-2 bd-highlight"
 };
 function render(_ctx, _cache, $props, $setup, $data, $options) {
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", null, [_hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.work) + " ", 1 /* TEXT */), $data.success ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, _hoisted_6)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", null, [_hoisted_1, $data.success ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_2, _hoisted_6)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true), _hoisted_7, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "file",
     onChange: _cache[0] || (_cache[0] = function () {
       return $options.handleFileChange && $options.handleFileChange.apply($options, arguments);
@@ -21264,7 +21266,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     onClick: _cache[40] || (_cache[40] = function ($event) {
       return $data.record = $data.cleanrecord;
     })
-  }, " Limpar formulário ")])])], 32 /* HYDRATE_EVENTS */)]);
+  }, " Limpar formulário ")])])], 32 /* HYDRATE_EVENTS */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($props.work), 1 /* TEXT */)], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),

@@ -4,7 +4,6 @@
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
             <h2>Show work</h2>
-            <p> {{ $work }}</p>
         </div>
         <div class="pull-right">
             <a class="btn btn-primary" href="{{ route('works.index') }}"> Back</a>
@@ -59,5 +58,7 @@
 
         <button type="submit" class="btn btn-danger">Delete</button>
     </form>
+    <br /><br />
+    <p> {{ $work }}</p>
 </div>
 @endsection
