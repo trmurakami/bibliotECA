@@ -19,9 +19,7 @@ class Cover extends Component {
     }
     public function render(): View|Closure|string
     {
-        if (!file_exists('files/covers/' . $this->work->id . '.png')) {
-
-            //dd($work);
+        if ($this->work->base64Image == null) {
             if ($this->work->author == null) {
                 $author = "";
             } else {
@@ -44,13 +42,8 @@ class Cover extends Component {
                 ->randomizeBackgroundColor();
             $base64_cover = $cover->getImageBase64();
         } else {
-            $path = 'files/covers/' . $this->work->id . '.png';
-            $type = pathinfo($path, PATHINFO_EXTENSION);
-            $data = file_get_contents($path);
-            $base64_cover = 'data:image/' . $type . ';base64,' . base64_encode($data);
-            $headers[] = header('Content-Type: image/png');
+            $base64_cover = $this->work->base64Image;
         }
-
         return view('components.cover', ['base64_cover' => $base64_cover]);
     }
 

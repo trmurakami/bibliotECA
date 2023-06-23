@@ -8,6 +8,17 @@
             Registro criado com sucesso! - <a href="/editor" class="alert-link">Criar novo registro</a>.
         </div>
 
+        <h2>Enviar capa</h2>
+
+        <div class="input-group mb-3">
+            <input type="file" @change="handleFileChange" class="form-control">
+            <button @click="uploadImage" class="btn btn-outline-secondary">Enviar imagem</button>
+        </div>
+
+        <img :src="record.base64Image" v-if="record.base64Image" height="300">
+
+        <h2>Metadados</h2>
+
         <form @submit.prevent>
             <input type="hidden" name="_token" :value="csrf" />
 
@@ -669,6 +680,7 @@ export default {
     data() {
         return {
             csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),
+            file: null,
             definition: '',
             deleteCoverSuccess: '',
             deleteRecordSuccess: false,
@@ -706,6 +718,7 @@ export default {
                 actor: [],
                 alternateName: "",
                 author: [],
+                base64Image: '',
                 bookEdition: "",
                 bookFormat: "",
                 byartist: [],
@@ -755,6 +768,7 @@ export default {
                 actor: [],
                 alternateName: "",
                 author: [],
+                base64Image: '',
                 bookEdition: "",
                 bookFormat: "",
                 byartist: [],
@@ -1170,6 +1184,17 @@ export default {
                 this.record.description = this.work.description;
                 this.record.datePublished = this.work.datePublished;
             }
+        },
+        handleFileChange(event) {
+            this.file = event.target.files[0];
+            this.convertToBase64();
+        },
+        convertToBase64() {
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                this.record.base64Image = event.target.result;
+            };
+            reader.readAsDataURL(this.file);
         },
     },
     mounted() {

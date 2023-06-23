@@ -35,6 +35,7 @@ class Work extends Model
         'albumProductionType',
         'albumReleaseType',
         'author',
+        'base64Image',
         'byartist',
         'releasedEvent',
         'countryOfOrigin',

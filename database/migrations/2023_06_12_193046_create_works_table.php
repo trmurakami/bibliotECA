@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('alternateName')->nullable();
             $table->jsonb('author')->nullable();
             $table->jsonb('award')->nullable(); // not included
+            $table->longText('base64Image')->nullable();
             $table->string('bookEdition')->nullable();
             $table->string('bookFormat')->nullable();
             $table->jsonb('byartist')->nullable();
