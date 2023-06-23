@@ -838,8 +838,12 @@ export default {
                         { headers }
                     )
                     .then((response) => {
-                        this.success = true,
-                            this.record = this.cleanrecord
+                        this.success = true;
+                        this.record = this.cleanrecord;
+                        window.scrollTo(0, 0);
+                        setTimeout(function () {
+                            location.reload();
+                        }, 1000);
                     })
                     .catch((error) => {
                         this.loaded = true;

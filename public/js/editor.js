@@ -19754,7 +19754,12 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
         axios__WEBPACK_IMPORTED_MODULE_0___default().post("api/works", JSON.stringify(this.record), {
           headers: headers
         }).then(function (response) {
-          _this.success = true, _this.record = _this.cleanrecord;
+          _this.success = true;
+          _this.record = _this.cleanrecord;
+          window.scrollTo(0, 0);
+          setTimeout(function () {
+            location.reload();
+          }, 1000);
         })["catch"](function (error) {
           _this.loaded = true;
           console.log(error);
