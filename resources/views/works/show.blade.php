@@ -51,12 +51,37 @@
 
         <a class="btn btn-info" href="{{ route('works.show',$work->id) }}">Show</a>
 
-        <a class="btn btn-primary" href="{{ route('works.edit',$work->id) }}">Edit</a>
+        <a class="btn btn-primary" href="{{ route('works.edit',$work->id) }}">Editar</a>
 
         @csrf
         @method('DELETE')
 
-        <button type="submit" class="btn btn-danger">Delete</button>
+        <!-- Button trigger modal - Delete -->
+        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+            Excluir
+        </button>
+
+        <!-- Modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="deleteModalLabel">Excluir registro</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        Esta ação é irreversível. Tem a certeza que pretende excluir o registro?
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger">Excluir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
     </form>
     <br /><br />
     <p> {{ $work }}</p>
