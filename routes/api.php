@@ -7,6 +7,7 @@ use App\Http\Controllers\ProxyOAIPMHController;
 use App\Http\Controllers\ProxyEIDRController;
 use App\Http\Controllers\HarvestOAIPMHController;
 use App\Http\Controllers\Z3950Controller;
+use App\Http\Controllers\CutterSanbornController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +40,5 @@ Route::get('eidr/{eidr}', [ProxyEIDRController::class, 'getEIDR']);
 
 
 Route::get('z3950', [Z3950Controller::class, 'searchZ3950']);
+
+Route::get('cutter', [CutterSanbornController::class, 'cutter']);
