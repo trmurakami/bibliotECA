@@ -20521,7 +20521,7 @@ var _hoisted_182 = {
   key: 16,
   "class": "form-floating mb-2"
 };
-var _hoisted_183 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<option value=\"AudiobookFormat\">Audiobook</option><option value=\"EBook\">E-book</option><option value=\"GraphicNovel\">Graphic Novel</option><option value=\"Hardcover\">Capa dura</option><option value=\"Paperback\">Capa tradicional</option>", 5);
+var _hoisted_183 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<option value=\"Audiobook\">Audiobook</option><option value=\"E-book\">E-book</option><option value=\"GraphicNovel\">Graphic Novel</option><option value=\"Capa dura\">Capa dura</option><option value=\"Capa tradicional\">Capa tradicional</option>", 5);
 var _hoisted_188 = [_hoisted_183];
 var _hoisted_189 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", {
   "for": "bookFormat"

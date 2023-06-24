@@ -639,11 +639,11 @@
                 <div class="form-floating mb-2">
                     <select class="form-select" id="bookFormat" v-model="record.bookFormat" name="bookFormat" aria-label=""
                         :class="{ 'is-invalid': record.bookFormat === '' }">
-                        <option value="AudiobookFormat">Audiobook</option>
-                        <option value="EBook">E-book</option>
+                        <option value="Audiobook">Audiobook</option>
+                        <option value="E-book">E-book</option>
                         <option value="GraphicNovel">Graphic Novel</option>
-                        <option value="Hardcover">Capa dura</option>
-                        <option value="Paperback">Capa tradicional</option>
+                        <option value="Capa dura">Capa dura</option>
+                        <option value="Capa tradicional">Capa tradicional</option>
                     </select>
                     <label for="bookFormat">Formato do livro</label>
                 </div>
