@@ -36,6 +36,8 @@ class Work extends Model
         'author',
         'base64Image',
         'byartist',
+        'bookEdition',
+        'bookFormat',
         'releasedEvent',
         'countryOfOrigin',
         'datePublished',
