@@ -582,18 +582,12 @@
             </template>
 
             <!-- Publisher -->
-            <div class="input-group mb-2" v-for="(publisher, indexpublisher) in record.publisher">
+            <div class="input-group mb-2">
                 <span class="input-group-text">Editora / Publicadora</span>
-                <input v-model.trim="publisher.name" type="text" class="form-control" name="name" id="name"
+                <input v-model.trim="record.publisher" type="text" class="form-control" name="name" id="name"
                     placeholder="Nome da Editora / Publicadora" list="datalistAuthorityOrg"
-                    :class="{ 'is-invalid': Object.keys(publisher.name).length === 0, }" />
-                <button @click="deleteField('publisher', indexpublisher)" class="btn btn-danger btn-sm">
-                    Limpar
-                </button>
+                    :class="{ 'is-invalid': Object.keys(record.publisher).length === 0, }" />
             </div>
-            <button @click="addField('publisher')" class="btn btn-info btn-sm mb-2">
-                Adicionar editora / publicadora
-            </button>
 
             <!-- subtitleLanguage -->
             <template v-if="record.type === 'Filme' || record.type === 'Vídeo'">
@@ -768,7 +762,7 @@ export default {
                 oaipmh: "",
                 oaiset: "",
                 productionCompany: [],
-                publisher: [{ id: "", name: "" }],
+                publisher: "",
                 recordingOf: "",
                 startDate: "",
                 subtitleLanguage: [],
@@ -818,7 +812,7 @@ export default {
                 oaipmh: "",
                 oaiset: "",
                 productionCompany: [],
-                publisher: [{ id: "", name: "" }],
+                publisher: "",
                 recordingOf: "",
                 startDate: "",
                 subtitleLanguage: [],
@@ -987,8 +981,12 @@ export default {
                             this.crossrefRecord.data.message.title[0]),
                         (this.record.url =
                             this.crossrefRecord.data.message.URL),
-                        (this.record.publisher[0].name =
+                        (this.record.publisher =
                             this.crossrefRecord.data.message.publisher),
+                        (this.record.abstract =
+                            this.crossrefRecord.data.message.abstract),
+                        (this.record.bookEdition =
+                            this.crossrefRecord.data.message['edition-number']),
                         (this.record.copyrightYear =
                             this.crossrefRecord.data.message.created[
                             "date-parts"

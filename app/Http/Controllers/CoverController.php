@@ -51,7 +51,7 @@ class CoverController extends Controller
             if ($request->publisher == null) {
                 $publisher = "";
             } else {
-                $publisher = $request->publisher[0]['name'];
+                $publisher = $request->publisher;
             }
 
             $cover = new BookCover();

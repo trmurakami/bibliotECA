@@ -22,7 +22,6 @@ class Work extends Model
         'musicalinstruments' => 'array',
         'musicby' => 'array',
         'productionCompany' => 'array',
-        'publisher' => 'array',
         'subtitleLanguage' => 'array',
         'translator' => 'array'
     ];
@@ -68,6 +67,7 @@ class Work extends Model
         'pageStart',
         'pagination',
         'productionCompany',
+        'publisher',
         'recordingOf',
         'startDate',
         'subtitleLanguage',

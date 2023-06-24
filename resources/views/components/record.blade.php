@@ -47,6 +47,13 @@
                     </ul>
                 </div>
                 @endif
+                @if (isset($work->publisher))
+                <p class="card-text">
+                    <small class="text-body-secondary">
+                        Editora: {{ $work->publisher }}
+                    </small>
+                </p>
+                @endif
                 @if (isset($work->isPartOf_name))
                 <p class="card-text">
                     <small class="text-body-secondary">

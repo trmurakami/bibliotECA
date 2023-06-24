@@ -77,7 +77,7 @@ return new class extends Migration
             $table->string('pagination')->nullable();
             $table->jsonb('producer')->nullable(); // not included
             $table->jsonb('productionCompany')->nullable();
-            $table->jsonb('publisher')->nullable();
+            $table->string('publisher')->nullable();
             $table->string('recordingOf')->nullable();
             $table->string('releasedEvent')->nullable();
             $table->string('startDate')->nullable();

@@ -29,7 +29,7 @@ class Cover extends Component {
             if ($this->work->publisher == null) {
                 $publisher = "";
             } else {
-                $publisher = $this->work->publisher[0]['name'];
+                $publisher = $this->work->publisher;
             }
 
             $cover = new BookCover();
