@@ -212,13 +212,13 @@ class WorkController extends Controller
                 }
             }
         }
-        if ($record->publisher) {
-            foreach ($record->publisher as $publisher) {
-                if ($publisher["id"] != "") {
-                    $person = Thing::find($publisher["id"]);
-                    $record->authors()->attach($person, ['function' => "publisher"]);
-                }
-            }
-        }
+        // if ($record->publisher) {
+        //     foreach ($record->publisher as $publisher) {
+        //         if ($publisher["id"] != "") {
+        //             $person = Thing::find($publisher["id"]);
+        //             $record->authors()->attach($person, ['function' => "publisher"]);
+        //         }
+        //     }
+        // }
     }
 }

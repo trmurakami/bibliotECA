@@ -30,6 +30,12 @@ class MARCController extends Controller
                     //echo $record->getField('245')->getSubfield('a')->getData() . "<br/>";
                     $workArray['type'] = 'Livro';
                     $workArray['name'] = (string)$record->getField('245')->getSubfield('a')->getData();
+                    //$workArray['subtitle'] = (string)$record->getField('245')->getSubfield('b')->getData();
+                    //$workArray['edition'] = (string)$record->getField('250')->getSubfield('a')->getData();
+                    $workArray['datePublished'] = (string)$record->getField('260')->getSubfield('c')->getData();
+                    //$workArray['abstract'] = (string)$record->getField('520')->getSubfield('a')->getData();
+                    $workArray['isbn'] = (string)$record->getField('020')->getSubfield('a')->getData();
+                    $workArray['publisher'] = (string)$record->getField('260')->getSubfield('b')->getData();
                     $work = new Work($workArray);
                     $work->save();
                     WorkController::indexRelations($work->id);

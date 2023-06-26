@@ -48,6 +48,7 @@
             <x-facet field="releasedEvent" fieldName="Nome do evento" :request="$request" />
             <x-facet field="inLanguage" fieldName="Idioma" :request="$request" />
             <x-facet field="issn" fieldName="ISSN" :request="$request" />
+            <x-facet field="publisher" fieldName="Editora" :request="$request" />
         </div>
 
     </div>
