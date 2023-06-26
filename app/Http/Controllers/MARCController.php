@@ -36,6 +36,21 @@ class MARCController extends Controller
                     //$workArray['abstract'] = (string)$record->getField('520')->getSubfield('a')->getData();
                     $workArray['isbn'] = (string)$record->getField('020')->getSubfield('a')->getData();
                     $workArray['publisher'] = (string)$record->getField('260')->getSubfield('b')->getData();
+                    $i_autores = 0;
+                    if (null !== $record->getField('100')){
+                        $workArray['author'][$i_autores]['id'] = '';
+                        $workArray['author'][$i_autores]['id_lattes13'] = '';
+                        $workArray['author'][$i_autores]['name'] = (string)$record->getField('100')->getSubfield('a')->getData();
+                        $workArray['author'][$i_autores]['function'] = 'Autor';
+                        $i_autores++;
+                    }
+                    foreach ($record->getFields('700') as $autor) {
+                        $i_autores++;
+                        $workArray['author'][$i_autores]['id'] = '';
+                        $workArray['author'][$i_autores]['id_lattes13'] = '';
+                        $workArray['author'][$i_autores]['name'] = (string)$autor->getSubfield('a')->getData();
+                        $workArray['author'][$i_autores]['function'] = 'Autor';
+                    }
                     $work = new Work($workArray);
                     $work->save();
                     WorkController::indexRelations($work->id);

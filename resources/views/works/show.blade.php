@@ -26,10 +26,12 @@
         </div>
     </div>
     @php
+    if (isset($work->author)) {
     $namesArray = array_map(function ($author) {
     return $author['name'];
     }, $work->author);
     $string = implode(', ', $namesArray);
+    }
     @endphp
     @if (isset($namesArray))
     <p class="card-text"><small class="text-body-secondary">Autores:
