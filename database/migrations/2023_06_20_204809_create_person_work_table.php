@@ -12,11 +12,11 @@ class CreatePersonWorkTable extends Migration
             $table->unsignedBigInteger('person_id');
             $table->unsignedBigInteger('work_id');
             $table->timestamps();
-            
             $table->primary(['person_id', 'work_id']);
             $table->foreign('person_id')->references('id')->on('people')->onDelete('cascade');
             $table->foreign('work_id')->references('id')->on('works')->onDelete('cascade');
-            $table->string('function');
+            $table->string('function')->nullable();
+            $table->string('affiliation')->nullable();
         });
     }
 
