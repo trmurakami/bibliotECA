@@ -100,4 +100,15 @@
     <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
 
+<h4 class="mt-3">MARC Quality Analysis</h4>
+<form method="POST" action="/api/marcqa" enctype="multipart/form-data">
+    @csrf
+    <div class="mb-3">
+        <label for="file" class="form-label">Arquivo MARC</label>
+        <input class="form-control" type="file" for="file" accept=".mrc" name="file">
+        <input type="text" name="new_filename" value="marc.mrc" hidden>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+
 @endsection
