@@ -60,8 +60,10 @@ class MARCQAController extends Controller
             foreach ($collection as $record) {
                 if (isset($request->marcfield)) {
                     if (null !== $record->query($request->marcfield)->text()) {
-                        $result['field'][] =  $record->query($request->marcfield)->text();
-                        $result['count']++;
+                        foreach ($record->query($request->marcfield) as $subfield) {
+                            $result['field'][] = $subfield->getData();
+                            $result['count']++;
+                         }
                     }
                 } else {
                     return response()->json(['error' => 'Field not found'], 404);
