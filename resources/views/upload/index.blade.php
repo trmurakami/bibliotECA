@@ -115,7 +115,8 @@
     @csrf
     <div class="mb-3">
         <div class="input-group mb-3">
-            <span class="input-group-text" id="file">Enviar arquivo .mrc</span>
+            <span class="input-group-text" id="file">Enviar arquivo .mrc - Tamanho máximo do arquivo
+                {{ (int)(ini_get('post_max_size')) }} MB</span>
             <input class="form-control" type="file" for="file" accept=".mrc" name="file">
             <input type="text" name="new_filename" value="marc.mrc" hidden>
         </div>
