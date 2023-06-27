@@ -110,5 +110,26 @@
     </div>
     <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
+<h4 class="mt-3">MARC Quality Analysis - Exportar campo</h4>
+<form method="POST" action="/api/marcqaexportfield" enctype="multipart/form-data">
+    @csrf
+    <div class="mb-3">
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="file">Enviar arquivo .mrc</span>
+            <input class="form-control" type="file" for="file" accept=".mrc" name="file">
+            <input type="text" name="new_filename" value="marc.mrc" hidden>
+        </div>
+
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="field" placeholder="Campo MARC" name="field">
+            <label for="field">Campo</label>
+        </div>
+        <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="subfield" placeholder="Subcampo MARC" name="subfield">
+            <label for="subfield">Subcampo</label>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
 
 @endsection

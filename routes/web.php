@@ -66,4 +66,4 @@ Route::get('/cutter', function () {
     return view('cutter.cutter');
 });
 
-Route::post('marc', [MARCController::class, 'processMARC'])->name('marc.processMARC');	
+Route::post('marc', [MARCController::class, 'processMARC'])->name('marc.processMARC');

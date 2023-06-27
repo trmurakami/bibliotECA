@@ -45,3 +45,4 @@ Route::get('z3950', [Z3950Controller::class, 'searchZ3950']);
 Route::get('cutter', [CutterSanbornController::class, 'cutter']);
 
 Route::post('marcqa', [MARCQAController::class, 'marcQA']);
+Route::post('marcqaexportfield', [MARCQAController::class, 'exportfield']);

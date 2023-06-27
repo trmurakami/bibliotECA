@@ -27,11 +27,9 @@ class MARCQAController extends Controller
                         $result['title'][] =  $record->getField('245')->getSubfield('a')->getData();
                         $result['count']['title']++;
                     }
-                    if (null !== $record->getField('245')->getSubfield('b')) {
-                        if (false !== $record->getField('245')->getSubfield('b')) {
-                            $result['subtitle'][] =  $record->getField('245')->getSubfield('b')->getData();
-                            $result['count']['subtitle']++;
-                        }
+                    if (null !== $record->query('245$b')->text()) {
+                        $result['subtitle'][] =  $record->query('245$b')->text();
+                        $result['count']['subtitle']++;
                     }
                     if (null !== $record->getField('100')) {
                         $result['author'][] =  $record->getField('100')->getSubfield('a')->getData();
@@ -41,8 +39,30 @@ class MARCQAController extends Controller
                         $result['publisher'][] =  $record->getField('260')->getSubfield('b')->getData();
                         $result['count']['publisher']++;
                     }
+
                     $result['count_unique']['author'] = count(array_unique($result['author']));
                     $result['count_unique']['publisher'] = count(array_unique($result['publisher']));
+                }
+            }
+        }
+        return response()->json($result, 201);
+    }
+    public function exportfield (Request $request) {
+        $request->validate([
+            'file' => 'required|mimes:mrc|max:2048',
+            'field' => 'required',
+        ]);
+        if ($request->file('file')->isValid()) {
+            $file = $request->file('file');
+            if ($file->getClientOriginalExtension() === 'mrc') {
+                $collection = Collection::fromFile($request->file);
+                $result = [];
+                $result['count'] = 0;
+                foreach ($collection as $record) {
+                    if (null !== $record->getField($request->field)) {
+                        $result['field'][] =  $record->getField($request->field)->getSubfield($request->subfield)->getData();
+                        $result['count']++;
+                    }
                 }
             }
         }
