@@ -23,7 +23,7 @@ var margin = {
     left: 100
 };
 var width = 800;
-var height = 400;
+var height = 600;
 
 var svg = d3.select("#chart")
     .attr("width", width + margin.left + margin.right)
@@ -33,7 +33,7 @@ var svg = d3.select("#chart")
 
 // Ordenar os dados por year
 data.sort(function(a, b) {
-    return d3.ascending(a.year, b.year);
+    return d3.descending(a.year, b.year);
 });
 
 // Escala para o eixo X
@@ -78,13 +78,14 @@ svg.selectAll(".bar-label")
     .enter().append("text")
     .attr("class", "bar-label")
     .attr("x", function(d) {
-        return xScale(d.total) + 2;
+        return xScale(d.total) - 5;
     })
     .attr("y", function(d) {
         return yScale(d.year) + yScale.bandwidth() / 2;
     })
     .attr("dy", "0.35em")
-    .attr("text-anchor", "start")
+    .attr("text-anchor", "end")
+    .attr("fill", "white")
     .text(function(d) {
         return d.total;
     });
