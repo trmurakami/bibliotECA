@@ -6,6 +6,7 @@
                 <li><a href="/" class="nav-link px-2 text-secondary">Início</a></li>
                 <li><a href="/works" class="nav-link px-2 text-white">Catálogo</a></li>
                 <li><a href="/people" class="nav-link px-2 text-white">Autoridades (Pessoas)</a></li>
+                <li><a href="/graficos" class="nav-link px-2 text-white">Gráficos</a></li>
                 <li><a href="/cutter" class="nav-link px-2 text-white">Cutter</a></li>
                 @if (Route::has('login'))
                 @auth

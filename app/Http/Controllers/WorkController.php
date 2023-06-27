@@ -221,4 +221,13 @@ class WorkController extends Controller
         //     }
         // }
     }
+    public function graficos()
+    {
+        $datePublishedData = DB::table('works')
+                        ->select('datePublished as year', \DB::raw('COUNT(*) as total'))
+                        ->groupBy('year')
+                        ->get();
+    
+        return view('works.graficos', compact('datePublishedData'));
+    }
 }
