@@ -73,6 +73,73 @@ class MARCQAController extends Controller
         } else {
             return response()->json(['error' => 'File not valid'], 404);
         }
-        
+    }
+
+    public function reportTitleInd2 (Request $request) {
+        $request->validate([
+            'file' => 'required|mimes:mrc|max:102400',
+        ]);
+        if ($request->file('file')->isValid()) {
+            $file = $request->file('file');
+            $collection = Collection::fromFile($request->file);
+            $result = [];
+            $articles = ['O', 'Os', 'A', 'As', 'Um', 'Uns', 'Uma', 'Umas', 'Ao', 'Aos', 'À', 'Às', 'Do', 'Dos', 'Da','Das',
+            'Dum', 'Duns', 'Duma', 'Dumas', 'No', 'Nos', 'Na', 'Nas', 'Num', 'Nuns', 'Numa', 'Numas', 'Pelo', 'Pelos', 'Pela',
+            'Pelas', 'The', 'An', 'A', 'Les', 'La', 'Le', 'L', 'El', 'Los', 'Las', 'Lo', 'Els', 'Es', 'Un', 'Una', 'Uns', 'Unes'];
+            $i = 0;
+            foreach ($collection as $record) {
+                $result[$i]['title'] = trim($record->getField('245')->getSubfield('a')->getData());
+                $result[$i]['ind2'] = $record->getField('245')->getIndicator(2);
+                $firstWord = ucwords(strtolower(explode(' ', $result[$i]['title'])[0]));
+                if (in_array($firstWord, $articles)) {
+                    $result[$i]['ind2_suggest'] = (string)(strlen($firstWord) + 1);
+                    if ($result[$i]['ind2_suggest'] == $result[$i]['ind2']) {
+                        $result[$i]['ind2_needs_correct'] = false;
+                    } else {
+                        $result[$i]['ind2_needs_correct'] = true;
+                    }
+                } else {
+                    $result[$i]['ind2_suggest'] = "0";
+                    $result[$i]['ind2_needs_correct'] = false;
+                }
+                //$result[$i]['recordRaw'] = $record->toRaw();
+                $i++;
+            }
+            return response()->json($result, 201);
+        } else {
+            return response()->json(['error' => 'File not valid'], 404);
+        }
+    }
+    public function correctTitleInd2 (Request $request) {
+        $request->validate([
+            'file' => 'required|mimes:mrc|max:102400',
+        ]);
+        if ($request->file('file')->isValid()) {
+            $file = $request->file('file');
+            $collection = Collection::fromFile($request->file);
+            $result = [];
+            $articles = ['O', 'Os', 'A', 'As', 'Um', 'Uns', 'Uma', 'Umas', 'Ao', 'Aos', 'À', 'Às', 'Do', 'Dos', 'Da','Das',
+            'Dum', 'Duns', 'Duma', 'Dumas', 'No', 'Nos', 'Na', 'Nas', 'Num', 'Nuns', 'Numa', 'Numas', 'Pelo', 'Pelos', 'Pela',
+            'Pelas', 'The', 'An', 'A', 'Les', 'La', 'Le', 'L', 'El', 'Los', 'Las', 'Lo', 'Els', 'Es', 'Un', 'Una', 'Uns', 'Unes'];
+            $i = 0;
+            foreach ($collection as $record) {
+                $result[$i]['title'] = trim($record->getField('245')->getSubfield('a')->getData());
+                $result[$i]['ind2'] = $record->getField('245')->getIndicator(2);
+                $firstWord = ucwords(strtolower(explode(' ', $result[$i]['title'])[0]));
+                if (in_array($firstWord, $articles)) {
+                    $result[$i]['ind2_suggest'] = (string)(strlen($firstWord) + 1);
+                    if ($result[$i]['ind2_suggest'] != $result[$i]['ind2']) {
+                        $record->getField('245')->setIndicator(2, $result[$i]['ind2_suggest']);
+                    }
+                }
+                $resultArray[] = $record->toRaw();
+                $i++;
+            }
+            $result = implode('', $resultArray);
+            return response($result, 200)
+            ->header('Content-Type', 'text/plain');
+        } else {
+            return response()->json(['error' => 'File not valid'], 404);
+        }
     }
 }
