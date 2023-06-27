@@ -13,7 +13,7 @@
     @endif
 
     <div class="col col-lg-12">
-        <h3 class="mt-2">Resultado da busca</h3>
+        <h3 class="mt-2">Resultado da busca <small>({{ $works->total() }} registros encontrados)</small></h3>
         <form action="/works" method="get">
             <div class="input-group">
                 <input type="text" class="form-control"
