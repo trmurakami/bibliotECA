@@ -136,8 +136,15 @@ class MARCQAController extends Controller
                 $i++;
             }
             $result = implode('', $resultArray);
-            return response($result, 200)
-            ->header('Content-Type', 'text/plain');
+            $headers = array(
+                "Content-type" => "text/plain",
+                "Content-Disposition" => "attachment; filename=result.mrc",
+                "Pragma" => "no-cache",
+                "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+                "Expires" => "0"
+            );
+            return response( $result, 200, $headers );
+
         } else {
             return response()->json(['error' => 'File not valid'], 404);
         }
