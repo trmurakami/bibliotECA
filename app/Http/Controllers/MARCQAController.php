@@ -49,23 +49,28 @@ class MARCQAController extends Controller
     }
     public function exportfield (Request $request) {
         $request->validate([
-            'file' => 'required|mimes:mrc|max:2048',
-            'field' => 'required',
+            'file' => 'required|mimes:mrc|max:102400',
         ]);
         if ($request->file('file')->isValid()) {
+            
             $file = $request->file('file');
-            if ($file->getClientOriginalExtension() === 'mrc') {
-                $collection = Collection::fromFile($request->file);
-                $result = [];
-                $result['count'] = 0;
-                foreach ($collection as $record) {
-                    if (null !== $record->getField($request->field)) {
-                        $result['field'][] =  $record->getField($request->field)->getSubfield($request->subfield)->getData();
+            $collection = Collection::fromFile($request->file);
+            $result = [];
+            $result['count'] = 0;
+            foreach ($collection as $record) {
+                if (isset($request->marcfield)) {
+                    if (null !== $record->query($request->marcfield)->text()) {
+                        $result['field'][] =  $record->query($request->marcfield)->text();
                         $result['count']++;
                     }
+                } else {
+                    return response()->json(['error' => 'Field not found'], 404);
                 }
             }
+            return response()->json($result, 201);
+        } else {
+            return response()->json(['error' => 'File not valid'], 404);
         }
-        return response()->json($result, 201);
+        
     }
 }

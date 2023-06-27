@@ -122,15 +122,10 @@
         </div>
 
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="field" placeholder="Campo MARC" name="field">
-            <label for="field">Campo</label>
+            <input type="text" class="form-control" id="marcfield" name="marcfield">
+            <label for="marcfield">Campo MARC (Ex. 245$a ou 245)</label>
         </div>
-        <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="subfield" placeholder="Subcampo MARC" name="subfield">
-            <label for="subfield">Subcampo</label>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Enviar</button>
+        <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
 
 @endsection
