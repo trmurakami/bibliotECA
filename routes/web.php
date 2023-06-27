@@ -69,3 +69,7 @@ Route::get('/cutter', function () {
 Route::post('marc', [MARCController::class, 'processMARC'])->name('marc.processMARC');
 
 Route::get('graficos', [WorkController::class, 'graficos'])->name('works.graficos');
+
+Route::get('/marcqa', function () {
+    return view('marcqa.upload');
+});

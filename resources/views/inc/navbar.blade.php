@@ -8,6 +8,7 @@
                 <li><a href="/people" class="nav-link px-2 text-white">Autoridades (Pessoas)</a></li>
                 <li><a href="/graficos" class="nav-link px-2 text-white">Gráficos</a></li>
                 <li><a href="/cutter" class="nav-link px-2 text-white">Cutter</a></li>
+                <li><a href="/marcqa" class="nav-link px-2 text-white">MARC QA</a></li>
                 @if (Route::has('login'))
                 @auth
                 <li class="nav-item dropdown">
