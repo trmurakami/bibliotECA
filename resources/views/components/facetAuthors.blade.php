@@ -17,11 +17,19 @@
                 </div>
             </form>
             <ul>
-
+                @php
+                $request_array_imploded = "";
+                foreach ($request->all() as $key => $value) {
+                if ($key != 'author') {
+                $request_array[] = $key . '=' . $value;
+                $request_array_imploded = implode('&', $request_array);
+                }
+                }
+                @endphp
                 @foreach ($facets as $facet)
 
                 <li class="list-group-item">
-                    <a href="/works?author={{ $facet['name'] }}">
+                    <a href="/works?author={{ $facet['name'] }}&{{ $request_array_imploded }}">
                         {{ $facet['name'] }} ({{ $facet['works_count'] }})
                     </a>
                 </li>

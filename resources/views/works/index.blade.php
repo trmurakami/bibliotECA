@@ -53,9 +53,40 @@
             @foreach ($request->all() as $key => $value)
             @if ($key != 'page')
             <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                @php
+                if ($key == 'author') {
+                $key_name = 'Autor';
+                }
+                if ($key == 'name') {
+                $key_name = 'Título';
+                }
+                if ($key == 'type') {
+                $key_name = 'Tipo';
+                }
+                if ($key == 'datePublished') {
+                $key_name = 'Ano de publicação';
+                }
+                if ($key == 'isPartOf_name') {
+                $key_name = 'Publicação';
+                }
+                if ($key == 'releasedEvent') {
+                $key_name = 'Nome do evento';
+                }
+                if ($key == 'inLanguage') {
+                $key_name = 'Idioma';
+                }
+                if ($key == 'issn') {
+                $key_name = 'ISSN';
+                }
+                if ($key == 'publisher') {
+                $key_name = 'Editora';
+                }
+                @endphp
+
+
                 <a type="button" class="btn btn-outline-warning mb-1"
                     href="/works?{{ http_build_query(array_diff_key($request->all(), [$key => $value])) }}">
-                    {{ $key }}: {{ $value }} (X)
+                    {{ $key_name }}: {{ $value }} (X)
                 </a>
             </div>
             @endif
