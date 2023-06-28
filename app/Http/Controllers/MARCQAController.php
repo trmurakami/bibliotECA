@@ -20,7 +20,7 @@ class MARCQAController extends Controller
 {
     public function marcQA(Request $request) {
         $request->validate([
-            'file' => 'required|mimes:mrc|max:2048',
+            'file' => 'required|mimes:mrc|max:102400',
         ]);
         if ($request->file('file')->isValid()) {
             $file = $request->file('file');
@@ -64,7 +64,7 @@ class MARCQAController extends Controller
 
     public function marcQAReport(Request $request) {
         $request->validate([
-            'file' => 'required|mimes:mrc|max:2048',
+            'file' => 'required|mimes:mrc|max:102400',
         ]);
         if ($request->file('file')->isValid()) {
             $file = $request->file('file');
@@ -79,6 +79,13 @@ class MARCQAController extends Controller
                             $result['count']['tagCount'][$string_tag]++;
                         } else {
                             $result['count']['tagCount'][$string_tag] = 1;
+                        }
+
+                        if (isset($result['count']['tagTotalCountArray'][$string_tag])
+                        ) {
+                            $result['count']['tagTotalCountArray'][$string_tag]++;
+                        } else {
+                            $result['count']['tagTotalCountArray'][$string_tag] = 1;
                         }
 
                         if ($value instanceof File_MARC_Control_Field) {
@@ -99,7 +106,14 @@ class MARCQAController extends Controller
                 $tags = $result['count'];
 
                 ksort($tags['tagCount']);
+                krsort($tags['tagTotalCountArray']);
 
+                $i_tagTotalCount = 0;
+                foreach ($tags['tagTotalCountArray'] as $key => $value) {
+                    $tags['tagTotalCount'][$i_tagTotalCount]['tag'] = $key;
+                    $tags['tagTotalCount'][$i_tagTotalCount]['total'] = $value;
+                    $i_tagTotalCount++;
+                }
             }
         }
         return view('marcqa.report', compact('tags'));
