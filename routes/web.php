@@ -10,6 +10,7 @@ use App\Http\Controllers\LattesController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\WorkPersonController;
 use App\Http\Controllers\MARCController;
+use App\Http\Controllers\MARCQAController;
 
 /*
 |--------------------------------------------------------------------------
@@ -73,3 +74,5 @@ Route::get('graficos', [WorkController::class, 'graficos'])->name('works.grafico
 Route::get('/marcqa', function () {
     return view('marcqa.upload');
 });
+
+Route::post('marcqareport', [MARCQAController::class, 'marcQAReport'])->name('marcqa.report');

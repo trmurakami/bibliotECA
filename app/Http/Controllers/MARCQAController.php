@@ -5,6 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Scriptotek\Marc\Collection;
 use Scriptotek\Marc\Record;
+use Scriptotek\Marc\Fields\Field;
+use Scriptotek\Marc\Fields\ControlField;
+use Scriptotek\Marc\Fields\DataField;
+use Scriptotek\Marc\Fields\Subfield;
+use File_MARC;
+use File_MARC_Source_File;
+use File_MARC_Record;
+use File_MARC_Field;
+use File_MARC_Control_Field;
+
 
 class MARCQAController extends Controller
 {
@@ -15,38 +25,83 @@ class MARCQAController extends Controller
         if ($request->file('file')->isValid()) {
             $file = $request->file('file');
             if ($file->getClientOriginalExtension() === 'mrc') {
-                $collection = Collection::fromFile($request->file);
-                $result = [];
-                $result['count']['title'] = 0;
-                $result['count']['subtitle'] = 0;
-                $result['count']['author'] = 0;
-                $result['count']['publisher'] = 0;
-                foreach ($collection as $record) {
-                    //dd($record->title);
-                    if (null !== $record->getField('245')->getSubfield('a')) {
-                        $result['title'][] =  $record->getField('245')->getSubfield('a')->getData();
-                        $result['count']['title']++;
-                    }
-                    if (null !== $record->query('245$b')->text()) {
-                        $result['subtitle'][] =  $record->query('245$b')->text();
-                        $result['count']['subtitle']++;
-                    }
-                    if (null !== $record->getField('100')) {
-                        $result['author'][] =  $record->getField('100')->getSubfield('a')->getData();
-                        $result['count']['author']++;
-                    }
-                    if (null !== $record->getField('260')->getSubfield('b')) {
-                        $result['publisher'][] =  $record->getField('260')->getSubfield('b')->getData();
-                        $result['count']['publisher']++;
-                    }
+                $collection = new File_MARC($request->file);
+                $result['count'] = [];
+                while ($record = $collection->next()) {
+                    foreach ($record->getFields() as $tag=>$value) {
+                        $string_tag = 'Tag - '.$tag;
+                        if (isset($result['count'][$string_tag])) {
+                            $result['count'][$string_tag]++;
+                        } else {
+                            $result['count'][$string_tag] = 1;
+                        }
 
-                    $result['count_unique']['author'] = count(array_unique($result['author']));
-                    $result['count_unique']['publisher'] = count(array_unique($result['publisher']));
+                        if ($value instanceof File_MARC_Control_Field) {
+                   
+                        } else {
+                            foreach ($value->getSubfields() as $code=>$subdata) {
+                                $string_code = 'Tag - '.$tag.' - Code - '.$code;
+                                if (isset($result['count'][$string_code])) {
+                                    $result['count'][$string_code]++;
+                                } else {
+                                    $result['count'][$string_code] = 1;
+                                }
+                            }
+                        }
+
+                    }
                 }
+                $array = $result['count'];
+
+                ksort($array);
+
             }
         }
-        return response()->json($result, 201);
+        return response()->json($array, 201);
     }
+
+    public function marcQAReport(Request $request) {
+        $request->validate([
+            'file' => 'required|mimes:mrc|max:2048',
+        ]);
+        if ($request->file('file')->isValid()) {
+            $file = $request->file('file');
+            if ($file->getClientOriginalExtension() === 'mrc') {
+                $collection = new File_MARC($request->file);
+                $result['count'] = [];
+                while ($record = $collection->next()) {
+                    foreach ($record->getFields() as $tag=>$value) {
+                        $string_tag = 'Tag - '.$tag;
+                        if (isset($result['count'][$string_tag])) {
+                            $result['count'][$string_tag]++;
+                        } else {
+                            $result['count'][$string_tag] = 1;
+                        }
+
+                        if ($value instanceof File_MARC_Control_Field) {
+                   
+                        } else {
+                            foreach ($value->getSubfields() as $code=>$subdata) {
+                                $string_code = 'Tag - '.$tag.' - Code - '.$code;
+                                if (isset($result['count'][$string_code])) {
+                                    $result['count'][$string_code]++;
+                                } else {
+                                    $result['count'][$string_code] = 1;
+                                }
+                            }
+                        }
+
+                    }
+                }
+                $tags = $result['count'];
+
+                ksort($tags);
+
+            }
+        }
+        return view('marcqa.report', compact('tags'));
+    }
+
     public function exportfield (Request $request) {
         $request->validate([
             'file' => 'required|mimes:mrc|max:102400',
