@@ -14,6 +14,7 @@
     </div>
     <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
+<hr>
 <h4 class="mt-3">MARC Quality Analysis - JSON</h4>
 <form method="POST" action="/api/marcqa" enctype="multipart/form-data">
     @csrf
@@ -24,6 +25,7 @@
     </div>
     <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
+<hr>
 <h4 class="mt-3">MARC Quality Analysis - Exportar campo</h4>
 <form method="POST" action="/api/marcqaexportfield" enctype="multipart/form-data">
     @csrf
@@ -41,6 +43,7 @@
         </div>
         <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
+<hr>
 <h4 class="mt-3">MARC Quality Analysis - Relatório indicador2 no campo título (245)</h4>
 <form method="POST" action="/api/marcqareportTitleInd2" enctype="multipart/form-data">
     @csrf
@@ -55,6 +58,7 @@
     </div>
     <button type="submit" class="btn btn-primary mt-2">Enviar</button>
 </form>
+<hr>
 <h4 class="mt-3">MARC Quality Analysis - Corrigir indicador2 no campo título (245) automaticamente</h4>
 <form method="POST" action="/api/marcqacorrectTitleInd2" enctype="multipart/form-data">
     @csrf

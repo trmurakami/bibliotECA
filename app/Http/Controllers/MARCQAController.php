@@ -29,7 +29,7 @@ class MARCQAController extends Controller
                 $result['count'] = [];
                 while ($record = $collection->next()) {
                     foreach ($record->getFields() as $tag=>$value) {
-                        $string_tag = 'Tag - '.$tag;
+                        $string_tag = 'Field - '.$tag;
                         if (isset($result['count'][$string_tag])) {
                             $result['count'][$string_tag]++;
                         } else {
@@ -40,7 +40,7 @@ class MARCQAController extends Controller
                    
                         } else {
                             foreach ($value->getSubfields() as $code=>$subdata) {
-                                $string_code = 'Tag - '.$tag.' - Code - '.$code;
+                                $string_code = 'Field - '.$tag.'$'.$code;
                                 if (isset($result['count'][$string_code])) {
                                     $result['count'][$string_code]++;
                                 } else {
@@ -71,7 +71,7 @@ class MARCQAController extends Controller
                 $result['count'] = [];
                 while ($record = $collection->next()) {
                     foreach ($record->getFields() as $tag=>$value) {
-                        $string_tag = 'Tag - '.$tag;
+                        $string_tag = 'Campo - '.$tag;
                         if (isset($result['count'][$string_tag])) {
                             $result['count'][$string_tag]++;
                         } else {
@@ -82,7 +82,7 @@ class MARCQAController extends Controller
                    
                         } else {
                             foreach ($value->getSubfields() as $code=>$subdata) {
-                                $string_code = 'Tag - '.$tag.' - Code - '.$code;
+                                $string_code = 'Campo - '.$tag.'$'.$code;
                                 if (isset($result['count'][$string_code])) {
                                     $result['count'][$string_code]++;
                                 } else {
