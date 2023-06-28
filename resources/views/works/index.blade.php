@@ -37,6 +37,33 @@
     <div class="col col-lg-4">
         <h3>Refinar resultados <a href="/works" class="btn btn-warning">Limpar busca</a> </h3>
 
+        @if (
+        $request->has('name')||
+        $request->has('type')||
+        $request->has('datePublished')||
+        $request->has('author')||
+        $request->has('isPartOf_name')||
+        $request->has('releasedEvent')||
+        $request->has('inLanguage')||
+        $request->has('issn')||
+        $request->has('publisher')
+        )
+        <div class="alert alert-light" role="alert">
+            Filtros ativos: <br>
+            @foreach ($request->all() as $key => $value)
+            @if ($key != 'page')
+            <div class="btn-group-vertical" role="group" aria-label="Vertical button group">
+                <a type="button" class="btn btn-outline-warning mb-1"
+                    href="/works?{{ http_build_query(array_diff_key($request->all(), [$key => $value])) }}">
+                    {{ $key }}: {{ $value }} (X)
+                </a>
+            </div>
+            @endif
+            @endforeach
+        </div>
+        @endif
+
+
         <div class="accordion" id="facets">
 
 
