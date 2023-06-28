@@ -11,7 +11,7 @@ class MARCController extends Controller
 {
     public function processMARC(Request $request) {
         $request->validate([
-            'file' => 'required|mimes:xml,mrc|max:2048',
+            'file' => 'required|mimes:xml,mrc|max:102400',
         ]);
         if ($request->file('file')->isValid()) {
             $file = $request->file('file');
@@ -29,27 +29,45 @@ class MARCController extends Controller
                 foreach ($collection as $record) {
                     //echo $record->getField('245')->getSubfield('a')->getData() . "<br/>";
                     $workArray['type'] = 'Livro';
-                    $workArray['name'] = (string)$record->getField('245')->getSubfield('a')->getData();
+                    $workArray['name'] = $record->query('245$a')->text();
                     //$workArray['subtitle'] = (string)$record->getField('245')->getSubfield('b')->getData();
                     //$workArray['edition'] = (string)$record->getField('250')->getSubfield('a')->getData();
-                    $workArray['datePublished'] = str_replace(['.', '[', ']', 'c'], '', (string)$record->getField('260')->getSubfield('c')->getData());
+                    if (null !== $record->getField('260')) {
+                        if (null !== $record->getField('260')->getSubfield('c')) {
+                            if (is_bool($record->getField('260')->getSubfield('c') !== true)) {
+                                $workArray['datePublished'] = str_replace(['.', '[', ']', 'c'], '', $record->query('260$c')->text());
+                            }
+                        }
+                    }
                     //$workArray['abstract'] = (string)$record->getField('520')->getSubfield('a')->getData();
-                    $workArray['isbn'] = (string)$record->getField('020')->getSubfield('a')->getData();
-                    $workArray['publisher'] = (string)$record->getField('260')->getSubfield('b')->getData();
+                    if (null !== $record->getField('020')) {
+                        if (!empty($record->getField('020')->isEmpty())) {
+                            $workArray['isbn'] = (string)$record->getField('020')->getSubfield('a')->getData();
+                        }
+                    }
+                    if (null !== $record->getField('260')) {
+                        if (!empty($record->getField('260')->isEmpty())) {
+                            $workArray['publisher'] = $record->query('260$b')->text();;
+                        }
+                    }
                     $i_autores = 0;
                     if (null !== $record->getField('100')){
-                        $workArray['author'][$i_autores]['id'] = '';
-                        $workArray['author'][$i_autores]['id_lattes13'] = '';
-                        $workArray['author'][$i_autores]['name'] = (string)$record->getField('100')->getSubfield('a')->getData();
-                        $workArray['author'][$i_autores]['function'] = 'Autor';
-                        $i_autores++;
+                        if (!empty($record->query('100$a')->text())) {
+                            $workArray['author'][$i_autores]['id'] = '';
+                            $workArray['author'][$i_autores]['id_lattes13'] = '';
+                            $workArray['author'][$i_autores]['name'] = $record->query('100$a')->text();
+                            $workArray['author'][$i_autores]['function'] = 'Autor';
+                            $i_autores++;
+                        }
                     }
-                    foreach ($record->getFields('700') as $autor) {
+                    foreach ($record->query('700') as $field) {
                         $i_autores++;
-                        $workArray['author'][$i_autores]['id'] = '';
-                        $workArray['author'][$i_autores]['id_lattes13'] = '';
-                        $workArray['author'][$i_autores]['name'] = (string)$autor->getSubfield('a')->getData();
-                        $workArray['author'][$i_autores]['function'] = 'Autor';
+                        if (!empty($record->query('700$a')->text())) {
+                            $workArray['author'][$i_autores]['id'] = '';
+                            $workArray['author'][$i_autores]['id_lattes13'] = '';
+                            $workArray['author'][$i_autores]['name'] = $record->query('700$a')->text();
+                            $workArray['author'][$i_autores]['function'] = 'Autor';
+                        }
                     }
                     $work = new Work($workArray);
                     $work->save();

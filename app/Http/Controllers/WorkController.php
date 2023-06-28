@@ -149,9 +149,11 @@ class WorkController extends Controller
         $record = Work::find($id);
         $record->authors()->detach();
         if ($record->author) {
+            $personsAttached = [];
             foreach ($record->author as $author) {
                 if ($author["id"] != "") {
                     $person = Person::find($author["id"]);
+                    $personsAttached[] = $person->id;
                     $record->authors()->attach($person, ['function' => $author['function']]);
                 } else {
                     $person = Person::where('name', $author["name"])->first();
@@ -160,9 +162,14 @@ class WorkController extends Controller
                         $person->name = $author["name"];
                         $person->save();
                     }
-                    $record->authors()->attach($person, ['function' => $author['function']]);
+                    $personsAttached[] = $person->id;
+                    if (!in_array($person->id, $personsAttached)) {
+                        dd($personsAttached);
+                        $record->authors()->attach($person, ['function' => $author['function']]);
+                    }
                 }
             }
+            unset($personsAttached);
         }
         if ($record->about) {
             foreach ($record->about as $about) {
