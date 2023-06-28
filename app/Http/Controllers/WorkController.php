@@ -149,7 +149,6 @@ class WorkController extends Controller
         $record = Work::find($id);
         $record->authors()->detach();
         if ($record->author) {
-            $personsAttached = [];
             foreach ($record->author as $author) {
                 if ($author["id"] != "") {
                     $person = Person::find($author["id"]);
@@ -162,11 +161,7 @@ class WorkController extends Controller
                         $person->name = $author["name"];
                         $person->save();
                     }
-                    $personsAttached[] = $person->id;
-                    if (!in_array($person->id, $personsAttached)) {
-                        dd($personsAttached);
-                        $record->authors()->attach($person, ['function' => $author['function']]);
-                    }
+                    $record->authors()->attach($person, ['function' => $author['function']]);
                 }
             }
             unset($personsAttached);
