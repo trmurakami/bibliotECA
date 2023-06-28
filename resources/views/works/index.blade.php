@@ -13,14 +13,17 @@
     @endif
 
     <div class="col col-lg-12">
-        <h3 class="mt-2">Resultado da busca <small>({{ $works->total() }} registros encontrados)</small></h3>
-        <form action="/works" method="get">
-            <div class="input-group">
-                <input type="text" class="form-control"
-                    placeholder="Pesquisar no título (Deixe em branco e clique em buscar para exibir todo o acervo)"
-                    name="name">
-                <button class="btn btn-primary" type="submit">Buscar</button>
-            </div>
+        <h3 class="mt-2">
+            Resultado da busca <span class="badge text-bg-light fw-lighter">Exibindo
+                {{ $works->firstItem() }}
+                a {{ $works->lastItem() }} de {{ $works->total() }} registros</span>
+        </h3>
+        <div class="input-group">
+            <input type="text" class="form-control"
+                placeholder="Pesquisar no título (Deixe em branco e clique em buscar para exibir todo o acervo)"
+                name="name">
+            <button class="btn btn-primary" type="submit">Buscar</button>
+        </div>
         </form>
         <div class="d-flex mt-3 mb-3">
             <div class="mx-auto">
