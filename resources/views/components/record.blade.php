@@ -20,7 +20,7 @@
                     <div class="col">
 
                         @if ($work->doi)
-                        <p class="card-text p-0 m-0"><small class="text-body-secondary">DOI:
+                        <p class="card-text p-0 m-0 lh-sm"><small class="text-body-secondary">DOI:
                                 <a href="https://doi.org/{{ $work->doi }}" target="_blank">{{ $work->doi }}</a>
                                 <span>
                                     <img height="16"
@@ -28,7 +28,7 @@
                             </small></p>
                         @endif
                         @if ($work->author)
-                        <div class="card-text p-0 m-0"><small class="text-body-secondary">Autores:</small>
+                        <div class="card-text p-0 m-0 lh-sm"><small class="text-body-secondary">Autores:</small>
                             <ul>
                                 @foreach ($work->author as $author)
                                 <li class="list-group-item">
@@ -57,7 +57,12 @@
                     </div>
                     <div class="col">
                         <div class="card">
+                            <div class="card-header">
+                                <small class="text-body-secundary">Imprenta</small>
+                            </div>
                             <div class="card-body">
+
+
 
                                 @if (isset($work->publisher))
                                 <p class="card-text p-0 m-0">
@@ -76,7 +81,7 @@
                                 @if (isset($work->isPartOf_name))
                                 <p class="card-text">
                                     <small class="text-body-secondary">
-                                        Publicado em: {{ $work->isPartOf_name }}
+                                        {{ $work->isPartOf_name }}
                                         @if (isset($work->issn))
                                         (ISSN: {{ $work->issn }})
                                         @endif
