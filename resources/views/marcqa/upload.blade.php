@@ -39,7 +39,11 @@
         <input class="form-control" type="file" for="file" accept=".mrc" name="file">
         <input type="text" name="new_filename" value="marc.mrc" hidden>
     </div>
-    <button type="submit" class="btn btn-primary">Enviar</button>
+    <div class="form-check form-switch">
+        <input class="form-check-input" type="checkbox" role="switch" id="onlyErrors" name="onlyErrors">
+        <label class="form-check-label" for="onlyErrors">Retornar somente os registros com erros</label>
+    </div>
+    <button type="submit" class="btn btn-primary mt-2">Enviar</button>
 </form>
 <h4 class="mt-3">MARC Quality Analysis - Corrigir indicador2 no campo título (245) automaticamente</h4>
 <form method="POST" action="/api/marcqacorrectTitleInd2" enctype="multipart/form-data">

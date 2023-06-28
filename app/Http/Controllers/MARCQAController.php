@@ -105,7 +105,14 @@ class MARCQAController extends Controller
                 //$result[$i]['recordRaw'] = $record->toRaw();
                 $i++;
             }
-            return response()->json($result, 201);
+            if ($request->onlyErrors) {
+                $result = array_filter($result, function($item) {
+                    return $item['ind2_needs_correct'] == true;
+                });
+                return response()->json($result, 201);
+            } else {
+                return response()->json($result, 201);
+            }
         } else {
             return response()->json(['error' => 'File not valid'], 404);
         }
