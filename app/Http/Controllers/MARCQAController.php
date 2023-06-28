@@ -27,6 +27,7 @@ class MARCQAController extends Controller
             if ($file->getClientOriginalExtension() === 'mrc') {
                 $collection = new File_MARC($request->file);
                 $result['count'] = [];
+                $result['count']['recordCount'] = 0;
                 while ($record = $collection->next()) {
                     foreach ($record->getFields() as $tag=>$value) {
                         $string_tag = 'Field - '.$tag;
@@ -50,6 +51,7 @@ class MARCQAController extends Controller
                         }
 
                     }
+                    $result['count']['recordCount']++;
                 }
                 $array = $result['count'];
 
@@ -68,14 +70,15 @@ class MARCQAController extends Controller
             $file = $request->file('file');
             if ($file->getClientOriginalExtension() === 'mrc') {
                 $collection = new File_MARC($request->file);
-                $result['count'] = [];
+                $result['count']['tagCount'] = [];
+                $result['count']['recordCount'] = 0;
                 while ($record = $collection->next()) {
                     foreach ($record->getFields() as $tag=>$value) {
                         $string_tag = 'Campo - '.$tag;
-                        if (isset($result['count'][$string_tag])) {
-                            $result['count'][$string_tag]++;
+                        if (isset($result['count']['tagCount'][$string_tag])) {
+                            $result['count']['tagCount'][$string_tag]++;
                         } else {
-                            $result['count'][$string_tag] = 1;
+                            $result['count']['tagCount'][$string_tag] = 1;
                         }
 
                         if ($value instanceof File_MARC_Control_Field) {
@@ -83,19 +86,19 @@ class MARCQAController extends Controller
                         } else {
                             foreach ($value->getSubfields() as $code=>$subdata) {
                                 $string_code = 'Campo - '.$tag.'$'.$code;
-                                if (isset($result['count'][$string_code])) {
-                                    $result['count'][$string_code]++;
+                                if (isset($result['count']['tagCount'][$string_code])) {
+                                    $result['count']['tagCount'][$string_code]++;
                                 } else {
-                                    $result['count'][$string_code] = 1;
+                                    $result['count']['tagCount'][$string_code] = 1;
                                 }
                             }
                         }
-
                     }
+                    $result['count']['recordCount']++;
                 }
                 $tags = $result['count'];
 
-                ksort($tags);
+                ksort($tags['tagCount']);
 
             }
         }
