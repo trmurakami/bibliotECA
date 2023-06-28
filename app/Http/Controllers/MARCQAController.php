@@ -160,26 +160,30 @@ class MARCQAController extends Controller
             'Pelas', 'The', 'An', 'A', 'Les', 'La', 'Le', 'L', 'El', 'Los', 'Las', 'Lo', 'Els', 'Es', 'Un', 'Una', 'Uns', 'Unes'];
             $i = 0;
             foreach ($collection as $record) {
-                $result[$i]['title'] = trim($record->getField('245')->getSubfield('a')->getData());
-                $result[$i]['ind2'] = $record->getField('245')->getIndicator(2);
-                $firstWord = ucwords(strtolower(explode(' ', $result[$i]['title'])[0]));
-                if (in_array($firstWord, $articles)) {
-                    $result[$i]['ind2_suggest'] = (string)(strlen($firstWord) + 1);
-                    if ($result[$i]['ind2_suggest'] == $result[$i]['ind2']) {
-                        $result[$i]['ind2_needs_correct'] = false;
-                    } else {
-                        $result[$i]['ind2_needs_correct'] = true;
+                if (null != $record->getField('245')) {
+                    if (null != $record->getField('245')->getSubfield('a')) {
+                        $result[$i]['title'] = trim($record->getField('245')->getSubfield('a')->getData());
+                        $result[$i]['ind2'] = $record->getField('245')->getIndicator(2);
+                        $firstWord = ucwords(strtolower(explode(' ', $result[$i]['title'])[0]));
+                        if (in_array($firstWord, $articles)) {
+                            $result[$i]['ind2_suggest'] = (string)(strlen($firstWord) + 1);
+                            if ($result[$i]['ind2_suggest'] == $result[$i]['ind2']) {
+                                $result[$i]['ind2_needs_correction'] = false;
+                            } else {
+                                $result[$i]['ind2_needs_correction'] = true;
+                            }
+                        } else {
+                            $result[$i]['ind2_suggest'] = "0";
+                            $result[$i]['ind2_needs_correction'] = false;
+                        }
                     }
-                } else {
-                    $result[$i]['ind2_suggest'] = "0";
-                    $result[$i]['ind2_needs_correct'] = false;
                 }
                 //$result[$i]['recordRaw'] = $record->toRaw();
                 $i++;
             }
             if ($request->onlyErrors) {
                 $result = array_filter($result, function($item) {
-                    return $item['ind2_needs_correct'] == true;
+                    return $item['ind2_needs_correction'] == true;
                 });
                 return response()->json($result, 201);
             } else {

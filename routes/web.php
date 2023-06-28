@@ -76,3 +76,7 @@ Route::get('/marcqa', function () {
 });
 
 Route::post('marcqareport', [MARCQAController::class, 'marcQAReport'])->name('marcqa.report');
+
+Route::get('/phpinfo', function () {
+    return view('phpinfo');
+});
