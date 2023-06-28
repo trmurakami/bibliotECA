@@ -206,17 +206,21 @@ class MARCQAController extends Controller
             'Pelas', 'The', 'An', 'A', 'Les', 'La', 'Le', 'L', 'El', 'Los', 'Las', 'Lo', 'Els', 'Es', 'Un', 'Una', 'Uns', 'Unes'];
             $i = 0;
             foreach ($collection as $record) {
-                $result[$i]['title'] = trim($record->getField('245')->getSubfield('a')->getData());
-                $result[$i]['ind2'] = $record->getField('245')->getIndicator(2);
-                $firstWord = ucwords(strtolower(explode(' ', $result[$i]['title'])[0]));
-                if (in_array($firstWord, $articles)) {
-                    $result[$i]['ind2_suggest'] = (string)(strlen($firstWord) + 1);
-                    if ($result[$i]['ind2_suggest'] != $result[$i]['ind2']) {
-                        $record->getField('245')->setIndicator(2, $result[$i]['ind2_suggest']);
+                if (null != $record->getField('245')) {
+                    if (null != $record->getField('245')->getSubfield('a')) {
+                        $result[$i]['title'] = trim($record->getField('245')->getSubfield('a')->getData());
+                        $result[$i]['ind2'] = $record->getField('245')->getIndicator(2);
+                        $firstWord = ucwords(strtolower(explode(' ', $result[$i]['title'])[0]));
+                        if (in_array($firstWord, $articles)) {
+                            $result[$i]['ind2_suggest'] = (string)(strlen($firstWord) + 1);
+                            if ($result[$i]['ind2_suggest'] != $result[$i]['ind2']) {
+                                $record->getField('245')->setIndicator(2, $result[$i]['ind2_suggest']);
+                            }
+                        }
+                        $resultArray[] = $record->toRaw();
+                        $i++;
                     }
                 }
-                $resultArray[] = $record->toRaw();
-                $i++;
             }
             $result = implode('', $resultArray);
             $headers = array(
