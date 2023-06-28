@@ -60,10 +60,7 @@
                             <div class="card-header">
                                 <small class="text-body-secundary">Imprenta</small>
                             </div>
-                            <div class="card-body">
-
-
-
+                            <div class="card-body p-2 m-0">
                                 @if (isset($work->publisher))
                                 <p class="card-text p-0 m-0">
                                     <small class="text-body-secondary">
@@ -79,23 +76,39 @@
                                 </p>
                                 @endif
                                 @if (isset($work->isPartOf_name))
-                                <p class="card-text">
+                                <p class="fw-light lh-1 fs-6 p-0 m-0">
                                     <small class="text-body-secondary">
                                         {{ $work->isPartOf_name }}
-                                        @if (isset($work->issn))
-                                        (ISSN: {{ $work->issn }})
-                                        @endif
-                                        @if (!empty($work->volumeNumber))
-                                        Vol.: {{ $work->volumeNumber }}
-                                        @endif
-                                        @if (!empty($work->issueNumber))
-                                        , Num.: {{ $work->issueNumber }}
-                                        @endif
-                                        @if (!empty($work->pageStart))
-                                        , p. {{ $work->pageStart }} - {{ $work->pageEnd }}
-                                        @endif
                                     </small>
                                 </p>
+                                @if (isset($work->issn))
+                                <p class="fw-light lh-1 fs-6 p-0 m-0">
+                                    <small class="text-body-secondary">
+                                        ISSN: {{ $work->issn }}
+                                    </small>
+                                </p>
+                                @endif
+                                @if (!empty($work->volumeNumber))
+                                <p class="fw-light lh-1 fs-6 p-0 m-0">
+                                    <small class="text-body-secondary">
+                                        Vol.: {{ $work->volumeNumber }}
+                                    </small>
+                                </p>
+                                @endif
+                                @if (!empty($work->issueNumber))
+                                <p class="fw-light lh-1 fs-6 p-0 m-0">
+                                    <small class="text-body-secondary">
+                                        Num.: {{ $work->issueNumber }}
+                                    </small>
+                                </p>
+                                @endif
+                                @if (!empty($work->pageStart))
+                                <p class="fw-light lh-1 fs-6 p-0 m-0">
+                                    <small class="text-body-secondary">
+                                        Pág. {{ $work->pageStart }} - {{ $work->pageEnd }}
+                                    </small>
+                                </p>
+                                @endif
                                 @endif
                                 @if (isset($work->releasedEvent))
                                 <p class="card-text">
