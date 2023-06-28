@@ -227,7 +227,6 @@ class WorkController extends Controller
                         ->select('datePublished as year', \DB::raw('COUNT(*) as total'))
                         ->groupBy('year')
                         ->get();
-    
         return view('works.graficos', compact('datePublishedData'));
     }
 }
