@@ -33,6 +33,12 @@
     </div>
 
     <div class="col col-lg-8">
+        @if ($works->count() == 0)
+        <div class="alert alert-warning" role="alert">
+            Nenhum registro encontrado
+        </div>
+        @endif
+
         @foreach ($works as $work)
         <x-record :work="$work" />
         @endforeach
