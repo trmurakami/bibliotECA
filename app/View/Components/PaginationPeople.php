@@ -6,15 +6,15 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class PaginationPeople extends Component
+class PaginationThings extends Component
 {
-    public $people;
+    public $things;
     /**
      * Create a new component instance.
      */
-    public function __construct($people)
+    public function __construct($things)
     {
-        $this->people = $people;
+        $this->things = $things;
     }
 
     /**
@@ -22,6 +22,6 @@ class PaginationPeople extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.paginationPeople');
+        return view('components.paginationThings');
     }
 }

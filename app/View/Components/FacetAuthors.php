@@ -7,7 +7,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 use Illuminate\Http\Request;
 use App\Models\Work;
-use App\Models\Person;
+use App\Models\Thing;
 use Illuminate\Support\Facades\DB;
 
 class FacetAuthors extends Component
@@ -34,7 +34,7 @@ class FacetAuthors extends Component
         $inLanguage = $this->request->inLanguage;
         $issn = $this->request->issn;
         $author = $this->request->author;
-        $q = Person::query();
+        $q = Thing::query();
         
         $q->whereHas('works', function ($q) use ($type, $name, $datePublished, $inLanguage, $issn, $author) {
             if (!empty($type)) {

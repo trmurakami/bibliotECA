@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Work;
-use App\Models\Person;
+use App\Models\Thing;
 use App\Http\Controllers\WorkController;
 
 class LattesController extends Controller
@@ -14,8 +14,8 @@ class LattesController extends Controller
         if ($request->file) {
             $curriculo = simplexml_load_file($request->file);
             //dd($curriculo);
-            // Create Person
-            $personLattesID = Person::firstOrCreate([
+            // Create Thing
+            $thingLattesID = Thing::firstOrCreate([
                 'id_lattes13' => (string)$curriculo['NUMERO-IDENTIFICADOR'],
                 'name' => (string)$curriculo->{'DADOS-GERAIS'}['NOME-COMPLETO']
             ])->id;
@@ -38,12 +38,12 @@ class LattesController extends Controller
                         $record['author'][$i_autores]['name'] = (string)$autor->attributes()->{'NOME-COMPLETO-DO-AUTOR'};
                         $record['author'][$i_autores]['id_lattes13'] = (string)$autor->attributes()->{'NRO-ID-CNPQ'};
                         $record['author'][$i_autores]['function'] = 'Autor';
-                        $existingPerson = Person::where('name', $record['author'][$i_autores]['name'])->first();
-                        if ($existingPerson) {
-                            $record['author'][$i_autores]['id'] = $existingPerson->id;
+                        $existingThing = Thing::where('name', $record['author'][$i_autores]['name'])->first();
+                        if ($existingThing) {
+                            $record['author'][$i_autores]['id'] = $existingThing->id;
                         } else {
-                            $newPersonID = Person::firstOrCreate(['name' => $record['author'][$i_autores]['name'], 'id_lattes13' => $record['author'][$i_autores]['id_lattes13']])->id;
-                            $record['author'][$i_autores]['id'] = $newPersonID;
+                            $newThingID = Thing::firstOrCreate(['name' => $record['author'][$i_autores]['name'], 'id_lattes13' => $record['author'][$i_autores]['id_lattes13']])->id;
+                            $record['author'][$i_autores]['id'] = $newThingID;
                         }
                         $i_autores++;
                     }
@@ -71,12 +71,12 @@ class LattesController extends Controller
                         $record['author'][$i_autores]['name'] = (string)$autor->attributes()->{'NOME-COMPLETO-DO-AUTOR'};
                         $record['author'][$i_autores]['id_lattes13'] = (string)$autor->attributes()->{'NRO-ID-CNPQ'};
                         $record['author'][$i_autores]['function'] = 'Autor';
-                        $existingPerson = Person::where('name', $record['author'][$i_autores]['name'])->first();
-                        if ($existingPerson) {
-                            $record['author'][$i_autores]['id'] = $existingPerson->id;
+                        $existingThing = Thing::where('name', $record['author'][$i_autores]['name'])->first();
+                        if ($existingThing) {
+                            $record['author'][$i_autores]['id'] = $existingThing->id;
                         } else {
-                            $newPersonID = Person::firstOrCreate(['name' => $record['author'][$i_autores]['name'], 'id_lattes13' => $record['author'][$i_autores]['id_lattes13']])->id;
-                            $record['author'][$i_autores]['id'] = $newPersonID;
+                            $newThingID = Thing::firstOrCreate(['name' => $record['author'][$i_autores]['name'], 'id_lattes13' => $record['author'][$i_autores]['id_lattes13']])->id;
+                            $record['author'][$i_autores]['id'] = $newThingID;
                         }
                         $i_autores++;
                     }

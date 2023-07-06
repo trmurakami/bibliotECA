@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Work;
-use App\Models\Person;
+use App\Models\Thing;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
@@ -151,74 +151,74 @@ class WorkController extends Controller
         if ($record->author) {
             foreach ($record->author as $author) {
                 if ($author["id"] != "") {
-                    $person = Person::find($author["id"]);
-                    $personsAttached[] = $person->id;
-                    $record->authors()->attach($person, ['function' => $author['function']]);
+                    $thing = Thing::find($author["id"]);
+                    $thingsAttached[] = $thing->id;
+                    $record->authors()->attach($thing, ['function' => $author['function']]);
                 } else {
-                    $person = Person::where('name', $author["name"])->first();
-                    if (!$person) {
-                        $person = new Person();
-                        $person->name = $author["name"];
-                        $person->save();
+                    $thing = Thing::where('name', $author["name"])->first();
+                    if (!$thing) {
+                        $thing = new Thing();
+                        $thing->name = $author["name"];
+                        $thing->save();
                     }
-                    $record->authors()->attach($person, ['function' => $author['function']]);
+                    $record->authors()->attach($thing, ['function' => $author['function']]);
                 }
             }
-            unset($personsAttached);
+            unset($thingsAttached);
         }
         if ($record->about) {
             foreach ($record->about as $about) {
                 if ($about["id"] != "") {
-                    $person = Thing::find($about["id"]);
-                    $record->authors()->attach($person, ['function' => "about"]);
+                    $thing = Thing::find($about["id"]);
+                    $record->authors()->attach($thing, ['function' => "about"]);
                 }
             }
         }
         if ($record->director) {
             foreach ($record->director as $director) {
                 if ($director["id"] != "") {
-                    $person = Person::find($director["id"]);
-                    $record->authors()->attach($person, ['function' => "director"]);
+                    $thing = Thing::find($director["id"]);
+                    $record->authors()->attach($thing, ['function' => "director"]);
                 }
             }
         }
         if ($record->actor) {
             foreach ($record->actor as $actor) {
                 if ($actor["id"] != "") {
-                    $person = Thing::find($actor["id"]);
-                    $record->authors()->attach($person, ['function' => "actor"]);
+                    $thing = Thing::find($actor["id"]);
+                    $record->authors()->attach($thing, ['function' => "actor"]);
                 }
             }
         }
         if ($record->musicby) {
             foreach ($record->musicby as $musicby) {
                 if ($musicby["id"] != "") {
-                    $person = Thing::find($musicby["id"]);
-                    $record->authors()->attach($person, ['function' => "musicby"]);
+                    $thing = Thing::find($musicby["id"]);
+                    $record->authors()->attach($thing, ['function' => "musicby"]);
                 }
             }
         }
         if ($record->productionCompany) {
             foreach ($record->productionCompany as $productionCompany) {
                 if ($productionCompany["id"] != "") {
-                    $person = Thing::find($productionCompany["id"]);
-                    $record->authors()->attach($person, ['function' => "productionCompany"]);
+                    $thing = Thing::find($productionCompany["id"]);
+                    $record->authors()->attach($thing, ['function' => "productionCompany"]);
                 }
             }
         }
         if ($record->translator) {
             foreach ($record->translator as $translator) {
                 if ($translator["id"] != "") {
-                    $person = Thing::find($translator["id"]);
-                    $record->authors()->attach($person, ['function' => "translator"]);
+                    $thing = Thing::find($translator["id"]);
+                    $record->authors()->attach($thing, ['function' => "translator"]);
                 }
             }
         }
         // if ($record->publisher) {
         //     foreach ($record->publisher as $publisher) {
         //         if ($publisher["id"] != "") {
-        //             $person = Thing::find($publisher["id"]);
-        //             $record->authors()->attach($person, ['function' => "publisher"]);
+        //             $thing = Thing::find($publisher["id"]);
+        //             $record->authors()->attach($thing, ['function' => "publisher"]);
         //         }
         //     }
         // }

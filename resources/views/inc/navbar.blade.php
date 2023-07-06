@@ -5,7 +5,7 @@
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a href="/" class="nav-link px-2 text-secondary">Início</a></li>
                 <li><a href="/works" class="nav-link px-2 text-white">Catálogo</a></li>
-                <li><a href="/people" class="nav-link px-2 text-white">Autoridades (Pessoas)</a></li>
+                <li><a href="/things" class="nav-link px-2 text-white">Autoridades</a></li>
                 <li><a href="/graficos" class="nav-link px-2 text-white">Gráficos</a></li>
                 <li><a href="/cutter" class="nav-link px-2 text-white">Cutter</a></li>
                 <li><a href="/marcqa" class="nav-link px-2 text-white">MARC QA</a></li>

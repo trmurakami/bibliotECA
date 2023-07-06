@@ -4,24 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Work;
-use App\Models\Person;
+use App\Models\Thing;
 
-class WorkPersonController extends Controller
+class WorkThingController extends Controller
 {
-    public function attachPerson(Request $request, $workId)
+    public function attachThing(Request $request, $workId)
     {
         $work = Work::findOrFail($workId);
-        $personIds = $request->input('person_ids', []);
+        $thingIds = $request->input('thing_ids', []);
 
-        $work->authors()->attach($personIds);
+        $work->authors()->attach($thingIds);
 
         return redirect()->route('works.show', $workId)->with('success', 'Authors attached successfully.');
     }
 
-    public function detachPerson($workId, $personId)
+    public function detachThing($workId, $thingId)
     {
         $work = Work::findOrFail($workId);
-        $work->authors()->detach($personId);
+        $work->authors()->detach($thingId);
 
         return redirect()->route('works.show', $workId)->with('success', 'Author detached successfully.');
     }

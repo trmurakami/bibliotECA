@@ -7,8 +7,8 @@ use App\Http\Controllers\WorksAPIController;
 use App\Http\Controllers\UploadController;
 use App\Http\Controllers\ClassificadorController;
 use App\Http\Controllers\LattesController;
-use App\Http\Controllers\PersonController;
-use App\Http\Controllers\WorkPersonController;
+use App\Http\Controllers\ThingController;
+use App\Http\Controllers\WorkThingController;
 use App\Http\Controllers\MARCController;
 use App\Http\Controllers\MARCQAController;
 
@@ -58,10 +58,10 @@ Route::post('/classificador/treinamento', [ClassificadorController::class, 'proc
 Route::post('/lattes', [LattesController::class, 'processXML'])->name('lattes.processXML');
 
 
-Route::post('/works/{work}/attach', [WorkPersonController::class, 'attachPerson'])->name('works.attachPerson');
-Route::delete('/works/{work}/detach/{person}', [WorkPersonController::class, 'detachPerson'])->name('works.detachPerson');
+Route::post('/works/{work}/attach', [WorkThingController::class, 'attachThing'])->name('works.attachThing');
+Route::delete('/works/{work}/detach/{thing}', [WorkThingController::class, 'detachThing'])->name('works.detachThing');
 
-Route::resource('people', PersonController::class);
+Route::resource('things', ThingController::class);
 
 Route::get('/cutter', function () {
     return view('cutter.cutter');

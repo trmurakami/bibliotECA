@@ -1,21 +1,21 @@
 <nav aria-label="Navigation">
     <ul class="pagination justify-content-center">
-        @if ($people->onFirstPage())
+        @if ($things->onFirstPage())
         <li class="page-item"><a class="page-link disabled">Anterior</a>
         </li>
         @else
-        <li class="page-item"><a class="page-link" href="{{ $people->previousPageUrl() }}">Anterior</a></li>
+        <li class="page-item"><a class="page-link" href="{{ $things->previousPageUrl() }}">Anterior</a></li>
         @endif
-        @for ($i = 1; $i <= $people->lastPage(); $i++)
-            @if ($i == $people->currentPage())
-            <li class="page-item"><a class="page-link active" href="{{ $people->url($i) }}">{{ $i }}</a></li>
+        @for ($i = 1; $i <= $things->lastPage(); $i++)
+            @if ($i == $things->currentPage())
+            <li class="page-item"><a class="page-link active" href="{{ $things->url($i) }}">{{ $i }}</a></li>
             @else
-            <li class="page-item"><a class="page-link" href="{{ $people->url($i) }}">{{ $i }}</a></li>
+            <li class="page-item"><a class="page-link" href="{{ $things->url($i) }}">{{ $i }}</a></li>
             @endif
             @endfor
 
-            @if ($people->hasMorePages())
-            <li class="page-item"><a class="page-link" href="{{ $people->nextPageUrl() }}">Próxima</a></li>
+            @if ($things->hasMorePages())
+            <li class="page-item"><a class="page-link" href="{{ $things->nextPageUrl() }}">Próxima</a></li>
             @else
             <li class="page-item"><a class="page-link disabled">Próxima</a></li>
             @endif
