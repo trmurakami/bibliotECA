@@ -1,12 +1,12 @@
 @extends('layouts.layout')
 
-@section('title', 'BibliotECA - Pessoas')
+@section('title', 'BibliotECA - Autoridades')
 
 @section('content')
 
 <div class="row">
     <div class="col col-lg-12">
-        <h2 class="mt-2 mb-2">Pessoas</h2>
+        <h2 class="mt-2 mb-2">Autoridades</h2>
         <form action="/things" method="get">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" placeholder="Pesquisar por nome" name="name"
