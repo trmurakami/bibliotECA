@@ -240,12 +240,12 @@ class WorkController extends Controller
     public static function indexAbout($id)
     {
         $record = Work::find($id);
-        $record->about()->detach();
+        $record->abouts()->detach();
         if ($record->about) {
             foreach ($record->about as $about) {
                 if ($about["id"] != "") {
                     $about = About::find($about["id"]);
-                    $record->about()->attach($thing);
+                    $record->abouts()->attach($about);
                 } else {
                     $about = about::where('name', $about["name"])->first();
                     if (!$about) {
@@ -253,7 +253,7 @@ class WorkController extends Controller
                         $about->name = $about["name"];
                         $about->save();
                     }
-                    $record->about()->attach($thing);
+                    $record->abouts()->attach($about);
                 }
             }
         }

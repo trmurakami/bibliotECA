@@ -10,9 +10,15 @@ class AboutController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $abouts = About::all();
+
+        $query = About::query();
+        if ($request->name) {
+            $query->where('name', 'LIKE', '%' . $request->name . '%');
+        }
+        $abouts = $query->withCount('works')->with('works')
+        ->orderByDesc('works_count')->orderByRaw('name COLLATE NOCASE')->paginate(15);
 
         return view('abouts.index', compact('abouts'));
     }
