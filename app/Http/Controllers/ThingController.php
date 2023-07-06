@@ -1,4 +1,4 @@
-<?phpperson
+<?php
 
 namespace App\Http\Controllers;
 
