@@ -290,6 +290,11 @@
                 ">
                 <div class="input-group mb-2" v-for="(author, indexAuthor) in record.author">
                     <span class="input-group-text">Autor / Função</span>
+                    <select v-model="author.type" autocomplete="off" class="form-select" aria-label="Author type"
+                        placeholder="Tipo">
+                        <option value="Person" selected>Pessoa</option>
+                        <option value="Organization">Instituição</option>
+                    </select>
                     <input v-model.trim="author.id" autocomplete="off" type="text" aria-label="Author ID"
                         class="form-control" placeholder="ID do autor" id="id" readonly />
                     <input v-model.trim="author.viaf" autocomplete="off" type="text" aria-label="VIAF" class="form-control"
@@ -308,8 +313,8 @@
                     <select v-model="author.function" autocomplete="off" class="form-select" aria-label="Author funcion"
                         placeholder="Função">
                         <option value="Autor" selected>Autor</option>
-                        <option value="Organizador" selected>Organizador</option>
-                        <option value="Autor do prefácio" selected>
+                        <option value="Organizador">Organizador</option>
+                        <option value="Autor do prefácio">
                             Autor do prefácio
                         </option>
                     </select>
@@ -662,6 +667,7 @@
             </template>
 
             <!-- About -->
+            <h5 class="m-3">Assuntos</h5>
             <div class="input-group mb-2" v-for="(about, indexAbout) in record.about">
                 <input v-model="about.id" type="text" aria-label="About ID" class="form-control" name="aboutId" id="aboutId"
                     placeholder="ID do assunto" readonly />
@@ -940,7 +946,7 @@ export default {
             }
         },
         addAuthor(name) {
-            this.record["author"].push({ id: "", id_lattes13: "", viaf: "", function: "Autor", name: name });
+            this.record["author"].push({ id: "", type: "Person", id_lattes13: "", viaf: "", function: "Autor", name: name });
         },
         getEIDR(eidr) {
             this.loadingEIDR = true;
@@ -1017,6 +1023,7 @@ export default {
                         ).forEach((val) => {
                             this.record.author.push({
                                 id: "",
+                                type: "Person",
                                 id_lattes13: "",
                                 viaf: "",
                                 name: val.given + " " + val.family,

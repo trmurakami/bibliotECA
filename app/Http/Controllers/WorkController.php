@@ -159,6 +159,7 @@ class WorkController extends Controller
                     if (!$thing) {
                         $thing = new Thing();
                         $thing->name = $author["name"];
+                        $thing->type = $author["type"];
                         $thing->save();
                     }
                     $record->authors()->attach($thing, ['function' => $author['function']]);
