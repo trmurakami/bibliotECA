@@ -661,6 +661,23 @@
                 </div>
             </template>
 
+            <!-- About -->
+            <div class="input-group mb-2" v-for="(about, indexAbout) in record.about">
+                <input v-model="about.id" type="text" aria-label="About ID" class="form-control" name="aboutId" id="aboutId"
+                    placeholder="ID do assunto" readonly />
+                <input v-model.trim="about.name" type="text" class="form-control" name="aboutAbout" id="aboutAbout"
+                    placeholder="Assunto" :class="{
+                        'is-invalid': Object.keys(about.name).length === 0,
+                    }" />
+                <button @click="deleteField('about', indexAbout)" class="btn btn-danger btn-sm">
+                    Limpar
+                </button>
+            </div>
+
+            <button @click="addField('about')" class="btn btn-info btn-sm mb-2">
+                Adicionar assunto
+            </button>
+
 
             <div class="d-flex bd-highlight mt-2">
                 <div class="p-2 flex-grow-1 bd-highlight">
@@ -900,7 +917,7 @@ export default {
             if (this.record[field] === null) {
                 this.record[field] = [];
             }
-            this.record[field].push({ name: "" });
+            this.record[field].push({ id: "", name: "" });
         },
         deleteField: function (field, index) {
             this.record[field].splice(index, 1);
