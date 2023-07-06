@@ -11,6 +11,7 @@ use App\Http\Controllers\ThingController;
 use App\Http\Controllers\WorkThingController;
 use App\Http\Controllers\MARCController;
 use App\Http\Controllers\MARCQAController;
+use App\Http\Controllers\AboutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +63,7 @@ Route::post('/works/{work}/attach', [WorkThingController::class, 'attachThing'])
 Route::delete('/works/{work}/detach/{thing}', [WorkThingController::class, 'detachThing'])->name('works.detachThing');
 
 Route::resource('things', ThingController::class);
+Route::resource('abouts', AboutController::class);
 
 Route::get('/cutter', function () {
     return view('cutter.cutter');

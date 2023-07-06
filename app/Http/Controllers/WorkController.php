@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Work;
 use App\Models\Thing;
+use App\Models\About;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Collection;
@@ -20,7 +21,7 @@ class WorkController extends Controller
             $request->per_page = 10;
         }
 
-        $query = Work::query()->with('authors');
+        $query = Work::query()->with('authors')->with('abouts');
 
         if ($request->name) {
             $query->where('name', 'LIKE', '%' . $request->name . '%');
@@ -83,6 +84,7 @@ class WorkController extends Controller
         $id = Work::create($request->all())->id;
 
         self::indexRelations($id);
+        self::indexAbout($id);
 
         return redirect()->route('works.index')
             ->with('success', 'Work created successfully.');
@@ -127,7 +129,10 @@ class WorkController extends Controller
             'name' => 'required',
         ]);
 
-        $work->update($request->all());
+        $id = $work->update($request->all())->id;
+
+        self::indexRelations($id);
+        self::indexAbout($id);
 
         return redirect()->route('works.index')
             ->with('success', 'Work updated successfully');
@@ -231,5 +236,26 @@ class WorkController extends Controller
                         ->groupBy('year')
                         ->get();
         return view('works.graficos', compact('datePublishedData'));
+    }
+    public static function indexAbout($id)
+    {
+        $record = Work::find($id);
+        $record->about()->detach();
+        if ($record->about) {
+            foreach ($record->about as $about) {
+                if ($about["id"] != "") {
+                    $about = About::find($about["id"]);
+                    $record->about()->attach($thing);
+                } else {
+                    $about = about::where('name', $about["name"])->first();
+                    if (!$about) {
+                        $about = new About();
+                        $about->name = $about["name"];
+                        $about->save();
+                    }
+                    $record->about()->attach($thing);
+                }
+            }
+        }
     }
 }

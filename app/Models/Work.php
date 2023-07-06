@@ -91,4 +91,9 @@ class Work extends Model
         return $this->belongsToMany(Thing::class, 'thing_work')->withPivot('function')->withTimestamps();
     }
 
+    public function abouts()
+    {
+        return $this->belongsToMany(About::class, 'about_work')->withTimestamps();
+    }
+
 }
