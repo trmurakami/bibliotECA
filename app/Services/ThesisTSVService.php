@@ -65,6 +65,9 @@ class ThesisTSVService
                         if ($label == 'NM_ENTIDADE_ENSINO') {
                             $work->sourceOrganization = $value;
                         }
+                        if ($label == 'NR_PAGINAS') {
+                            $work->numberOfPages = $value;
+                        }
                     }
                     $saved_id = $work->save();
                     if (!$saved_id) {

@@ -106,6 +106,13 @@
                                     </small>
                                 </p>
                                 @endif
+                                @if (isset($work->numberOfPages))
+                                <p class="card-text p-0 m-0">
+                                    <small class="text-body-secondary">
+                                        Número de páginas: {{ $work->numberOfPages }}
+                                    </small>
+                                </p>
+                                @endif
                                 @if (isset($work->bookEdition))
                                 <p class="card-text p-0 m-0">
                                     <small class="text-body-secondary">
