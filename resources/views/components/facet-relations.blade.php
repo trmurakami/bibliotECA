@@ -2,13 +2,13 @@
 
     <h2 class="accordion-header">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-            data-bs-target="#{{ hash('crc32', 'Autores') }}" aria-expanded="true"
-            aria-controls="{{ hash('crc32', 'Autores') }}">
-            {{ 'Autores' }}
+            data-bs-target="#{{ hash('crc32', $field) }}" aria-expanded="true"
+            aria-controls="{{ hash('crc32', $field) }}">
+            {{ $fieldName }}
         </button>
     </h2>
-    <div id="{{ hash('crc32', 'Autores') }}" class="accordion-collapse collapse"
-        data-bs-parent="#{{ hash('crc32', 'Autores') }}">
+    <div id="{{ hash('crc32', $field) }}" class="accordion-collapse collapse"
+        data-bs-parent="#{{ hash('crc32', $field) }}">
         <div class="accordion-body">
             <form action="/works" method="get" class="m-3">
                 <div class="input-group">

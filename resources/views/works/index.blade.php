@@ -110,7 +110,8 @@
             <x-facet field="type" fieldName="Tipo" :request="$request" />
             <x-facet field="name" fieldName="Título" :request="$request" />
             <x-facet field="datePublished" fieldName="Ano de publicação" :request="$request" />
-            <x-facetAuthors :request="$request" />
+            <x-facet-relations field="authors" fieldName="Autores" :request="$request" />
+            <x-facet-relations field="abouts" fieldName="Assuntos" :request="$request" />
             <x-facet field="isPartOf_name" fieldName="Publicação" :request="$request" />
             <x-facet field="releasedEvent" fieldName="Nome do evento" :request="$request" />
             <x-facet field="inLanguage" fieldName="Idioma" :request="$request" />
