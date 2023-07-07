@@ -89,6 +89,8 @@
     <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
 
+<hr />
+
 <h4 class="mt-3">Upload de Arquivo MARC</h4>
 <form method="POST" action="{{ route('marc.processMARC') }}" enctype="multipart/form-data">
     @csrf
@@ -100,6 +102,8 @@
     </div>
     <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
+
+<hr />
 
 <h4 class="mt-3">Upload de Arquivo de Teses da CAPES</h4>
 <form method="POST" action="{{ route('upload.upload') }}" enctype="multipart/form-data">

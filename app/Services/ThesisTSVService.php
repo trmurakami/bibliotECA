@@ -44,6 +44,9 @@ class ThesisTSVService
                         if ($label == 'DS_RESUMO') {
                             $work->abstract = $value;
                         }
+                        if ($label == 'NM_PROGRAMA') {
+                            $work->inSupportOf = $value;
+                        }
                         if ($label == 'NM_DISCENTE') {
                             $author_array = [];
                             $author_array[0]['id'] = '';

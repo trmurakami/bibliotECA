@@ -49,6 +49,7 @@ class Work extends Model
         'inAlbum',
         'inLanguage',
         'inPlaylist',
+        'inSupportOf',
         'isaccessibleforfree',
         'isbn',
         'isPartOf_citation',

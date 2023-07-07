@@ -8,9 +8,10 @@
                 <li><a href="/things" class="nav-link px-2 text-white">Autoridades</a></li>
                 <li><a href="/abouts" class="nav-link px-2 text-white">Assuntos</a></li>
                 <li><a href="/editor" class="nav-link px-2 text-white">Editor</a></li>
+                <li><a href="/upload" class="nav-link px-2 text-white">Upload</a></li>
                 <li><a href="/graficos" class="nav-link px-2 text-white">Gráficos</a></li>
                 <li><a href="/cutter" class="nav-link px-2 text-white">Cutter</a></li>
-                <li><a href="/marcqa" class="nav-link px-2 text-white">MARC QA</a></li>
+                <li><a href="/marcqa" class="nav-link px-2 text-white">MARC</a></li>
                 @if (Route::has('login'))
                 @auth
                 <li class="nav-item dropdown">

@@ -99,6 +99,13 @@
                                     </small>
                                 </p>
                                 @endif
+                                @if (isset($work->inSupportOf))
+                                <p class="card-text p-0 m-0">
+                                    <small class="text-body-secondary">
+                                        Programa de Pós Graduação: {{ $work->inSupportOf }}
+                                    </small>
+                                </p>
+                                @endif
                                 @if (isset($work->bookEdition))
                                 <p class="card-text p-0 m-0">
                                     <small class="text-body-secondary">

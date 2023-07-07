@@ -118,6 +118,7 @@
             <x-facet field="issn" fieldName="ISSN" :request="$request" />
             <x-facet field="publisher" fieldName="Editora" :request="$request" />
             <x-facet field="sourceOrganization" fieldName="Instituição" :request="$request" />
+            <x-facet field="inSupportOf" fieldName="Nome do PPG" :request="$request" />
         </div>
 
     </div>

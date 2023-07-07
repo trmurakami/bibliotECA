@@ -49,6 +49,7 @@ return new class extends Migration
             $table->jsonb('inAlbum')->nullable();
             $table->string('inLanguage')->nullable();
             $table->jsonb('inPlaylist')->nullable(); // not included
+            $table->string('inSupportOf')->nullable();
             $table->boolean('isaccessibleforfree')->nullable();
             $table->jsonb('isBasedOn')->nullable(); // not included
             $table->jsonb('isbn')->nullable();
