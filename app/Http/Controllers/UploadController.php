@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Services\EbookCSVService;
 use App\Services\ScopusCSVService;
 use App\Services\BookCoverService;
+use App\Services\ThesisTSVService;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\DB;
@@ -37,7 +38,6 @@ class UploadController extends Controller
             // Verificar o tipo do arquivo e chamar o serviço correspondente
             if ($file->getClientOriginalExtension() === 'csv') {
                 $filename = $path;
-
                 if (strpos($filename, 'ebooks.csv') !== false) {
                     $ebookCSVService = new EbookCSVService();
                     $ebookCSVService->process($path);
@@ -45,6 +45,9 @@ class UploadController extends Controller
                     $scopusCSVService = new ScopusCSVService();
                     $scopusCSVService->process($path);
                 }
+            } elseif ($file->getClientOriginalExtension() === 'tsv') {
+                $thesisCSVService = new ThesisTSVService();
+                $thesisCSVService->process($path);
             } elseif ($file->getClientOriginalExtension() === 'xml') {
                 // Lógica para processar o arquivo XML
             } elseif ($file->getClientOriginalExtension() === 'txt') {

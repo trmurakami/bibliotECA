@@ -101,4 +101,15 @@
     <button type="submit" class="btn btn-primary">Enviar</button>
 </form>
 
+<h4 class="mt-3">Upload de Arquivo de Teses da CAPES</h4>
+<form method="POST" action="{{ route('upload.upload') }}" enctype="multipart/form-data">
+    @csrf
+    <div class="mb-3">
+        <label for="file" class="form-label">Arquivo TSV da CAPES</label>
+        <input class="form-control" type="file" for="file" accept=".tsv" name="file">
+        <input type="text" name="new_filename" value="thesis.csv" hidden>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar</button>
+</form>
+
 @endsection
