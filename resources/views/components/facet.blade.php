@@ -1,24 +1,3 @@
-@foreach ($facets as $facet)
-
-@foreach ($facet['values'] as $value)
-
-@php
-
-$request_array = [];
-
-if (!empty($value['field']) && (count($facet['values']) == 1)) {
-$show = false;
-} else {
-$show = true;
-}
-
-@endphp
-
-@endforeach
-
-@endforeach
-
-@if ($show)
 <div class="accordion-item">
     @foreach ($facets as $facet)
     <h2 class="accordion-header">
@@ -63,4 +42,3 @@ $show = true;
     </div>
     @endforeach
 </div>
-@endif
