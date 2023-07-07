@@ -255,4 +255,25 @@ class WorkController extends Controller
                         ->get();
         return view('works.graficos', compact('datePublishedData'));
     }
+
+    public static function checkIfRecordExists($title, $doi = null)
+    {
+        if ($doi) {
+            $record = Work::where('doi', $doi)->first();
+            if ($record) {
+                return $record;
+            } else {
+                return false;
+            }
+        } else {
+            $record = Work::where('name', $title)->first();
+            if ($record) {
+                return $record;
+            } else {
+                return false;
+            }
+        }
+
+    }
+
 }

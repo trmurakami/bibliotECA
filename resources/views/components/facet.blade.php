@@ -7,9 +7,9 @@
 $request_array = [];
 
 if (!empty($value['field']) && (count($facet['values']) == 1)) {
-$show = true;
-} else {
 $show = false;
+} else {
+$show = true;
 }
 
 @endphp
