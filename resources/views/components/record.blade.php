@@ -54,6 +54,19 @@
                             </ul>
                         </div>
                         @endif
+                        @if ($work->about)
+                        <div class="card-text p-0 m-0 lh-sm"><small class="text-body-secondary">Assuntos:</small>
+                            <ul>
+                                @foreach ($work->about as $about)
+                                <li class="list-group-item">
+                                    <small class="text-body-secondary">
+                                        <a href="/works?about={{ $about['name'] }}">{{ $about['name'] }}</a>
+                                    </small>
+                                </li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
                     </div>
                     <div class="col">
                         <div class="card">
