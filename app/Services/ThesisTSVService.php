@@ -45,7 +45,7 @@ class ThesisTSVService
                             $work->abstract = $value;
                         }
                         if ($label == 'NM_PROGRAMA') {
-                            $work->inSupportOf = $value;
+                            $work->inSupportOf = Str::title($value);
                         }
                         if ($label == 'NM_DISCENTE') {
                             $author_array = [];
@@ -63,10 +63,19 @@ class ThesisTSVService
                             unset($author_array);
                         }
                         if ($label == 'NM_ENTIDADE_ENSINO') {
-                            $work->sourceOrganization = $value;
+                            $work->sourceOrganization = Str::title($value);
                         }
                         if ($label == 'NR_PAGINAS') {
                             $work->numberOfPages = $value;
+                        }
+                        if ($label == 'DS_PALAVRA_CHAVE') {
+                            $keywords = explode(';', $value);
+                            foreach ($keywords as $key => $value) {
+                                $keywords_array[$key]['id'] = "";
+                                $keywords_array[$key]['name'] = Str::title($value);
+                            }
+                            $work->about = $keywords_array;
+                            unset($keywords_array);
                         }
                     }
                     $saved_id = $work->save();
