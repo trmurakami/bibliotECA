@@ -81,7 +81,8 @@ class Work extends Model
         'uploadDate',
         'videoFrameSize',
         'videoQuality',
-        'volumeNumber'
+        'volumeNumber',
+        'url'
     ];
 
     protected $with = ['authors'];

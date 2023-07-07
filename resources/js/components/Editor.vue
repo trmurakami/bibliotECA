@@ -666,6 +666,13 @@
                 </div>
             </template>
 
+            <!-- URL -->
+            <div class="form-floating mb-2">
+                <input type="text" class="form-control" v-model.trim="record.url" id="url" name="url"
+                    placeholder="Digite a URL da obra" />
+                <label for="url">URL</label>
+            </div>
+
             <!-- About -->
             <h5 class="m-3">Assuntos</h5>
             <div class="input-group mb-2" v-for="(about, indexAbout) in record.about">
