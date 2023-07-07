@@ -34,6 +34,10 @@ class FacetRelations extends Component
         $issn = $this->request->issn;
         $author = $this->request->author;
         $about = $this->request->about;
+        $inSupportOf = $this->request->inSupportOf;
+        $sourceOrganization = $this->request->sourceOrganization;
+        $isbn = $this->request->isbn;
+        $doi = $this->request->doi;
 
         if ($this->field == 'authors') {
             $q = Thing::query();
@@ -57,6 +61,18 @@ class FacetRelations extends Component
             if (!empty($issn)) {
                 $q->where('issn', $issn);
             }
+            if (!empty($inSupportOf)) {
+                $q->where('inSupportOf', $inSupportOf);
+            }
+            if (!empty($sourceOrganization)) {
+                $q->where('sourceOrganization', $sourceOrganization);
+            }
+            if (!empty($isbn)) {
+                $q->where('isbn', $isbn);
+            }
+            if (!empty($doi)) {
+                $q->where('doi', $doi);
+            }
             if (!empty($author)) {
                 $q->whereHas($this->field, function ($q) use ($author) {
                     $q->where('name', 'LIKE', '%' . $author . '%');
@@ -79,6 +95,18 @@ class FacetRelations extends Component
             }
             if (!empty($issn)) {
                 $q->where('issn', $issn);
+            }
+            if (!empty($inSupportOf)) {
+                $q->where('inSupportOf', $inSupportOf);
+            }
+            if (!empty($sourceOrganization)) {
+                $q->where('sourceOrganization', $sourceOrganization);
+            }
+            if (!empty($isbn)) {
+                $q->where('isbn', $isbn);
+            }
+            if (!empty($doi)) {
+                $q->where('doi', $doi);
             }
             if (!empty($author)) {
                 $q->whereHas($this->field, function ($q) use ($author) {

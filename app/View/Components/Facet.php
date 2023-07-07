@@ -42,6 +42,18 @@ class Facet extends Component
         if ($this->request->issn) {
             $query->where('issn', $this->request->issn);
         }
+        if ($this->request->isbn) {
+            $query->where('isbn', $this->request->isbn);
+        }
+        if ($this->request->doi) {
+            $query->where('doi', $this->request->doi);
+        }
+        if ($this->request->inSupportOf) {
+            $query->where('inSupportOf', $this->request->inSupportOf);
+        }
+        if ($this->request->sourceOrganization) {
+            $query->where('sourceOrganization', $this->request->sourceOrganization);
+        }
         if ($this->request->author) {
             $search = $this->request->author;
             $query->whereHas('authors', function ($query) use ($search) {
@@ -53,8 +65,7 @@ class Facet extends Component
             
         }
         if ($this->request->isPartOf_name) {
-            $querywhere('isPartOf_name', 'like', '%' . $this->request->isPartOf_name . '%');
-            
+            $querywhere('isPartOf_name', 'like', '%' . $this->request->isPartOf_name . '%');            
         }
         if ($this->field == 'datePublished') {
             $query->groupBy($this->field)->orderByDesc('field')->limit(10);

@@ -65,6 +65,26 @@ class WorkController extends Controller
             $query->where('issn', $request->issn);
         }
 
+        if ($request->isbn) {
+            $query->where('isbn', $request->isbn);
+        }
+
+        if ($request->doi) {
+            $query->where('doi', $request->doi);
+        }
+
+        if ($request->publisher) {
+            $query->where('publisher', $request->publisher);
+        }
+
+        if ($request->inSupportOf) {
+            $query->where('inSupportOf', $request->inSupportOf);
+        }
+
+        if ($request->sourceOrganization) {
+            $query->where('sourceOrganization', $request->sourceOrganization);
+        }
+
         $works = $query->orderByDesc('datePublished')->paginate($request->per_page)->withQueryString();
 
         return view('works.index', compact('works', 'request'));
