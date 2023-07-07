@@ -11,18 +11,14 @@ use Illuminate\Support\Facades\DB;
 
 class Facet extends Component
 {
-    public $field;
-    public $fieldName;
-    public $request;
     /**
      * Create a new component instance.
      */
-    public function __construct(Request $request, $field, $fieldName)
-    {
-        $this->request = $request;
-        $this->field = $field;
-        $this->fieldName = $fieldName;
-    }
+    public function __construct(
+        public Request $request,
+        public string $field,
+        public string $fieldName
+    ){}
 
     /**
      * Get the view / contents that represent the component.
@@ -67,8 +63,6 @@ class Facet extends Component
         }
         
         $result = $query->get();
-        $facets[0]['field'] = $this->field;
-        $facets[0]['fieldName'] = $this->fieldName;
         $facets[0]['values'] = $result->toArray();
         $facets[0]['request'][0]['field'] = "name";
         $facets[0]['request'][0]['value'] = $this->request->name;
