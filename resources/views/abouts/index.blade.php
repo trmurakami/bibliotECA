@@ -24,7 +24,7 @@
                 <li class="list-group-item">
                     <div class="d-flex bd-highlight">
                         <div class="w-100 bd-highlight">
-                            <a href="/works?author={{ $about->name }}">{{ print_r($about->name, true)}}</a>
+                            <a href="/works?about={{ $about->name }}">{{ print_r($about->name, true)}}</a>
                         </div>
                         <div class="flex-shrink-1 bd-highlight"><span
                                 class="badge text-bg-primary">{{ $about->works_count }}</span>

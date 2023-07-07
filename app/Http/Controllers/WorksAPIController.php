@@ -42,6 +42,7 @@ class WorksAPIController extends Controller
     {
         $work = Work::findOrFail($id);
         $updateWork = $work->update($request->all());
+        WorkController::indexRelations($id);
         return response()->json($updateWork);
     }
 

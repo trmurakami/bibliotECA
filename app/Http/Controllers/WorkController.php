@@ -42,6 +42,13 @@ class WorkController extends Controller
             });
         }
 
+        if ($request->about) {
+            $search = $request->about;
+            $query->whereHas('abouts', function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%');
+            });
+        }
+
         if ($request->releasedEvent) {
             $query->where('releasedEvent', $request->releasedEvent);
         }
@@ -84,7 +91,6 @@ class WorkController extends Controller
         $id = Work::create($request->all())->id;
 
         self::indexRelations($id);
-        self::indexAbout($id);
 
         return redirect()->route('works.index')
             ->with('success', 'Work created successfully.');
@@ -132,7 +138,6 @@ class WorkController extends Controller
         $id = $work->update($request->all())->id;
 
         self::indexRelations($id);
-        self::indexAbout($id);
 
         return redirect()->route('works.index')
             ->with('success', 'Work updated successfully');
@@ -160,23 +165,36 @@ class WorkController extends Controller
                     $thingsAttached[] = $thing->id;
                     $record->authors()->attach($thing, ['function' => $author['function']]);
                 } else {
-                    $thing = Thing::where('name', $author["name"])->first();
-                    if (!$thing) {
-                        $thing = new Thing();
-                        $thing->name = $author["name"];
-                        $thing->type = $author["type"];
-                        $thing->save();
+                    $thing_existing = Thing::where('name', $author["name"])->first();
+                    if (!$thing_existing) {
+                        $thing_new = new Thing();
+                        $thing_new->name = $author["name"];
+                        $thing_new->type = $author["type"];
+                        $thing_new->save();
+                        $record->authors()->attach($thing_new, ['function' => $author['function']]);
+                    } else {
+                        $record->authors()->attach($thing_existing, ['function' => $author['function']]);
                     }
-                    $record->authors()->attach($thing, ['function' => $author['function']]);
+                    
                 }
             }
-            unset($thingsAttached);
         }
+        $record->abouts()->detach();
         if ($record->about) {
             foreach ($record->about as $about) {
                 if ($about["id"] != "") {
-                    $thing = Thing::find($about["id"]);
-                    $record->authors()->attach($thing, ['function' => "about"]);
+                    $about = About::find($about["id"]);
+                    $record->abouts()->attach($about);
+                } else {
+                    $about_existing = about::where('name', $about["name"])->first();
+                    if (!$about_existing) {
+                        $about_new = new About();
+                        $about_new->name = $about["name"];
+                        $about_new->save();
+                        $record->abouts()->attach($about_new);
+                    } else {
+                        $record->abouts()->attach($about_existing);
+                    }
                 }
             }
         }
@@ -236,26 +254,5 @@ class WorkController extends Controller
                         ->groupBy('year')
                         ->get();
         return view('works.graficos', compact('datePublishedData'));
-    }
-    public static function indexAbout($id)
-    {
-        $record = Work::find($id);
-        $record->abouts()->detach();
-        if ($record->about) {
-            foreach ($record->about as $about) {
-                if ($about["id"] != "") {
-                    $about = About::find($about["id"]);
-                    $record->abouts()->attach($about);
-                } else {
-                    $about = about::where('name', $about["name"])->first();
-                    if (!$about) {
-                        $about = new About();
-                        $about->name = $about["name"];
-                        $about->save();
-                    }
-                    $record->abouts()->attach($about);
-                }
-            }
-        }
     }
 }
