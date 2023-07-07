@@ -29,7 +29,7 @@
                 @endforeach
 
                 <li class="list-group-item">
-                    <a href="/works?{{ $field }}={{ $field }}&{{ implode('&', $request_array) }}">
+                    <a href="/works?{{ $field }}={{ $value['field'] }}&{{ implode('&', $request_array) }}">
                         {{ $value['field'] }} ({{ $value['count'] }})
                     </a>
                 </li>
