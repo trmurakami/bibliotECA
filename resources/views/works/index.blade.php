@@ -117,6 +117,7 @@
             <x-facet field="inLanguage" fieldName="Idioma" :request="$request" />
             <x-facet field="issn" fieldName="ISSN" :request="$request" />
             <x-facet field="publisher" fieldName="Editora" :request="$request" />
+            <x-facet field="sourceOrganization" fieldName="Instituição" :request="$request" />
         </div>
 
     </div>

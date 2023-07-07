@@ -92,6 +92,13 @@
                                     </small>
                                 </p>
                                 @endif
+                                @if (isset($work->sourceOrganization))
+                                <p class="card-text p-0 m-0">
+                                    <small class="text-body-secondary">
+                                        Instituição: {{ $work->sourceOrganization }}
+                                    </small>
+                                </p>
+                                @endif
                                 @if (isset($work->bookEdition))
                                 <p class="card-text p-0 m-0">
                                     <small class="text-body-secondary">

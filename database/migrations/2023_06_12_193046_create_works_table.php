@@ -82,6 +82,7 @@ return new class extends Migration
             $table->string('releasedEvent')->nullable();
             $table->string('startDate')->nullable();
             $table->jsonb('size')->nullable(); // not included
+            $table->string('sourceOrganization')->nullable();
             $table->jsonb('subjectOf')->nullable(); // not included
             $table->jsonb('subtitleLanguage')->nullable();
             $table->string('temporalCoverage')->nullable(); // not included
