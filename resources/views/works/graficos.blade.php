@@ -286,8 +286,8 @@ svg.selectAll(".y-label")
 var tags = @json($aboutData);
 
 // Configurações do gráfico de tag cloud
-var width = 800;
-var height = 400;
+var width = 1200;
+var height = 500;
 
 // Cria a escala de tamanhos para as tags
 var scale = d3.scaleLinear()

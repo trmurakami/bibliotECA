@@ -296,9 +296,6 @@ class WorkController extends Controller
             if (!empty($request->type)) {
                 $q->where('type', $request->type);
             }
-            if (!empty($request->name)) {
-                $q->where('name', 'LIKE', '%' . $request->name . '%');
-            }
             if (!empty($request->datePublished)) {
                 $q->where('datePublished', $request->datePublished);
             }
@@ -325,9 +322,6 @@ class WorkController extends Controller
             if (!empty($request->type)) {
                 $q->where('type', $request->type);
             }
-            if (!empty($request->name)) {
-                $q->where('name', 'LIKE', '%' . $request->name . '%');
-            }
             if (!empty($request->datePublished)) {
                 $q->where('datePublished', $request->datePublished);
             }
@@ -351,7 +345,7 @@ class WorkController extends Controller
             }
         }])->get();
         $q->orderByDesc('count');
-        $aboutData = $q->limit(100)->get();
+        $aboutData = $q->limit(200)->get();
 
         
         return view('works.graficos', array('datePublishedData' => $datePublishedData, 'typeData' => $typeData, 'request' => $request, 'aboutData' => $aboutData));
