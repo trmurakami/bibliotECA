@@ -73,6 +73,12 @@ class FacetRelations extends Component
             if (!empty($doi)) {
                 $q->where('doi', $doi);
             }
+            if ($this->request->about) {
+                $search = $this->request->about;
+                $q->whereHas('abouts', function ($q) use ($search) {
+                    $q->where('name', 'like', '%' . $search . '%');
+                });
+            }
             if (!empty($author)) {
                 $q->whereHas($this->field, function ($q) use ($author) {
                     $q->where('name', 'LIKE', '%' . $author . '%');
@@ -107,6 +113,12 @@ class FacetRelations extends Component
             }
             if (!empty($doi)) {
                 $q->where('doi', $doi);
+            }
+            if ($this->request->about) {
+                $search = $this->request->about;
+                $q->whereHas('abouts', function ($q) use ($search) {
+                    $q->where('name', 'like', '%' . $search . '%');
+                });
             }
             if (!empty($author)) {
                 $q->whereHas($this->field, function ($q) use ($author) {
