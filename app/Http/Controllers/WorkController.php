@@ -269,6 +269,7 @@ class WorkController extends Controller
     }
     public function graficos(Request $request)
     {
+        // Gerar gráfico de datas
         $datePublishedData = DB::table('works')->select('datePublished as year', \DB::raw('COUNT(*) as total'));
         if ($request->datePublished) {
             $datePublishedData = $datePublishedData->where('datePublished', $request->datePublished);
@@ -278,6 +279,8 @@ class WorkController extends Controller
         }
         $datePublishedData = $datePublishedData->groupBy('datePublished')->get();
 
+
+        // Gerar gráfico de tipos
         $typeData = DB::table('works')->select('type', \DB::raw('COUNT(*) as total'));
         if ($request->datePublished) {
             $typeData = $typeData->where('datePublished', $request->datePublished);
@@ -286,8 +289,72 @@ class WorkController extends Controller
             $typeData = $typeData->where('type', $request->type);
         }
         $typeData = $typeData->groupBy('type')->get();
+
+        // Gerar gráfico de assuntos
+        $q = About::query();
+        $q->whereHas('works', function ($q) use ($request) {
+            if (!empty($request->type)) {
+                $q->where('type', $request->type);
+            }
+            if (!empty($request->name)) {
+                $q->where('name', 'LIKE', '%' . $request->name . '%');
+            }
+            if (!empty($request->datePublished)) {
+                $q->where('datePublished', $request->datePublished);
+            }
+            if (!empty($request->inLanguage)) {
+                $q->where('inLanguage', 'LIKE', '%' . $request->inLanguage . '%');
+            }
+            if (!empty($request->issn)) {
+                $q->where('issn', $request->issn);
+            }
+            if (!empty($request->inSupportOf)) {
+                $q->where('inSupportOf', $request->inSupportOf);
+            }
+            if (!empty($request->sourceOrganization)) {
+                $q->where('sourceOrganization', $request->sourceOrganization);
+            }
+            if (!empty($request->isbn)) {
+                $q->where('isbn', $request->isbn);
+            }
+            if (!empty($request->doi)) {
+                $q->where('doi', $request->doi);
+            }
+        });
+        $q->withCount(['works as count' => function ($q) use ($request) {
+            if (!empty($request->type)) {
+                $q->where('type', $request->type);
+            }
+            if (!empty($request->name)) {
+                $q->where('name', 'LIKE', '%' . $request->name . '%');
+            }
+            if (!empty($request->datePublished)) {
+                $q->where('datePublished', $request->datePublished);
+            }
+            if (!empty($request->inLanguage)) {
+                $q->where('inLanguage', 'LIKE', '%' . $request->inLanguage . '%');
+            }
+            if (!empty($request->issn)) {
+                $q->where('issn', $request->issn);
+            }
+            if (!empty($request->inSupportOf)) {
+                $q->where('inSupportOf', $request->inSupportOf);
+            }
+            if (!empty($request->sourceOrganization)) {
+                $q->where('sourceOrganization', $request->sourceOrganization);
+            }
+            if (!empty($request->isbn)) {
+                $q->where('isbn', $request->isbn);
+            }
+            if (!empty($request->doi)) {
+                $q->where('doi', $request->doi);
+            }
+        }])->get();
+        $q->orderByDesc('count');
+        $aboutData = $q->limit(100)->get();
+
         
-        return view('works.graficos', array('datePublishedData' => $datePublishedData, 'typeData' => $typeData, 'request' => $request));
+        return view('works.graficos', array('datePublishedData' => $datePublishedData, 'typeData' => $typeData, 'request' => $request, 'aboutData' => $aboutData));
     }
 
     public static function checkIfRecordExists($title, $doi = null)
