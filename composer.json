@@ -13,7 +13,8 @@
         "medlib/cover": "^1.0",
         "opcodesio/log-viewer": "^2.4",
         "scriptotek/marc": "^2.2",
-        "teamtnt/tntsearch": "^3.1"
+        "teamtnt/tntsearch": "^3.1",
+        "twbs/bootstrap-icons": "^1.10"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

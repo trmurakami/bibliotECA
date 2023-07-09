@@ -34,7 +34,7 @@
                         @if(isset($work->url))
                         <p class="card-text p-0 m-0">
                             <small class="text-body-secondary">URL:
-                                <a href="{{ $work->url }}" target="_blank">{{ $work->url }}</a>
+                                <a href="{{ $work->url }}" target="_blank">Acessar o trabalho</a>
                             </small>
                         </p>
                         @endif
