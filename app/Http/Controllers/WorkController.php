@@ -267,13 +267,27 @@ class WorkController extends Controller
         //     }
         // }
     }
-    public function graficos()
+    public function graficos(Request $request)
     {
-        $datePublishedData = DB::table('works')
-                        ->select('datePublished as year', \DB::raw('COUNT(*) as total'))
-                        ->groupBy('year')
-                        ->get();
-        return view('works.graficos', compact('datePublishedData'));
+        $datePublishedData = DB::table('works')->select('datePublished as year', \DB::raw('COUNT(*) as total'));
+        if ($request->datePublished) {
+            $datePublishedData = $datePublishedData->where('datePublished', $request->datePublished);
+        }
+        if ($request->type) {
+            $datePublishedData = $datePublishedData->where('type', $request->type);
+        }
+        $datePublishedData = $datePublishedData->groupBy('datePublished')->get();
+
+        $typeData = DB::table('works')->select('type', \DB::raw('COUNT(*) as total'));
+        if ($request->datePublished) {
+            $typeData = $typeData->where('datePublished', $request->datePublished);
+        }
+        if ($request->type) {
+            $typeData = $typeData->where('type', $request->type);
+        }
+        $typeData = $typeData->groupBy('type')->get();
+        
+        return view('works.graficos', array('datePublishedData' => $datePublishedData, 'typeData' => $typeData, 'request' => $request));
     }
 
     public static function checkIfRecordExists($title, $doi = null)
