@@ -29,7 +29,7 @@
                 @foreach ($facets as $facet)
 
                 <li class="list-group-item">
-                    <a href="/works?author={{ $facet['name'] }}&{{ $request_array_imploded }}">
+                    <a href="/works?{{ $field }}={{ $facet['name'] }}&{{ $request_array_imploded }}">
                         {{ $facet['name'] }} ({{ $facet['works_count'] }})
                     </a>
                 </li>

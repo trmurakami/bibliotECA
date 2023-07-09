@@ -73,11 +73,11 @@ Route::post('marc', [MARCController::class, 'processMARC'])->name('marc.processM
 
 Route::get('graficos', [WorkController::class, 'graficos'])->name('works.graficos');
 
-Route::get('/marcqa', function () {
-    return view('marcqa.upload');
+Route::get('/marc', function () {
+    return view('marc.upload');
 });
 
-Route::post('marcqareport', [MARCQAController::class, 'marcQAReport'])->name('marcqa.report');
+Route::post('marcqareport', [MARCQAController::class, 'marcQAReport'])->name('marc.report');
 
 Route::get('/phpinfo', function () {
     return view('phpinfo');
