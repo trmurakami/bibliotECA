@@ -27,7 +27,7 @@ class ThesisTSVService
                     foreach ($data as $key => $value) {
                         $label = data_get(HEADER, $key);
                         if ($label == 'NM_SUBTIPO_PRODUCAO') {
-                            $work->type = $value;
+                            $work->type = Str::title($value);
                         }
                         if ($label == 'NM_PRODUCAO') {
                             $work->name = $value;
@@ -36,7 +36,7 @@ class ThesisTSVService
                             $work->datePublished = $value;
                         }
                         if ($label == 'NM_IDIOMA') {
-                            $work->inLanguage = $value;
+                            $work->inLanguage = Str::title($value);
                         }
                         if ($label == 'DS_URL_TEXTO_COMPLETO') {
                             $work->url = $value;
@@ -89,5 +89,6 @@ class ThesisTSVService
             }
         }
         fclose($handle);
+        return redirect('/works')->with('success', 'Trabalhos importados com sucesso!');
     }
 }
