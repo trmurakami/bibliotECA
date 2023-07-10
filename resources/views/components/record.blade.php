@@ -17,7 +17,7 @@
                 <h5 class="card-title"><a href="{{ route('works.show',$work->id) }}">{{ $work->name }}
                         ({{ $work->datePublished }})</a></h5>
                 <div class="row">
-                    <div class="col">
+                    <div class="col border-end">
 
                         @if ($work->doi)
                         <p class="card-text p-0 m-0 lh-sm">
@@ -40,7 +40,7 @@
                         </p>
                         @endif
                         @if ($work->author)
-                        <div class="card-text p-0 m-0 lh-sm"><small class="text-body-secondary">Autores:</small>
+                        <div class="card-text p-0 m-0 lh-sm"><small class="text-body-secondary"><b>Autores</b></small>
                             <ul>
                                 @foreach ($work->author as $author)
                                 <li class="list-group-item">
@@ -48,7 +48,7 @@
                                         <a href="/works?author={{ $author['name'] }}">{{ $author['name'] }}</a>
                                     </small>
                                     @if ($author['function'])
-                                    <small>({{ $author['function'] }})</small>
+                                    <small class="text-body-secondary">({{ $author['function'] }})</small>
                                     @endif
                                     @if (isset($author['id_lattes13']))
                                     <a href="https://lattes.cnpq.br/{{ $author['id_lattes13'] }}" target="_blank">
@@ -67,7 +67,7 @@
                         </div>
                         @endif
                         @if ($work->about)
-                        <div class="card-text p-0 m-0 lh-sm"><small class="text-body-secondary">Assuntos:</small>
+                        <div class="card-text p-0 m-0 lh-sm"><small class="text-body-secondary"><b>Assuntos</b></small>
                             <ul>
                                 @foreach ($work->about as $about)
                                 <li class="list-group-item">
@@ -81,99 +81,96 @@
                         @endif
                     </div>
                     <div class="col">
-                        <div class="card">
-                            <div class="card-header">
-                                <small class="text-body-secundary">Imprenta</small>
-                            </div>
-                            <div class="card-body p-2 m-0">
-                                @if (isset($work->publisher))
-                                <p class="card-text p-0 m-0">
-                                    <small class="text-body-secondary">
-                                        Editora: {{ $work->publisher }}
-                                    </small>
-                                </p>
-                                @endif
-                                @if (isset($work->sourceOrganization))
-                                <p class="card-text p-0 m-0">
-                                    <small class="text-body-secondary">
-                                        Instituição: {{ $work->sourceOrganization }}
-                                    </small>
-                                </p>
-                                @endif
-                                @if (isset($work->inSupportOf))
-                                <p class="card-text p-0 m-0">
-                                    <small class="text-body-secondary">
-                                        Programa de Pós Graduação: {{ $work->inSupportOf }}
-                                    </small>
-                                </p>
-                                @endif
-                                @if (isset($work->numberOfPages))
-                                <p class="card-text p-0 m-0">
-                                    <small class="text-body-secondary">
-                                        Número de páginas: {{ $work->numberOfPages }}
-                                    </small>
-                                </p>
-                                @endif
-                                @if (isset($work->bookEdition))
-                                <p class="card-text p-0 m-0">
-                                    <small class="text-body-secondary">
-                                        Edição: {{ $work->bookEdition }} ed.
-                                    </small>
-                                </p>
-                                @endif
-                                @if (isset($work->isPartOf_name))
-                                <p class="fw-light lh-1 fs-6 p-0 m-0">
-                                    <small class="text-body-secondary">
-                                        {{ $work->isPartOf_name }}
-                                    </small>
-                                </p>
-                                @if (isset($work->issn))
-                                <p class="fw-light lh-1 fs-6 p-0 m-0">
-                                    <small class="text-body-secondary">
-                                        ISSN: {{ $work->issn }}
-                                    </small>
-                                </p>
-                                @endif
+
+                        <p class="card-text p-0 m-0 lh-sm"><small class="text-body-secondary"><b>Imprenta</b></small>
+                        </p>
+                        @if (isset($work->publisher))
+                        <p class="card-text p-0 m-0 lh-sm">
+                            <small class="text-body-secondary">
+                                Editora: {{ $work->publisher }}
+                            </small>
+                        </p>
+                        @endif
+                        @if (isset($work->sourceOrganization))
+                        <p class="card-text p-0 m-0 lh-sm">
+                            <small class="text-body-secondary">
+                                Instituição: {{ $work->sourceOrganization }}
+                            </small>
+                        </p>
+                        @endif
+                        @if (isset($work->inSupportOf))
+                        <p class="card-text p-0 m-0 lh-sm">
+                            <small class="text-body-secondary">
+                                Programa de Pós Graduação: {{ $work->inSupportOf }}
+                            </small>
+                        </p>
+                        @endif
+                        @if (isset($work->numberOfPages))
+                        <p class="card-text p-0 m-0 lh-sm">
+                            <small class="text-body-secondary">
+                                Número de páginas: {{ $work->numberOfPages }}
+                            </small>
+                        </p>
+                        @endif
+                        @if (isset($work->bookEdition))
+                        <p class="card-text p-0 m-0 lh-sm">
+                            <small class="text-body-secondary">
+                                Edição: {{ $work->bookEdition }} ed.
+                            </small>
+                        </p>
+                        @endif
+                        @if (isset($work->isPartOf_name))
+                        <p class="card-text p-0 m-0 lh-sm">
+                            <small class="text-body-secondary">
+                                {{ $work->isPartOf_name }}
+                            </small>
+                        </p>
+                        @if (isset($work->issn))
+                        <p class="card-text p-0 m-0 lh-sm">
+                            <small class="text-body-secondary">
+                                ISSN: {{ $work->issn }}
+                            </small>
+                        </p>
+                        @endif
+                        @if (!empty($work->volumeNumber))
+                        <p class="card-text p-0 m-0 lh-sm">
+                            <small class="text-body-secondary">
+                                Vol.: {{ $work->volumeNumber }}
+                            </small>
+                        </p>
+                        @endif
+                        @if (!empty($work->issueNumber))
+                        <p class="card-text p-0 m-0 lh-sm">
+                            <small class="text-body-secondary">
+                                Num.: {{ $work->issueNumber }}
+                            </small>
+                        </p>
+                        @endif
+                        @if (!empty($work->pageStart))
+                        <p class="card-text p-0 m-0 lh-sm">
+                            <small class="text-body-secondary">
+                                Pág. {{ $work->pageStart }} - {{ $work->pageEnd }}
+                            </small>
+                        </p>
+                        @endif
+                        @endif
+                        @if (isset($work->releasedEvent))
+                        <p class="card-text p-2 m-0 lh-sm">
+                            <small class="text-body-secondary">
+                                Apresentado no evento: {{ $work->releasedEvent }}
                                 @if (!empty($work->volumeNumber))
-                                <p class="fw-light lh-1 fs-6 p-0 m-0">
-                                    <small class="text-body-secondary">
-                                        Vol.: {{ $work->volumeNumber }}
-                                    </small>
-                                </p>
+                                Vol.: {{ $work->volumeNumber }}
                                 @endif
                                 @if (!empty($work->issueNumber))
-                                <p class="fw-light lh-1 fs-6 p-0 m-0">
-                                    <small class="text-body-secondary">
-                                        Num.: {{ $work->issueNumber }}
-                                    </small>
-                                </p>
+                                , Num.: {{ $work->issueNumber }}
                                 @endif
                                 @if (!empty($work->pageStart))
-                                <p class="fw-light lh-1 fs-6 p-0 m-0">
-                                    <small class="text-body-secondary">
-                                        Pág. {{ $work->pageStart }} - {{ $work->pageEnd }}
-                                    </small>
-                                </p>
+                                , p. {{ $work->pageStart }} - {{ $work->pageEnd }}
                                 @endif
-                                @endif
-                                @if (isset($work->releasedEvent))
-                                <p class="card-text">
-                                    <small class="text-body-secondary">
-                                        Apresentado no evento: {{ $work->releasedEvent }}
-                                        @if (!empty($work->volumeNumber))
-                                        Vol.: {{ $work->volumeNumber }}
-                                        @endif
-                                        @if (!empty($work->issueNumber))
-                                        , Num.: {{ $work->issueNumber }}
-                                        @endif
-                                        @if (!empty($work->pageStart))
-                                        , p. {{ $work->pageStart }} - {{ $work->pageEnd }}
-                                        @endif
-                                    </small>
-                                    @endif
-                                <p class="card-text">{{ $work->description }}</p>
-                            </div>
-                        </div>
+                            </small>
+                            @endif
+                        <p class="card-text p-0 m-0 lh-sm">{{ $work->description }}</p>
+
                     </div>
                 </div>
             </div>
