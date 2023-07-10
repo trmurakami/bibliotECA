@@ -27,7 +27,7 @@ class ThesisTSVService
                     foreach ($data as $key => $value) {
                         $label = data_get(HEADER, $key);
                         if ($label == 'NM_SUBTIPO_PRODUCAO') {
-                            $work->type = Str::title($value);
+                            $work->type = $value;
                         }
                         if ($label == 'NM_PRODUCAO') {
                             $work->name = $value;
@@ -36,7 +36,7 @@ class ThesisTSVService
                             $work->datePublished = $value;
                         }
                         if ($label == 'NM_IDIOMA') {
-                            $work->inLanguage = Str::title($value);
+                            $work->inLanguage = $value;
                         }
                         if ($label == 'DS_URL_TEXTO_COMPLETO') {
                             $work->url = $value;
@@ -45,25 +45,25 @@ class ThesisTSVService
                             $work->abstract = $value;
                         }
                         if ($label == 'NM_PROGRAMA') {
-                            $work->inSupportOf = Str::title($value);
+                            $work->inSupportOf = $value;
                         }
                         if ($label == 'NM_DISCENTE') {
                             $author_array = [];
                             $author_array[0]['id'] = '';
                             $author_array[0]['type'] = 'Person';
-                            $author_array[0]['name'] = Str::title($value);
+                            $author_array[0]['name'] = $value;
                             $author_array[0]['function'] = 'Autor';
                         }
                         if ($label == 'NM_ORIENTADOR') {
                             $author_array[1]['id'] = '';
                             $author_array[1]['type'] = 'Person';
-                            $author_array[1]['name'] = Str::title($value);
+                            $author_array[1]['name'] = $value;
                             $author_array[1]['function'] = 'Orientador';
                             $work->author = $author_array;
                             unset($author_array);
                         }
                         if ($label == 'NM_ENTIDADE_ENSINO') {
-                            $work->sourceOrganization = Str::title($value);
+                            $work->sourceOrganization = $value;
                         }
                         if ($label == 'NR_PAGINAS') {
                             $work->numberOfPages = $value;
@@ -72,7 +72,7 @@ class ThesisTSVService
                             $keywords = explode(';', $value);
                             foreach ($keywords as $key => $value) {
                                 $keywords_array[$key]['id'] = "";
-                                $keywords_array[$key]['name'] = Str::title($value);
+                                $keywords_array[$key]['name'] = $value;
                             }
                             $work->about = $keywords_array;
                             unset($keywords_array);
