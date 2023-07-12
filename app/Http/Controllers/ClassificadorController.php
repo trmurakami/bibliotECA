@@ -21,7 +21,7 @@ class ClassificadorController extends Controller
         $classifier = new StringClassifier;
         $results = $classifier->predict($string);
 
-        return view('classificador.resultados', compact('results'));
+        return view('classificador.resultados', compact('results', 'request'));
     }
 
     public function treinamento()

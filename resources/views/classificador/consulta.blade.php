@@ -4,7 +4,7 @@
 
 @section('content')
 
-<h2 class="mt-3">Consulta</h2>
+<h2 class="mt-3">Consulta no classificador</h2>
 
 <form method="POST" action="{{ route('classificador.consulta') }}">
     @csrf
@@ -12,7 +12,7 @@
         <label for="string" class="form-label">Digite a string para consulta:</label>
         <input type="text" name="string" class="form-control" id="string">
     </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button type="submit" class="btn btn-primary">Classificar</button>
 </form>
 
 @endsection
