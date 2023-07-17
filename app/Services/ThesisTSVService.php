@@ -32,22 +32,47 @@ class ThesisTSVService
                         if ($label == 'NM_PRODUCAO') {
                             $work->name = $value;
                         }
+                        if ($label == 'TituloTese') {
+                            $work->name = $value;
+                        }
                         if ($label == 'AN_BASE') {
+                            $work->datePublished = $value;
+                        }
+                        if ($label == 'AnoBase') {
                             $work->datePublished = $value;
                         }
                         if ($label == 'NM_IDIOMA') {
                             $work->inLanguage = $value;
                         }
+                        if ($label == 'Idioma') {
+                            $work->inLanguage = $value;
+                        }
                         if ($label == 'DS_URL_TEXTO_COMPLETO') {
+                            $work->url = $value;
+                        }
+                        if ($label == 'URLTextoCompleto') {
                             $work->url = $value;
                         }
                         if ($label == 'DS_RESUMO') {
                             $work->abstract = $value;
                         }
+                        if ($label == 'ResumoTese') {
+                            $work->abstract = $value;
+                        }
                         if ($label == 'NM_PROGRAMA') {
                             $work->inSupportOf = $value;
                         }
+                        if ($label == 'NomePrograma') {
+                            $work->inSupportOf = $value;
+                        }
                         if ($label == 'NM_DISCENTE') {
+                            $author_array = [];
+                            $author_array[0]['id'] = '';
+                            $author_array[0]['type'] = 'Person';
+                            $author_array[0]['name'] = $value;
+                            $author_array[0]['function'] = 'Autor';
+                        }
+                        if ($label == 'Autor') {
                             $author_array = [];
                             $author_array[0]['id'] = '';
                             $author_array[0]['type'] = 'Person';
@@ -62,13 +87,36 @@ class ThesisTSVService
                             $work->author = $author_array;
                             unset($author_array);
                         }
+                        if ($label == 'Orientador_1') {
+                            $author_array[1]['id'] = '';
+                            $author_array[1]['type'] = 'Person';
+                            $author_array[1]['name'] = $value;
+                            $author_array[1]['function'] = 'Orientador';
+                            $work->author = $author_array;
+                            unset($author_array);
+                        }
                         if ($label == 'NM_ENTIDADE_ENSINO') {
+                            $work->sourceOrganization = $value;
+                        }
+                        if ($label == 'NomeIes') {
                             $work->sourceOrganization = $value;
                         }
                         if ($label == 'NR_PAGINAS') {
                             $work->numberOfPages = $value;
                         }
+                        if ($label == 'NumeroPaginas') {
+                            $work->numberOfPages = $value;
+                        }
                         if ($label == 'DS_PALAVRA_CHAVE') {
+                            $keywords = explode(';', $value);
+                            foreach ($keywords as $key => $value) {
+                                $keywords_array[$key]['id'] = "";
+                                $keywords_array[$key]['name'] = $value;
+                            }
+                            $work->about = $keywords_array;
+                            unset($keywords_array);
+                        }
+                        if ($label == 'PalavrasChave') {
                             $keywords = explode(';', $value);
                             foreach ($keywords as $key => $value) {
                                 $keywords_array[$key]['id'] = "";
