@@ -12,7 +12,8 @@
         <div class="accordion-body">
             <form action="/works" method="get" class="m-3">
                 <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Pesquisar por nome do autor" name="author">
+                    <input type="text" class="form-control" placeholder="Pesquisar por {{ $fieldName }}"
+                        name="{{ $field }}">
                     <button class="btn btn-primary" type="submit">Buscar</button>
                 </div>
             </form>
@@ -29,7 +30,7 @@
                 @foreach ($facets as $facet)
 
                 <li class="list-group-item">
-                    <a href="/works?{{ $field }}={{ $facet['name'] }}&{{ $request_array_imploded }}">
+                    <a href="/works?{{ substr($field, 0, -1) }}={{ $facet['name'] }}&{{ $request_array_imploded }}">
                         {{ $facet['name'] }} ({{ $facet['works_count'] }})
                     </a>
                 </li>

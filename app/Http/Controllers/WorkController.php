@@ -24,7 +24,7 @@ class WorkController extends Controller
         $query = Work::query()->with('authors')->with('abouts');
 
         if ($request->name) {
-            $query->where('name', 'iLIKE', '%' . $request->name . '%');
+            $query->where('name', 'ilike', '%' . $request->name . '%');
         }
 
         if ($request->type) {
@@ -199,8 +199,9 @@ class WorkController extends Controller
             foreach ($record->author as $author) {
                 if ($author["id"] != "") {
                     $thing = Thing::find($author["id"]);
-                    $thingsAttached[] = $thing->id;
-                    $record->authors()->attach($thing, ['function' => $author['function']]);
+                    if ($record->authors()->where('thing_id', $thing->id)->doesntExist()) {
+                        $record->authors()->attach($thing, ['function' => $author['function']]);
+                    }
                 } else {
                     $thing_existing = Thing::where('name', $author["name"])->first();
                     if (!$thing_existing) {

@@ -57,13 +57,13 @@ class Facet extends Component
         if ($this->request->about) {
             $search = $this->request->about;
             $query->whereHas('abouts', function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
+                $query->where('name', $search);
             });
         }
         if ($this->request->author) {
             $search = $this->request->author;
             $query->whereHas('authors', function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
+                $query->where('name', $search);
             });
         }
         if ($this->request->releasedEvent) {
@@ -71,7 +71,7 @@ class Facet extends Component
             
         }
         if ($this->request->isPartOf_name) {
-            $querywhere('isPartOf_name', 'like', '%' . $this->request->isPartOf_name . '%');
+            $query->where('isPartOf_name', 'like', '%' . $this->request->isPartOf_name . '%');
         }
         if ($this->field == 'datePublished') {
             $query->groupBy($this->field)->orderByDesc('field')->limit(10);
@@ -79,30 +79,7 @@ class Facet extends Component
             $query->groupBy($this->field)->orderByDesc('count')->orderByDesc($this->field)->limit(10);
         }
         
-        $result = $query->get();
-        $facets[0]['values'] = $result->toArray();
-        $facets[0]['request'][0]['field'] = "name";
-        $facets[0]['request'][0]['value'] = $this->request->name;
-        if ($this->request->type) {
-            $facets[0]['request'][1]['field'] = "type";
-            $facets[0]['request'][1]['value'] = $this->request->type;
-        }
-        if ($this->request->datePublished) {
-            $facets[0]['request'][2]['field'] = "datePublished";
-            $facets[0]['request'][2]['value'] = $this->request->datePublished;
-        }
-        if ($this->request->author) {
-            $facets[0]['request'][3]['field'] = "author";
-            $facets[0]['request'][3]['value'] = $this->request->author;
-        }
-        if ($this->request->releasedEvent) {
-            $facets[0]['request'][4]['field'] = "releasedEvent";
-            $facets[0]['request'][4]['value'] = $this->request->releasedEvent;
-        }
-        if ($this->request->isPartOf_name) {
-            $facets[0]['request'][5]['field'] = "isPartOf_name";
-            $facets[0]['request'][5]['value'] = $this->request->isPartOf_name;
-        }
+        $facets = $query->get();
         return view('components.facet', compact('facets'));
     }
 }

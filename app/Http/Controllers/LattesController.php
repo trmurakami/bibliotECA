@@ -58,29 +58,28 @@ class LattesController extends Controller
             return $newThing;
         }
     }
-    public function searchForAuthor($author) 
+    public function searchForAuthor($author)
     {
-        $author = get_object_vars($author);
-        if (!empty($author['@attributes']['NRO-ID-CNPQ'])) {
-            $existingThing = Thing::where('id_lattes13', $author['@attributes']['NRO-ID-CNPQ'])->first();
+        if (!empty((string)$author->attributes()->{'NRO-ID-CNPQ'})) {
+            $existingThing = Thing::where('id_lattes13', (string)$author->attributes()->{'NRO-ID-CNPQ'})->first();
             if ($existingThing) {
                 return $existingThing;
             } else {
                 $newThing = Thing::firstOrCreate([
                     'type'=>'Person',
-                    'name' => $author['@attributes']['NOME-COMPLETO-DO-AUTOR'],
-                    'id_lattes13' => $author['@attributes']['NRO-ID-CNPQ']
+                    'name' => (string)$author->attributes()->{'NOME-COMPLETO-DO-AUTOR'},
+                    'id_lattes13' => (string)$author->attributes()->{'NRO-ID-CNPQ'}
                 ]);
                 return $newThing;
             }
         } else {
-            $existingThing = Thing::where('name', $author['@attributes']['NOME-COMPLETO-DO-AUTOR'])->first();
+            $existingThing = Thing::where('name', (string)$author->attributes()->{'NOME-COMPLETO-DO-AUTOR'})->first();
             if ($existingThing) {
                 return $existingThing;
             } else {
                 $newThing = Thing::firstOrCreate([
                     'type'=>'Person',
-                    'name' => $author['@attributes']['NOME-COMPLETO-DO-AUTOR']
+                    'name' => (string)$author->attributes()->{'NOME-COMPLETO-DO-AUTOR'}
                 ]);
                 return $newThing;
             }
@@ -129,10 +128,12 @@ class LattesController extends Controller
                         $record['pageEnd'] = (string)$trabalho->{'DETALHAMENTO-DO-TRABALHO'}['PAGINA-FINAL'];
                         $i_autores = 0;
                         foreach ($trabalho->{'AUTORES'} as $author) {
-                            $record['author'][$i_autores] = $this->searchForAuthor($author);
-                            $record['author'][$i_autores]['function'] = 'Autor';
+                            $record_authors[$i_autores] = $this->searchForAuthor($author);
+                            $record_authors[$i_autores]['function'] = 'Autor';
                             $i_autores++;
                         }
+                        $record['author'] = array_unique($record_authors, SORT_REGULAR);
+                        unset($record_authors);
                         if (isset($trabalho->{'PALAVRAS-CHAVE'})) {
                             $array_result_pc = $this->processaPalavrasChaveLattes($trabalho->{'PALAVRAS-CHAVE'});
                             if (isset($array_result_pc)) {
@@ -140,12 +141,12 @@ class LattesController extends Controller
                             }
                             unset($array_result_pc);
                         }
-                        //dd($record);
                         $work = new Work($record);
                         $work->save();
                         WorkController::indexRelations($work->id);
                     }
                     unset($record);
+                    unset($trabalho);
                 }
             }
             if (isset($curriculo->{'PRODUCAO-BIBLIOGRAFICA'}->{'ARTIGOS-PUBLICADOS'})) {
@@ -181,6 +182,7 @@ class LattesController extends Controller
                         WorkController::indexRelations($work->id);
                     }
                     unset($record);
+                    unset($artigo);
                 }
             }
             return redirect('/works')->with('success', 'Trabalhos importados com sucesso!');
