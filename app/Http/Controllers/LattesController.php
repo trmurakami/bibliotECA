@@ -10,21 +10,45 @@ use App\Http\Controllers\WorkController;
 class LattesController extends Controller
 {
 
-    public function createThing($curriculo, Request $request) 
+    public function createThing($curriculo, Request $request)
     {
         $curriculo = get_object_vars($curriculo);
         $curriculo_dados_gerais = get_object_vars($curriculo['DADOS-GERAIS']);
         $existingThing = Thing::where('id_lattes13', $curriculo['@attributes']['NUMERO-IDENTIFICADOR'])->first();
-        if (isset($request->universidade) && isset($request->ppg)) {
-            $affiliation['universidade'] = $request->universidade;
-            $affiliation['program'] = $request->ppg;
-        } else {
-            $affiliation['universidade'] = '';
-            $affiliation['program'] = '';
-        }
         if ($existingThing) {
-            return $existingThing;
+            if (isset($request->universidade) && isset($request->ppg)) {
+                if (isset($existingThing->affiliation)) {
+                    $affiliation = json_decode($existingThing->affiliation, true);
+                    foreach ($affiliation as $aff_check) {
+                        if ($aff_check['universidade'] == $request->universidade && $aff_check['program'] == $request->ppg) {
+                            return $existingThing;
+                        } else {
+                            $aff_count = count($affiliation) + 1;
+                            $affiliation[$aff_count]['universidade'] = $request->universidade;
+                            $affiliation[$aff_count]['program'] = $request->ppg;
+                            $existingThing->affiliation = json_encode($affiliation);
+                            $existingThing->save();
+                            return $existingThing;
+                        }
+                    }
+                } else {
+                    $affiliation[0]['universidade'] = $request->universidade;
+                    $affiliation[0]['program'] = $request->ppg;
+                    $existingThing->affiliation = json_encode($affiliation);
+                    $existingThing->save();
+                    return $existingThing;
+                }
+            } else {
+                return $existingThing;
+            }
         } else {
+            if (isset($request->universidade) && isset($request->ppg)) {
+                $affiliation[0]['universidade'] = $request->universidade;
+                $affiliation[0]['program'] = $request->ppg;
+            } else {
+                $affiliation[0]['universidade'] = '';
+                $affiliation[0]['program'] = '';
+            }
             $newThing = Thing::firstOrCreate([
                 'type'=>'Person',
                 'name' => $curriculo_dados_gerais['@attributes']['NOME-COMPLETO'],

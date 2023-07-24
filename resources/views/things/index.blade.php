@@ -42,12 +42,16 @@
                             @endif
                             @if ($thing->affiliation)
                             <ul class="list-group list-group-flush">
-                                @foreach ($thing->affiliation as $affiliation)
-                                <li class="list-group-item"><i class="bi bi-building"></i>{{ $affiliation['name'] }} -
-                                    {{ $affiliation['program'] }}</li>
+                                @foreach (json_decode($thing->affiliation) as $affiliation)
+                                <li class="list-group-item">
+                                    <span>
+                                        <i class="bi bi-building"></i>
+                                    </span>
+                                    {{ $affiliation->universidade }} -
+                                    {{ $affiliation->program }}
+                                </li>
                                 @endforeach
-                            </ul>
-                            @endif
+                                @endif
                         </div>
                         <div class="flex-shrink-1 bd-highlight"><span
                                 class="badge text-bg-primary">{{ $thing->works_count }}</span>

@@ -11,10 +11,10 @@ class ThingController extends Controller
     {
         $query = Thing::query();
         if ($request->name) {
-            $query->where('name', 'LIKE', '%' . $request->name . '%');
+            $query->where('name', 'iLIKE', '%' . $request->name . '%');
         }
         $things = $query->withCount('works')->with('works')
-        ->orderByDesc('works_count')->orderByRaw('name COLLATE NOCASE')->paginate(15);
+        ->orderByDesc('works_count')->paginate(15);
 
         return view('things.index', compact('things'));
     }

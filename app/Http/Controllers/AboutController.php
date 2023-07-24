@@ -15,10 +15,10 @@ class AboutController extends Controller
 
         $query = About::query();
         if ($request->name) {
-            $query->where('name', 'LIKE', '%' . $request->name . '%');
+            $query->where('name', 'iLIKE', '%' . $request->name . '%');
         }
         $abouts = $query->withCount('works')->with('works')
-        ->orderByDesc('works_count')->orderByRaw('name COLLATE NOCASE')->paginate(15);
+        ->orderByDesc('works_count')->paginate(15);
 
         return view('abouts.index', compact('abouts'));
     }
