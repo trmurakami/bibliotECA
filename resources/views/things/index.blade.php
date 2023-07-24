@@ -40,6 +40,14 @@
                                     height="15" />
                             </a>
                             @endif
+                            @if ($thing->affiliation)
+                            <ul>
+                                @foreach ($thing->affiliation as $affiliation)
+                                <li><i class="bi bi-building"></i>{{ $affiliation['name'] }} -
+                                    {{ $affiliation['program'] }}</li>
+                                @endforeach
+                            </ul>
+                            @endif
                         </div>
                         <div class="flex-shrink-1 bd-highlight"><span
                                 class="badge text-bg-primary">{{ $thing->works_count }}</span>

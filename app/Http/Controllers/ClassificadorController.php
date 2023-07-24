@@ -39,4 +39,15 @@ class ClassificadorController extends Controller
 
         return redirect()->route('classificador.consulta')->with('success', 'O modelo foi treinado com sucesso!');
     }
+
+    public function uploadTSVTreinamento(Request $request) {
+        $file = $request->file('file');
+        if (($handle = fopen($file, "r")) !== FALSE) {
+            $classifier = new StringClassifier;
+            while (($data = fgetcsv($handle, 1000, "\t")) !== FALSE) {
+                $classifier->train([$data[0]], [$data[1]]);
+            }
+            fclose($handle);
+        }
+    }
 }

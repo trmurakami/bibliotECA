@@ -24,7 +24,7 @@ class WorkController extends Controller
         $query = Work::query()->with('authors')->with('abouts');
 
         if ($request->name) {
-            $query->where('name', 'LIKE', '%' . $request->name . '%');
+            $query->where('name', 'iLIKE', '%' . $request->name . '%');
         }
 
         if ($request->type) {
@@ -38,14 +38,28 @@ class WorkController extends Controller
         if ($request->author) {
             $search = $request->author;
             $query->whereHas('authors', function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
+                $query->where('name', $search);
+            });
+        }
+
+        if ($request->authors) {
+            $search = $request->authors;
+            $query->whereHas('authors', function ($query) use ($search) {
+                $query->where('name', 'ilike', '%' . $search . '%');
             });
         }
 
         if ($request->about) {
             $search = $request->about;
             $query->whereHas('abouts', function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%');
+                $query->where('name', $search);
+            });
+        }
+
+        if ($request->abouts) {
+            $search = $request->abouts;
+            $query->whereHas('abouts', function ($query) use ($search) {
+                $query->where('name', 'ilike', '%' . $search . '%');
             });
         }
 
@@ -58,7 +72,7 @@ class WorkController extends Controller
         }
 
         if ($request->inLanguage) {
-            $query->where('inLanguage', 'like', '%' .  $request->inLanguage . '%');
+            $query->where('inLanguage', $request->inLanguage);
         }
 
         if ($request->issn) {
@@ -142,6 +156,9 @@ class WorkController extends Controller
      */
     public function edit(Work $work)
     {
+        if (is_null($work->publisher)) {
+            $work->publisher = "";
+        }
         return view('works.edit', compact('work'));
     }
 
@@ -209,9 +226,11 @@ class WorkController extends Controller
                     $about_existing = about::where('name', $about["name"])->first();
                     if (!$about_existing) {
                         $about_new = new About();
-                        $about_new->name = $about["name"];
-                        $about_new->save();
-                        $record->abouts()->attach($about_new);
+                        if (!empty($about["name"])) {
+                            $about_new->name = mb_convert_encoding(substr($about["name"], 0, 254), 'UTF-8', 'UTF-8');
+                            $about_new->save();
+                            $record->abouts()->attach($about_new);
+                        }
                     } else {
                         $record->abouts()->attach($about_existing);
                     }
@@ -300,7 +319,7 @@ class WorkController extends Controller
                 $q->where('datePublished', $request->datePublished);
             }
             if (!empty($request->inLanguage)) {
-                $q->where('inLanguage', 'LIKE', '%' . $request->inLanguage . '%');
+                $q->where('inLanguage', 'iLIKE', '%' . $request->inLanguage . '%');
             }
             if (!empty($request->issn)) {
                 $q->where('issn', $request->issn);
@@ -326,7 +345,7 @@ class WorkController extends Controller
                 $q->where('datePublished', $request->datePublished);
             }
             if (!empty($request->inLanguage)) {
-                $q->where('inLanguage', 'LIKE', '%' . $request->inLanguage . '%');
+                $q->where('inLanguage', 'iLIKE', '%' . $request->inLanguage . '%');
             }
             if (!empty($request->issn)) {
                 $q->where('issn', $request->issn);

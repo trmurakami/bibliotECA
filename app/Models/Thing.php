@@ -10,7 +10,11 @@ class Thing extends Model
 
     //use HasFactory;
     
-    protected $fillable = ['type', 'id_lattes13', 'name'];
+    protected $fillable = ['type', 'id_lattes13', 'name', 'affiliation'];
+
+    protected $casts = [
+        'affiliation' => 'array',
+    ];
 
     public function works()
     {

@@ -42,6 +42,7 @@ require __DIR__.'/auth.php';
 
 Route::resource('works', WorkController::class);
 Route::resource('works', WorkController::class)->only(['create'])->middleware('auth');
+Route::resource('works', WorkController::class)->only(['edit']);
 
 Route::get('/editor', function () {
     return view('works.createnew');

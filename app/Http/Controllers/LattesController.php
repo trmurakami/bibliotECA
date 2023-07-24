@@ -34,7 +34,11 @@ class LattesController extends Controller
             $thingLattesID = Thing::firstOrCreate([
                 'type'=>'Person',
                 'id_lattes13' => (string)$curriculo['NUMERO-IDENTIFICADOR'],
-                'name' => (string)$curriculo->{'DADOS-GERAIS'}['NOME-COMPLETO']
+                'name' => (string)$curriculo->{'DADOS-GERAIS'}['NOME-COMPLETO'],
+                'affiliation' => [[
+                    'name' => (string)$request->universidade,
+                    'program' => (string)$request->ppg
+                ]]
             ])->id;
 
             if (isset($curriculo->{'PRODUCAO-BIBLIOGRAFICA'}->{'TRABALHOS-EM-EVENTOS'})) { 
