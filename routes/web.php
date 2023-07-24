@@ -12,6 +12,7 @@ use App\Http\Controllers\WorkThingController;
 use App\Http\Controllers\MARCController;
 use App\Http\Controllers\MARCQAController;
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\QualisController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,6 +80,8 @@ Route::get('/marc', function () {
 });
 
 Route::post('marcqareport', [MARCQAController::class, 'marcQAReport'])->name('marc.report');
+
+Route::resource('qualis', QualisController::class);
 
 Route::get('/phpinfo', function () {
     return view('phpinfo');

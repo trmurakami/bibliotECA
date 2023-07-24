@@ -12,6 +12,7 @@
                 <li><a href="/graficos" class="nav-link px-2 text-white">Gráficos</a></li>
                 <li><a href="/cutter" class="nav-link px-2 text-white">Cutter</a></li>
                 <li><a href="/marc" class="nav-link px-2 text-white">MARC</a></li>
+                <li><a href="/qualis" class="nav-link px-2 text-white">Qualis</a></li>
                 @if (Route::has('login'))
                 @auth
                 <li class="nav-item dropdown">
