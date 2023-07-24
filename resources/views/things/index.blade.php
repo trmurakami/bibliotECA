@@ -41,9 +41,9 @@
                             </a>
                             @endif
                             @if ($thing->affiliation)
-                            <ul>
+                            <ul class="list-group list-group-flush">
                                 @foreach ($thing->affiliation as $affiliation)
-                                <li><i class="bi bi-building"></i>{{ $affiliation['name'] }} -
+                                <li class="list-group-item"><i class="bi bi-building"></i>{{ $affiliation['name'] }} -
                                     {{ $affiliation['program'] }}</li>
                                 @endforeach
                             </ul>

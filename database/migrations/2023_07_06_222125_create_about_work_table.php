@@ -15,9 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('about_id')->constrained();
             $table->foreignId('work_id')->constrained();
-            $table->foreign('work_id')->references('id')->on('works')->onDelete('cascade');
-            $table->foreign('about_id')->references('id')->on('abouts')->onDelete('cascade');
             $table->timestamps();
+            $table->index(['about_id', 'work_id']);
         });
     }
 

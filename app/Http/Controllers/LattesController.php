@@ -10,6 +10,60 @@ use App\Http\Controllers\WorkController;
 class LattesController extends Controller
 {
 
+    public function createThing($curriculo, Request $request) 
+    {
+        $curriculo = get_object_vars($curriculo);
+        $curriculo_dados_gerais = get_object_vars($curriculo['DADOS-GERAIS']);
+        $existingThing = Thing::where('id_lattes13', $curriculo['@attributes']['NUMERO-IDENTIFICADOR'])->first();
+        if (isset($request->universidade) && isset($request->ppg)) {
+            $affiliation['universidade'] = $request->universidade;
+            $affiliation['program'] = $request->ppg;
+        } else {
+            $affiliation['universidade'] = '';
+            $affiliation['program'] = '';
+        }
+        if ($existingThing) {
+            return $existingThing;
+        } else {
+            $newThing = Thing::firstOrCreate([
+                'type'=>'Person',
+                'name' => $curriculo_dados_gerais['@attributes']['NOME-COMPLETO'],
+                'id_lattes13' => $curriculo['@attributes']['NUMERO-IDENTIFICADOR'],
+                'affiliation' => json_encode($affiliation)
+            ]);
+            return $newThing;
+        }
+    }
+    public function searchForAuthor($author) 
+    {
+        $author = get_object_vars($author);
+        if (!empty($author['@attributes']['NRO-ID-CNPQ'])) {
+            $existingThing = Thing::where('id_lattes13', $author['@attributes']['NRO-ID-CNPQ'])->first();
+            if ($existingThing) {
+                return $existingThing;
+            } else {
+                $newThing = Thing::firstOrCreate([
+                    'type'=>'Person',
+                    'name' => $author['@attributes']['NOME-COMPLETO-DO-AUTOR'],
+                    'id_lattes13' => $author['@attributes']['NRO-ID-CNPQ']
+                ]);
+                return $newThing;
+            }
+        } else {
+            $existingThing = Thing::where('name', $author['@attributes']['NOME-COMPLETO-DO-AUTOR'])->first();
+            if ($existingThing) {
+                return $existingThing;
+            } else {
+                $newThing = Thing::firstOrCreate([
+                    'type'=>'Person',
+                    'name' => $author['@attributes']['NOME-COMPLETO-DO-AUTOR']
+                ]);
+                return $newThing;
+            }
+        }
+
+    }
+    
     public function processaPalavrasChaveLattes($palavras_chave)
     {
         $palavras_chave = get_object_vars($palavras_chave);
@@ -31,15 +85,7 @@ class LattesController extends Controller
             $curriculo = simplexml_load_file($request->file);
             //dd($curriculo);
             // Create Thing
-            $thingLattesID = Thing::firstOrCreate([
-                'type'=>'Person',
-                'id_lattes13' => (string)$curriculo['NUMERO-IDENTIFICADOR'],
-                'name' => (string)$curriculo->{'DADOS-GERAIS'}['NOME-COMPLETO'],
-                'affiliation' => [[
-                    'name' => (string)$request->universidade,
-                    'program' => (string)$request->ppg
-                ]]
-            ])->id;
+            $this->createThing($curriculo, $request);
 
             if (isset($curriculo->{'PRODUCAO-BIBLIOGRAFICA'}->{'TRABALHOS-EM-EVENTOS'})) { 
                 foreach ($curriculo->{'PRODUCAO-BIBLIOGRAFICA'}->{'TRABALHOS-EM-EVENTOS'}->{'TRABALHO-EM-EVENTOS'} as $trabalho) {
@@ -58,22 +104,9 @@ class LattesController extends Controller
                         $record['pageStart'] = (string)$trabalho->{'DETALHAMENTO-DO-TRABALHO'}['PAGINA-INICIAL'];
                         $record['pageEnd'] = (string)$trabalho->{'DETALHAMENTO-DO-TRABALHO'}['PAGINA-FINAL'];
                         $i_autores = 0;
-                        foreach ($trabalho->{'AUTORES'} as $autor) {
-                            $record['author'][$i_autores]['type'] = "Person";
-                            $record['author'][$i_autores]['name'] = (string)$autor->attributes()->{'NOME-COMPLETO-DO-AUTOR'};
-                            $record['author'][$i_autores]['id_lattes13'] = (string)$autor->attributes()->{'NRO-ID-CNPQ'};
+                        foreach ($trabalho->{'AUTORES'} as $author) {
+                            $record['author'][$i_autores] = $this->searchForAuthor($author);
                             $record['author'][$i_autores]['function'] = 'Autor';
-                            $existingThing = Thing::where('name', $record['author'][$i_autores]['name'])->first();
-                            if ($existingThing) {
-                                $record['author'][$i_autores]['id'] = $existingThing->id;
-                            } else {
-                                $newThingID = Thing::firstOrCreate([
-                                    'type'=>'Person', 
-                                    'name' => $record['author'][$i_autores]['name'], 
-                                    'id_lattes13' => $record['author'][$i_autores]['id_lattes13']
-                                ])->id;
-                                $record['author'][$i_autores]['id'] = $newThingID;
-                            }
                             $i_autores++;
                         }
                         if (isset($trabalho->{'PALAVRAS-CHAVE'})) {
@@ -83,6 +116,7 @@ class LattesController extends Controller
                             }
                             unset($array_result_pc);
                         }
+                        //dd($record);
                         $work = new Work($record);
                         $work->save();
                         WorkController::indexRelations($work->id);
@@ -107,22 +141,9 @@ class LattesController extends Controller
                         $record['pageStart'] = (string)$artigo->{'DETALHAMENTO-DO-ARTIGO'}['PAGINA-INICIAL'];
                         $record['pageEnd'] = (string)$artigo->{'DETALHAMENTO-DO-ARTIGO'}['PAGINA-FINAL'];
                         $i_autores = 0;
-                        foreach ($artigo->{'AUTORES'} as $autor) {
-                            $record['author'][$i_autores]['type'] = "Person";
-                            $record['author'][$i_autores]['name'] = (string)$autor->attributes()->{'NOME-COMPLETO-DO-AUTOR'};
-                            $record['author'][$i_autores]['id_lattes13'] = (string)$autor->attributes()->{'NRO-ID-CNPQ'};
+                        foreach ($artigo->{'AUTORES'} as $author) {
+                            $record['author'][$i_autores] = $this->searchForAuthor($author);
                             $record['author'][$i_autores]['function'] = 'Autor';
-                            $existingThing = Thing::where('name', $record['author'][$i_autores]['name'])->first();
-                            if ($existingThing) {
-                                $record['author'][$i_autores]['id'] = $existingThing->id;
-                            } else {
-                                $newThingID = Thing::firstOrCreate([
-                                    'type'=>'Person',
-                                    'name' => $record['author'][$i_autores]['name'],
-                                    'id_lattes13' => $record['author'][$i_autores]['id_lattes13']
-                                ])->id;
-                                $record['author'][$i_autores]['id'] = $newThingID;
-                            }
                             $i_autores++;
                         }
                         $i_about = 0;
