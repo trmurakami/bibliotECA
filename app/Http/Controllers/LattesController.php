@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Work;
 use App\Models\Thing;
+use App\Models\Qualis;
 use App\Http\Controllers\WorkController;
 
 class LattesController extends Controller
@@ -101,6 +102,18 @@ class LattesController extends Controller
         }
         unset($array_result);
     }
+
+    public function validarISSN($issn)
+    {
+        // Remover possíveis traços e espaços em branco
+        $issn = str_replace(['-', ' '], '', $issn);
+        if (strlen($issn) !== 8) {
+            return false;
+        }
+        // Formatar o ISSN no formato XXXX-XXXX
+        $formattedISSN = substr($issn, 0, 4) . '-' . substr($issn, 4);
+        return $formattedISSN;
+    }
     
     public function processXML(Request $request)
     {
@@ -119,9 +132,22 @@ class LattesController extends Controller
                     } else {
                         $record['datePublished'] = (string)$trabalho->{'DADOS-BASICOS-DO-TRABALHO'}['ANO-DO-TRABALHO'];
                         $record['type'] = "Trabalho em Evento";
-                        $record['releasedEvent'] = (string)$trabalho->{'DETALHAMENTO-DO-TRABALHO'}['NOME-DO-EVENTO'];
                         $record['inLanguage'] = (string)$trabalho->{'DADOS-BASICOS-DO-TRABALHO'}['IDIOMA'];
-                        $record['issn'] = (string)$trabalho->{'DETALHAMENTO-DO-TRABALHO'}['ISSN'];
+
+                        $ISSN = $this->validarISSN((string)$trabalho->{'DETALHAMENTO-DO-ARTIGO'}['ISSN']);
+                        if ($ISSN) {
+                            if (!is_null(Qualis::where('issn', $ISSN)->first())) {
+                                $ISSN_result = Qualis::where('issn', $ISSN)->first();
+                                $record['releasedEvent'] = $ISSN_result['titulo'];
+                            } else {
+                                $record['releasedEvent'] = (string)$trabalho->{'DETALHAMENTO-DO-TRABALHO'}['NOME-DO-EVENTO'];
+                            }
+                            $record['issn'] = $ISSN;
+                        } else {
+                            $record['issn'] = $ISSN;
+                            $record['releasedEvent'] = (string)$trabalho->{'DETALHAMENTO-DO-TRABALHO'}['NOME-DO-EVENTO'];
+                        }
+                        
                         $record['volumeNumber'] = (string)$trabalho->{'DETALHAMENTO-DO-TRABALHO'}['VOLUME'];
                         $record['issueNumber'] = (string)$trabalho->{'DETALHAMENTO-DO-TRABALHO'}['FASCICULO'];
                         $record['pageStart'] = (string)$trabalho->{'DETALHAMENTO-DO-TRABALHO'}['PAGINA-INICIAL'];
@@ -158,9 +184,22 @@ class LattesController extends Controller
                     } else {
                         $record['datePublished'] = (string)$artigo->{'DADOS-BASICOS-DO-ARTIGO'}['ANO-DO-ARTIGO'];
                         $record['type'] = "Artigo";
-                        $record['isPartOf_name'] = (string)$artigo->{'DETALHAMENTO-DO-ARTIGO'}['TITULO-DO-PERIODICO-OU-REVISTA'];
                         $record['inLanguage'] = (string)$artigo->{'DADOS-BASICOS-DO-ARTIGO'}['IDIOMA'];
-                        $record['issn'] = (string)$artigo->{'DETALHAMENTO-DO-ARTIGO'}['ISSN'];
+                        
+                        $ISSN = $this->validarISSN((string)$artigo->{'DETALHAMENTO-DO-ARTIGO'}['ISSN']);
+                        if ($ISSN) {
+                            if (!is_null(Qualis::where('issn', $ISSN)->first())) {
+                                $ISSN_result = Qualis::where('issn', $ISSN)->first();
+                                $record['isPartOf_name'] = $ISSN_result['titulo'];
+                            } else {
+                                $record['isPartOf_name'] = (string)$artigo->{'DETALHAMENTO-DO-ARTIGO'}['TITULO-DO-PERIODICO-OU-REVISTA'];
+                            }
+                            $record['issn'] = $ISSN;
+                        } else {
+                            $record['issn'] = $ISSN;
+                            $record['isPartOf_name'] = (string)$artigo->{'DETALHAMENTO-DO-ARTIGO'}['TITULO-DO-PERIODICO-OU-REVISTA'];
+                        }
+
                         $record['volumeNumber'] = (string)$artigo->{'DETALHAMENTO-DO-ARTIGO'}['VOLUME'];
                         $record['issueNumber'] = (string)$artigo->{'DETALHAMENTO-DO-ARTIGO'}['FASCICULO'];
                         $record['pageStart'] = (string)$artigo->{'DETALHAMENTO-DO-ARTIGO'}['PAGINA-INICIAL'];

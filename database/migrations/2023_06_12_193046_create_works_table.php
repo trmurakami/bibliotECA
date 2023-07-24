@@ -102,6 +102,8 @@ return new class extends Migration
             $table->string('volumeNumber')->nullable();
             $table->jsonb('workTranslation')->nullable(); // not included
             $table->timestamps();
+
+            $table->index(['about', 'author', 'byartist', 'character', 'contributor', 'director', 'editor', 'funder', 'genre', 'hasPart', 'identifier', 'inAlbum', 'inPlaylist', 'isBasedOn', 'isPartOf', 'maintainer', 'material', 'mentions', 'musicalinstruments', 'musicby', 'name', 'producer', 'productionCompany', 'subjectOf', 'subtitleLanguage', 'track', 'translator', 'workTranslation']);
         });
     }
 
