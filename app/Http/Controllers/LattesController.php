@@ -11,7 +11,7 @@ use App\Http\Controllers\WorkController;
 class LattesController extends Controller
 {
 
-    public function createThing($curriculo, Request $request)
+    public function createThing(Object $curriculo, Request $request)
     {
         $curriculo = get_object_vars($curriculo);
         $curriculo_dados_gerais = get_object_vars($curriculo['DADOS-GERAIS']);
