@@ -299,8 +299,8 @@
                         class="form-control" placeholder="ID do autor" id="id" readonly />
                     <input v-model.trim="author.viaf" autocomplete="off" type="text" aria-label="VIAF" class="form-control"
                         placeholder="VIAF" id="viaf" />
-                    <input hidden v-model.trim="author.id_lattes13" autocomplete="off" type="text" aria-label="ID Lattes"
-                        class="form-control" placeholder="ID Lattes" id="id_lattes13" readonly />
+                    <input hidden v-model.trim="author.idLattes13" autocomplete="off" type="text" aria-label="ID Lattes"
+                        class="form-control" placeholder="ID Lattes" id="idLattes13" readonly />
                     <!-- <input
                         v-model="author.name"
                         autocomplete="off"
@@ -953,7 +953,7 @@ export default {
             }
         },
         addAuthor(name) {
-            this.record["author"].push({ id: "", type: "Person", id_lattes13: "", viaf: "", function: "Autor", name: name });
+            this.record["author"].push({ id: "", type: "Person", idLattes13: "", viaf: "", function: "Autor", name: name });
         },
         getEIDR(eidr) {
             this.loadingEIDR = true;
@@ -1031,7 +1031,7 @@ export default {
                             this.record.author.push({
                                 id: "",
                                 type: "Person",
-                                id_lattes13: "",
+                                idLattes13: "",
                                 viaf: "",
                                 name: val.given + " " + val.family,
                                 function: "Autor",

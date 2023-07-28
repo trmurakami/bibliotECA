@@ -19822,7 +19822,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
       this.record["author"].push({
         id: "",
         type: "Person",
-        id_lattes13: "",
+        idLattes13: "",
         viaf: "",
         "function": "Autor",
         name: name
@@ -19865,7 +19865,7 @@ function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input ==
           _this6.record.author.push({
             id: "",
             type: "Person",
-            id_lattes13: "",
+            idLattes13: "",
             viaf: "",
             name: val.given + " " + val.family,
             "function": "Autor"
@@ -20806,16 +20806,16 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
       hidden: "",
       "onUpdate:modelValue": function onUpdateModelValue($event) {
-        return author.id_lattes13 = $event;
+        return author.idLattes13 = $event;
       },
       autocomplete: "off",
       type: "text",
       "aria-label": "ID Lattes",
       "class": "form-control",
       placeholder: "ID Lattes",
-      id: "id_lattes13",
+      id: "idLattes13",
       readonly: ""
-    }, null, 8 /* PROPS */, _hoisted_85), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, author.id_lattes13, void 0, {
+    }, null, 8 /* PROPS */, _hoisted_85), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelText, author.idLattes13, void 0, {
       trim: true
     }]]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)(" <input\n                        v-model=\"author.name\"\n                        autocomplete=\"off\"\n                        type=\"text\"\n                        class=\"form-control\"\n                        placeholder=\"Digite o nome\"\n                    /> "), (0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
       "class": "form-control",

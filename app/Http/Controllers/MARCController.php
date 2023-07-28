@@ -37,7 +37,7 @@ class MARCController extends Controller
                     if (null !== $record->getField('100')){
                         if (!empty($record->query('100$a')->text())) {
                             $workArray['author'][$i_autores]['id'] = '';
-                            $workArray['author'][$i_autores]['id_lattes13'] = '';
+                            $workArray['author'][$i_autores]['idLattes13'] = '';
                             $workArray['author'][$i_autores]['name'] = $record->query('100$a')->text();
                             $workArray['author'][$i_autores]['function'] = 'Autor';
                             $i_autores++;
@@ -46,7 +46,7 @@ class MARCController extends Controller
                     foreach ($record->query('700') as $field) {
                         if (!empty($record->query('700$a')->text())) {
                             $workArray['author'][$i_autores]['id'] = '';
-                            $workArray['author'][$i_autores]['id_lattes13'] = '';
+                            $workArray['author'][$i_autores]['idLattes13'] = '';
                             $workArray['author'][$i_autores]['name'] = $record->query('700$a')->text();
                             $workArray['author'][$i_autores]['function'] = 'Autor';
                             $i_autores++;

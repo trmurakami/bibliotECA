@@ -15,7 +15,7 @@ class LattesController extends Controller
     {
         $curriculo = get_object_vars($curriculo);
         $curriculo_dados_gerais = get_object_vars($curriculo['DADOS-GERAIS']);
-        $existingThing = Thing::where('id_lattes13', $curriculo['@attributes']['NUMERO-IDENTIFICADOR'])->first();
+        $existingThing = Thing::where('idLattes13', $curriculo['@attributes']['NUMERO-IDENTIFICADOR'])->first();
         if ($existingThing) {
             if (isset($request->universidade) && isset($request->ppg)) {
                 if (isset($existingThing->affiliation)) {
@@ -53,7 +53,7 @@ class LattesController extends Controller
             $newThing = Thing::firstOrCreate([
                 'type'=>'Person',
                 'name' => $curriculo_dados_gerais['@attributes']['NOME-COMPLETO'],
-                'id_lattes13' => $curriculo['@attributes']['NUMERO-IDENTIFICADOR'],
+                'idLattes13' => $curriculo['@attributes']['NUMERO-IDENTIFICADOR'],
                 'affiliation' => json_encode($affiliation)
             ]);
             return $newThing;
@@ -62,14 +62,14 @@ class LattesController extends Controller
     public function searchForAuthor($author)
     {
         if (!empty((string)$author->attributes()->{'NRO-ID-CNPQ'})) {
-            $existingThing = Thing::where('id_lattes13', (string)$author->attributes()->{'NRO-ID-CNPQ'})->first();
+            $existingThing = Thing::where('idLattes13', (string)$author->attributes()->{'NRO-ID-CNPQ'})->first();
             if ($existingThing) {
                 return $existingThing;
             } else {
                 $newThing = Thing::firstOrCreate([
                     'type'=>'Person',
                     'name' => (string)$author->attributes()->{'NOME-COMPLETO-DO-AUTOR'},
-                    'id_lattes13' => (string)$author->attributes()->{'NRO-ID-CNPQ'}
+                    'idLattes13' => (string)$author->attributes()->{'NRO-ID-CNPQ'}
                 ]);
                 return $newThing;
             }
@@ -136,7 +136,7 @@ class LattesController extends Controller
 
                         $ISSN = $this->validarISSN((string)$trabalho->{'DETALHAMENTO-DO-ARTIGO'}['ISSN']);
                         if ($ISSN) {
-                            if (!is_null(Qualis::where('issn', $ISSN)->first())) {
+                            if (Qualis::where('issn', $ISSN)?->first()) {
                                 $ISSN_result = Qualis::where('issn', $ISSN)->first();
                                 $record['releasedEvent'] = $ISSN_result['titulo'];
                             } else {
@@ -188,7 +188,7 @@ class LattesController extends Controller
                         
                         $ISSN = $this->validarISSN((string)$artigo->{'DETALHAMENTO-DO-ARTIGO'}['ISSN']);
                         if ($ISSN) {
-                            if (!is_null(Qualis::where('issn', $ISSN)->first())) {
+                            if (Qualis::where('issn', $ISSN)?->first()) {
                                 $ISSN_result = Qualis::where('issn', $ISSN)->first();
                                 $record['isPartOf_name'] = $ISSN_result['titulo'];
                             } else {

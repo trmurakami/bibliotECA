@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('things', function (Blueprint $table) {
             $table->id();
             $table->string('type');
-            $table->string('id_lattes13')->nullable();
+            $table->string('idLattes13')->nullable();
             $table->string('name');
             $table->jsonb('affiliation')->nullable();
             $table->timestamps();
 
             $table->collation = 'utf8mb4_unicode_ci';
 
-            $table->index('name', 'affiliation', 'id_lattes13');
+            $table->index('name');
         });
     }
 
